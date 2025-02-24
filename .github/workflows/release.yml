@@ -1,61 +1,53 @@
-name: Release
-env:
-  GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+name: Semantic Release
 
 on:
   push:
     branches:
       - main
-    paths:
-      - 'app/**'
-      - 'bootstrap/**'
-      - 'config/**'
-      - 'database/**'
-      - 'public/**'
-      - 'resources/**'
-      - 'routes/**'
-      - 'storage/**'
-      - 'tests/**'
-      - 'composer.json'
-      - 'Dockerfile'
-  workflow_dispatch:
+      - dev/*
+      - feature/*
+      - hotfix/*
 
 jobs:
-  release:
-    permissions: write-all
+  semantic-release:
+    if: "!contains(github.event.head_commit.message, '[skip ci]')"
 
-    outputs:
-      release_version: ${{ steps.semantic-release.outputs.release_version }}
-
+    name: Semantic Release
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
 
     steps:
-      - name: Checkout code
+      - name: Checkout
         uses: actions/checkout@v4
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          fetch-depth: 0
+          persist-credentials: false
 
-      - name: Install dependencies
-        run: npm ci
+      - uses: actions/setup-node@v3
+        with:
+          node-version: "lts/*"
 
-      - name: Install zip
-        uses: montudor/action-zip@v1
+      - name: Prepare prerelease semantic
+        if: github.ref != 'refs/heads/main'
+        run: mv .releaserc.prerelease.yaml .releaserc.yaml
 
-      - id: semantic-release 
-        name: Run semantic-release
+      - name: Semantic Release
+        uses: cycjimmy/semantic-release-action@v2
+        id: semantic # Need an `id` for output variables
+        with:
+          semantic_version: 17
+          extra_plugins: |
+            @semantic-release/changelog@5
+            @semantic-release/exec@5
+            @semantic-release/git@9
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Do something when a new release published
+        if: steps.semantic.outputs.new_release_published == 'true'
         run: |
-          if npx semantic-release; then
-            if [ -f VERSION ]; then
-              VERSION=$(cat VERSION)
-              echo "Resolved release_version: $VERSION"
-              echo "release_version=$VERSION" >> $GITHUB_OUTPUT
-            else
-              echo "VERSION file not found"
-              echo "release_version=" >> $GITHUB_OUTPUT
-            fi
-          else
-            echo "release_version=" >> $GITHUB_OUTPUT
-          fi
+          echo ${{ steps.semantic.outputs.new_release_version }}
+          echo ${{ steps.semantic.outputs.new_release_major_version }}
+          echo ${{ steps.semantic.outputs.new_release_minor_version }}
+          echo ${{ steps.semantic.outputs.new_release_patch_version }}
