@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/kristiansnts/LevelUPKota-Administration-System/compare/v1.1.0...v1.2.0) (2025-02-24)
+
+
+### Features
+
+* **main:** add model and migration ([2f4c519](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/2f4c519ab94e2f31c7877be1834372cd90179a22))
+
 # [1.1.0](https://github.com/kristiansnts/LevelUPKota-Administration-System/compare/v1.0.0...v1.1.0) (2025-02-24)
 
 
