@@ -1,3 +1,15 @@
+# [1.1.0](https://github.com/kristiansnts/LevelUPKota-Administration-System/compare/v1.0.0...v1.1.0) (2025-02-24)
+
+
+### Bug Fixes
+
+* **test:** remove contributing on readme ([3642750](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/36427508d1ce2f5cffe0b27ca8b7f3f023fb0ea3))
+
+
+### Features
+
+* **init:** add filament and update releasec.json ([ebe9d09](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/ebe9d0977106139e0392e97dd003fafd7bc96cab))
+
 # 1.0.0 (2025-02-24)
 
 
