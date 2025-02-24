@@ -1,29 +1,61 @@
 name: Release
+env:
+  GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
 
 on:
   push:
     branches:
       - main
+    paths:
+      - 'app/**'
+      - 'bootstrap/**'
+      - 'config/**'
+      - 'database/**'
+      - 'public/**'
+      - 'resources/**'
+      - 'routes/**'
+      - 'storage/**'
+      - 'tests/**'
+      - 'composer.json'
+      - 'Dockerfile'
+  workflow_dispatch:
 
 jobs:
   release:
+    permissions: write-all
+
+    outputs:
+      release_version: ${{ steps.semantic-release.outputs.release_version }}
+
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-      - name: Install Node.js
-        uses: actions/setup-node@v3
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
         with:
-          node-version: 20.11.1
+          node-version: '20'
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci
 
-      - name: Run Semantic Release
-        env:
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-        run: npx semantic-release
+      - name: Install zip
+        uses: montudor/action-zip@v1
+
+      - id: semantic-release 
+        name: Run semantic-release
+        run: |
+          if npx semantic-release; then
+            if [ -f VERSION ]; then
+              VERSION=$(cat VERSION)
+              echo "Resolved release_version: $VERSION"
+              echo "release_version=$VERSION" >> $GITHUB_OUTPUT
+            else
+              echo "VERSION file not found"
+              echo "release_version=" >> $GITHUB_OUTPUT
+            fi
+          else
+            echo "release_version=" >> $GITHUB_OUTPUT
+          fi
