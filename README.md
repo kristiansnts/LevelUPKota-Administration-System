@@ -2,9 +2,7 @@
 
 LevelUpKota Administration System is a web application that allows the administrator to manage the LevelUPKota management system.
 
-## Contributing
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
 
 ## Code of Conduct
 
