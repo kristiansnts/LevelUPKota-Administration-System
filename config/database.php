@@ -42,6 +42,12 @@ return [
             'synchronous' => null,
         ],
 
+        'indonesia_territory' => [
+            'driver' => env('DB_CONNECTION_INDONESIA_TERRITORY', 'sqlite'),
+            'database' => env('DB_DATABASE_INDONESIA_TERRITORY_SQLITE', database_path('indonesia_territory.sqlite')),
+            'prefix' => '',
+        ],
+
         'mysql' => [
             'driver' => 'mysql',
             'url' => env('DB_URL'),
