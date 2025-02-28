@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/kristiansnts/LevelUPKota-Administration-System/compare/v1.2.1...v1.3.0) (2025-02-28)
+
+
+### Features
+
+* **migration:** add new migration for pivot table and fix user model ([561b247](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/561b2473568c743a1dad4961e502eca90cc3e952))
+
 ## [1.2.1](https://github.com/kristiansnts/LevelUPKota-Administration-System/compare/v1.2.0...v1.2.1) (2025-02-28)
 
 
