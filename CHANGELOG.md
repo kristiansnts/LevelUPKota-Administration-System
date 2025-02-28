@@ -1,3 +1,17 @@
+## [1.2.1](https://github.com/kristiansnts/LevelUPKota-Administration-System/compare/v1.2.0...v1.2.1) (2025-02-28)
+
+
+### Bug Fixes
+
+* **main:** address fix ([da130a8](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/da130a8896db1a070a3def206da88647c5739f58))
+
+# [1.2.0](https://github.com/kristiansnts/LevelUPKota-Administration-System/compare/v1.1.0...v1.2.0) (2025-02-24)
+
+
+### Features
+
+* **main:** add model and migration ([2f4c519](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/2f4c519ab94e2f31c7877be1834372cd90179a22))
+
 # [1.1.0](https://github.com/kristiansnts/LevelUPKota-Administration-System/compare/v1.0.0...v1.1.0) (2025-02-24)
 
 
