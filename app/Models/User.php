@@ -9,6 +9,8 @@ use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
@@ -68,4 +70,19 @@ class User extends Authenticatable
     }
 
     
+
+    public function transactionCategories(): BelongsToMany
+    {
+        return $this->belongsToMany(TransactionCategory::class);
+    }
+
+    public function mailCategories(): BelongsToMany
+    {
+        return $this->belongsToMany(MailCategory::class);
+    }
+
+    public function transactionTypes(): BelongsToMany
+    {
+        return $this->belongsToMany(TransactionType::class);
+    }
 }

@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 class Finance extends Model
 {
     /** @use HasFactory<\Database\Factories\FinanceFactory> */
@@ -32,5 +32,10 @@ class Finance extends Model
     public function transactionType(): BelongsTo
     {
         return $this->belongsTo(TransactionType::class);
+    }
+
+    public function user(): BelongsToMany
+    {
+        return $this->belongsToMany(User::class);
     }
 }
