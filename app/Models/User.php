@@ -69,7 +69,15 @@ class User extends Authenticatable
         return $this->belongsTo(District::class, 'district_id', 'dis_id');
     }
 
-    
+    public function finances(): BelongsToMany
+    {
+        return $this->belongsToMany(Finance::class);
+    }
+
+    public function mails(): BelongsToMany
+    {
+        return $this->belongsToMany(Mail::class);
+    }
 
     public function transactionCategories(): BelongsToMany
     {
