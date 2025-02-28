@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+
 class Mail extends Model
 {
     /** @use HasFactory<\Database\Factories\MailFactory> */
@@ -25,5 +27,10 @@ class Mail extends Model
     public function mailCategory(): BelongsTo
     {
         return $this->belongsTo(MailCategory::class);
+    }
+
+    public function user(): BelongsToMany
+    {
+        return $this->belongsToMany(User::class);
     }
 }
