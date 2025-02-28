@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e7434bd09c195ea75084eb25768d440d",
+    "content-hash": "cd2fd7d767ce30f6946a023d8e1f85e9",
     "packages": [
         {
             "name": "anourvalar/eloquent-serialize",
@@ -7360,6 +7360,79 @@
                 }
             ],
             "time": "2025-01-17T11:39:41+00:00"
+        },
+        {
+            "name": "teguh02/indonesia-territory-forms",
+            "version": "v1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/teguh02/Indonesia-Territory-Forms.git",
+                "reference": "e9a3c9eb70497e0fe5d48c39999229a02a445942"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/teguh02/Indonesia-Territory-Forms/zipball/e9a3c9eb70497e0fe5d48c39999229a02a445942",
+                "reference": "e9a3c9eb70497e0fe5d48c39999229a02a445942",
+                "shasum": ""
+            },
+            "require": {
+                "filament/forms": "^3.0",
+                "php": "^8.1",
+                "spatie/laravel-package-tools": "^1.15.0"
+            },
+            "require-dev": {
+                "nunomaduro/collision": "^7.9",
+                "orchestra/testbench": "^8.0",
+                "pestphp/pest": "^2.1",
+                "pestphp/pest-plugin-arch": "^2.0",
+                "pestphp/pest-plugin-laravel": "^2.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "aliases": {
+                        "IndonesiaTerritoryForms": "Teguh02\\IndonesiaTerritoryForms\\Facades\\IndonesiaTerritoryForms"
+                    },
+                    "providers": [
+                        "Teguh02\\IndonesiaTerritoryForms\\IndonesiaTerritoryFormsServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Teguh02\\IndonesiaTerritoryForms\\": "src/",
+                    "Teguh02\\IndonesiaTerritoryForms\\Database\\Factories\\": "database/factories/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Teguh Rijanandi",
+                    "email": "teguhrijanandi02@gmail.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Display a Indonesia Territory Select Form For Filament Within the Zip-Code Without Any Seeder Needed",
+            "homepage": "https://github.com/teguh02/indonesia-territory-forms",
+            "keywords": [
+                "indonesia-territory-forms",
+                "laravel",
+                "teguh02"
+            ],
+            "support": {
+                "issues": "https://github.com/teguh02/indonesia-territory-forms/issues",
+                "source": "https://github.com/teguh02/indonesia-territory-forms"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/teguh02",
+                    "type": "github"
+                }
+            ],
+            "time": "2024-09-15T01:46:44+00:00"
         },
         {
             "name": "tijsverkoyen/css-to-inline-styles",
