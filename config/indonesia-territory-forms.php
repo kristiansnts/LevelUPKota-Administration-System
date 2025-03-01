@@ -18,7 +18,7 @@ return [
 
     /**
      * The visibility of the form fields
-     * Note : this form fields are used to show or hide 
+     * Note : this form fields are used to show or hide
      *        the form fields, and we can't disable the province
      *        because the province is the main data
      */

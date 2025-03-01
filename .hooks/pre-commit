@@ -1,0 +1,16 @@
+ #!/bin/sh
+
+ # Run Laravel Pint
+ # This script will run Laravel Pint on newly staged PHP Files. 
+
+ files=$(git diff --cached --name-only --diff-filter=AMCR | grep "\.php$")
+ if echo "$files" | grep --quiet "\.php$"; then
+     echo "Running Laravel Pint..."
+     ./vendor/bin/pint $files && git add $files
+
+     echo "Running Laravel Insights..."
+     php artisan insights --no-interaction --min-quality=100 --min-complexity=85 --min-architecture=100 --min-style=100
+
+     echo "Running Testing"
+     php artisan test
+ fi

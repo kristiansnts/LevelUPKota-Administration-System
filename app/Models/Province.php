@@ -13,6 +13,9 @@ class Province extends Model
 
     protected $primaryKey = 'prov_id';
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany<\App\Models\City, $this>
+     */
     public function cities(): HasMany
     {
         return $this->hasMany(City::class);

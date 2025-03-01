@@ -4,14 +4,14 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\UserResource\Pages;
 use App\Models\User;
+use Filament\Forms\Components\Section;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
-use Filament\Tables\Table;
 use Filament\Tables\Columns\TextColumn;
-use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\Select;
-use Filament\Forms\Components\Section;
+use Filament\Tables\Table;
 
 class UserResource extends Resource
 {
@@ -25,22 +25,22 @@ class UserResource extends Resource
             ->schema([
                 Section::make([
                     TextInput::make('name')
-                    ->required()
-                    ->maxLength(255),
-                TextInput::make('email')
-                    ->email()
-                    ->required()
-                    ->maxLength(255)
-                    ->unique(ignoreRecord: true),
-                TextInput::make('password')
-                    ->password()
-                    ->required(fn (string $context): bool => $context === 'create')
-                    ->dehydrated(fn ($state): bool => filled($state))
-                    ->maxLength(255),
-                Select::make('roles')
-                    ->multiple()
-                    ->relationship('roles', 'name')
-                    ->preload(),
+                        ->required()
+                        ->maxLength(255),
+                    TextInput::make('email')
+                        ->email()
+                        ->required()
+                        ->maxLength(255)
+                        ->unique(ignoreRecord: true),
+                    TextInput::make('password')
+                        ->password()
+                        ->required(fn (string $context): bool => $context === 'create')
+                        ->dehydrated(fn ($state): bool => filled($state))
+                        ->maxLength(255),
+                    Select::make('roles')
+                        ->multiple()
+                        ->relationship('roles', 'name')
+                        ->preload(),
                 ])->columns(2),
                 Section::make('Alamat')
                     ->schema([
@@ -59,7 +59,7 @@ class UserResource extends Resource
                             ->relationship('district', 'dis_name')
                             ->preload()
                             ->searchable(),
-                ])->columns(2),
+                    ])->columns(2),
             ]);
     }
 
@@ -74,7 +74,7 @@ class UserResource extends Resource
                 TextColumn::make('created_at')->dateTime(),
             ])
             ->filters([
-                //
+
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
@@ -89,7 +89,7 @@ class UserResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+
         ];
     }
 

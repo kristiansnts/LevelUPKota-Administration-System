@@ -24,11 +24,17 @@ class Mail extends Model
         'status',
     ];
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<\App\Models\MailCategory, $this>
+     */
     public function mailCategory(): BelongsTo
     {
         return $this->belongsTo(MailCategory::class);
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany<\App\Models\User, $this>
+     */
     public function user(): BelongsToMany
     {
         return $this->belongsToMany(User::class);
