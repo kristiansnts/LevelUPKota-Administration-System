@@ -2,11 +2,11 @@
 
 namespace App\Policies;
 
-use App\Models\Mail;
+use App\Models\MailCategory;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class MailPolicy
+class MailCategoryPolicy
 {
     use HandlesAuthorization;
 
@@ -15,15 +15,15 @@ class MailPolicy
      */
     public function viewAny(User $user): bool
     {
-        return $user->can('view_any_mail');
+        return $user->can('view_any_mail::category');
     }
 
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, Mail $mail): bool
+    public function view(User $user, MailCategory $mailCategory): bool
     {
-        return $user->can('view_mail');
+        return $user->can('view_mail::category');
     }
 
     /**
@@ -31,23 +31,23 @@ class MailPolicy
      */
     public function create(User $user): bool
     {
-        return $user->can('create_mail');
+        return $user->can('create_mail::category');
     }
 
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, Mail $mail): bool
+    public function update(User $user, MailCategory $mailCategory): bool
     {
-        return $user->can('update_mail');
+        return $user->can('update_mail::category');
     }
 
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, Mail $mail): bool
+    public function delete(User $user, MailCategory $mailCategory): bool
     {
-        return $user->can('delete_mail');
+        return $user->can('delete_mail::category');
     }
 
     /**
@@ -55,15 +55,15 @@ class MailPolicy
      */
     public function deleteAny(User $user): bool
     {
-        return $user->can('delete_any_mail');
+        return $user->can('delete_any_mail::category');
     }
 
     /**
      * Determine whether the user can permanently delete.
      */
-    public function forceDelete(User $user, Mail $mail): bool
+    public function forceDelete(User $user, MailCategory $mailCategory): bool
     {
-        return $user->can('force_delete_mail');
+        return $user->can('force_delete_mail::category');
     }
 
     /**
@@ -71,15 +71,15 @@ class MailPolicy
      */
     public function forceDeleteAny(User $user): bool
     {
-        return $user->can('force_delete_any_mail');
+        return $user->can('force_delete_any_mail::category');
     }
 
     /**
      * Determine whether the user can restore.
      */
-    public function restore(User $user, Mail $mail): bool
+    public function restore(User $user, MailCategory $mailCategory): bool
     {
-        return $user->can('restore_mail');
+        return $user->can('restore_mail::category');
     }
 
     /**
@@ -87,15 +87,15 @@ class MailPolicy
      */
     public function restoreAny(User $user): bool
     {
-        return $user->can('restore_any_mail');
+        return $user->can('restore_any_mail::category');
     }
 
     /**
      * Determine whether the user can replicate.
      */
-    public function replicate(User $user, Mail $mail): bool
+    public function replicate(User $user, MailCategory $mailCategory): bool
     {
-        return $user->can('replicate_mail');
+        return $user->can('replicate_mail::category');
     }
 
     /**
@@ -103,6 +103,6 @@ class MailPolicy
      */
     public function reorder(User $user): bool
     {
-        return $user->can('reorder_mail');
+        return $user->can('reorder_mail::category');
     }
 }
