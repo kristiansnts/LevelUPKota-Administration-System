@@ -22,7 +22,7 @@ class StoreFinanceRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+
         ];
     }
 }

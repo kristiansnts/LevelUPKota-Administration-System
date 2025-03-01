@@ -8,6 +8,7 @@
     "require": {
         "php": "^8.2",
         "bezhansalleh/filament-shield": "^3.3",
+        "chrisdicarlo/laravel-config-checker": "^1.2",
         "filament/filament": "^3.2",
         "laravel/framework": "^11.31",
         "laravel/tinker": "^2.9",
@@ -15,13 +16,17 @@
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",
+        "larastan/larastan": "^3.0",
         "laravel/pail": "^1.1",
-        "laravel/pint": "^1.13",
+        "laravel/pint": "^1.21",
         "laravel/sail": "^1.26",
         "mockery/mockery": "^1.6",
         "nunomaduro/collision": "^8.1",
+        "nunomaduro/phpinsights": "^2.12",
         "pestphp/pest": "^3.7",
-        "pestphp/pest-plugin-laravel": "^3.1"
+        "pestphp/pest-plugin-laravel": "^3.1",
+        "phpstan/phpstan": "^2.1",
+        "rector/rector": "^2.0"
     },
     "autoload": {
         "psr-4": {
@@ -55,6 +60,18 @@
         "dev": [
             "Composer\\Config::disableProcessTimeout",
             "npx concurrently -c \"#93c5fd,#c4b5fd,#fb7185,#fdba74\" \"php artisan serve\" \"php artisan queue:listen --tries=1\" \"php artisan pail --timeout=0\" \"npm run dev\" --names=server,queue,logs,vite"
+        ],
+        "test-coverage": "XDEBUG_MODE=coverage vendor/bin/pest --coverage-clover coverage.xml",
+        "sonar": "sonar-scanner",
+        "format": [
+            "@php artisan insights --fix --no-interaction",
+            "./vendor/bin/pint",
+            "vendor/bin/rector process"
+        ],
+        "analyze": [
+            "@php artisan config:check",
+            "@php artisan insights --no-interaction",
+            "vendor/bin/phpstan"
         ]
     },
     "extra": {
@@ -67,6 +84,7 @@
         "preferred-install": "dist",
         "sort-packages": true,
         "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true,
             "pestphp/pest-plugin": true,
             "php-http/discovery": true
         }
