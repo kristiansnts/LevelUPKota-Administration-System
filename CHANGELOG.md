@@ -1,3 +1,19 @@
+# [1.5.0](https://github.com/kristiansnts/LevelUPKota-Administration-System/compare/v1.4.1...v1.5.0) (2025-03-01)
+
+
+### Bug Fixes
+
+* **resource:** fix from man ([2b9a332](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/2b9a332552308b1c0d4aeb62c41544defa907445))
+* **resource:** update pre-commit ([1aac077](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/1aac07729107e0835562b4277b94a93bfe05a155))
+* **resource:** update readme ([3c7106b](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/3c7106b9927ebea7ce8669eeb7ec160f87791eba))
+
+
+### Features
+
+* **resource:** add mail resource ([b2e230f](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/b2e230fd6aff1b88dcecb7175b2e08871bb6dfa4))
+* **resource:** adding documentation ([13a1f6d](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/13a1f6dbdc8988eaa03853381574b3f5c0975976))
+* **resource:** simple crud mails ([758555e](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/758555ee9635eab0597fde5f5ba28eb12afb7d9a))
+
 ## [1.4.1](https://github.com/kristiansnts/LevelUPKota-Administration-System/compare/v1.4.0...v1.4.1) (2025-03-01)
 
 
