@@ -1,3 +1,17 @@
+# [1.4.0](https://github.com/kristiansnts/LevelUPKota-Administration-System/compare/v1.3.1...v1.4.0) (2025-03-01)
+
+
+### Features
+
+* **main:** add precommit format and analyze and testing ([b0307ec](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/b0307ec73df2754c39db259056ca1fd4dc931ec5))
+
+## [1.3.1](https://github.com/kristiansnts/LevelUPKota-Administration-System/compare/v1.3.0...v1.3.1) (2025-02-28)
+
+
+### Bug Fixes
+
+* **migration:** add pivot mail_user and finance_user ([c200f99](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/c200f99b90ed18ad97beb34b0961505b08d6b844))
+
 # [1.3.0](https://github.com/kristiansnts/LevelUPKota-Administration-System/compare/v1.2.1...v1.3.0) (2025-02-28)
 
 
