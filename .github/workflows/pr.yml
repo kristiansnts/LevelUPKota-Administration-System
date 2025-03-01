@@ -16,7 +16,7 @@ on:
   pull_request_review:
     types: [submitted]
 
-  jobs:
+jobs:
     code-quality:
       if: github.event_name == 'pull_request' && github.event.action != 'closed'
       permissions:
