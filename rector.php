@@ -13,9 +13,11 @@ return RectorConfig::configure()
         __DIR__.'/resources',
         __DIR__.'/routes',
         __DIR__.'/tests',
+        __DIR__.'/database',
     ])
     // uncomment to reach your current PHP version
-    // ->withPhpSets()
-    ->withTypeCoverageLevel(0)
-    ->withDeadCodeLevel(0)
-    ->withCodeQualityLevel(0);
+    // uncomment to reach your current PHP version
+    ->withPhpSets()
+    ->withTypeCoverageLevel(100)
+    ->withDeadCodeLevel(100)
+    ->withCodeQualityLevel(100);
