@@ -1,0 +1,20 @@
+includes:
+    - vendor/larastan/larastan/extension.neon
+    - vendor/nesbot/carbon/extension.neon
+
+parameters:
+
+    paths:
+        - app/
+        - config/
+        - database/
+        - bootstrap/
+
+    # Level 10 is the highest level
+    level: max
+
+    checkNullables: true
+    checkUninitializedProperties: true
+
+    scanDirectories:
+        - vendor/squizlabs/php_codesniffer/src
