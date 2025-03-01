@@ -24,6 +24,10 @@ class Mail extends Model
         'status',
     ];
 
+    protected $casts = [
+        'receiver_name' => 'array',
+    ];
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<\App\Models\MailCategory, $this>
      */
