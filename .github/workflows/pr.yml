@@ -16,7 +16,7 @@ on:
   pull_request_review:
     types: [submitted]
 
-  jobs:
+jobs:
     code-quality:
       if: github.event_name == 'pull_request' && github.event.action != 'closed'
       permissions:
@@ -29,7 +29,7 @@ on:
             fetch-depth: 0
             ref: ${{ github.event.pull_request.head.ref }}
             repository: ${{ github.event.pull_request.head.repo.full_name }}
-
+  
         - name: Setup PHP
           uses: shivammathur/setup-php@v2
           with:
@@ -37,52 +37,52 @@ on:
             
         - name: Install Dependencies
           run: composer install --prefer-dist --no-progress
-
+  
         - name: Pull latest changes from remote
           run: |
             git config user.name "github-actions[bot]"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
             git pull --rebase origin "${{ github.event.pull_request.head.ref }}"
-
+  
         - name: Format and Analyze Code
           run: |
             composer format
             composer analyze
-
+  
         - name: Commit changes
           uses: stefanzweifel/git-auto-commit-action@v5
           with:
             commit_message: "chore: auto format and analyze code"
             skip_fetch: true
             
-  testing:
-    if: github.event_name == 'pull_request' && github.event.action != 'closed'
-    runs-on: ubuntu-latest
-    name: "Testing"
-    permissions:
-      contents: write
-    steps:
-    - uses: actions/checkout@v4
-      with:
-        fetch-depth: 0
-        
-    - name: Setup PHP
-      uses: shivammathur/setup-php@v2
-      with:
-        php-version: 8.3
-        coverage: xdebug
-        
-    - name: Install Dependencies
-      run: composer install --prefer-dist --no-progress
-
-    - name: Prepare Laravel Application
-      run: |
-        cp .env.example .env
-        php artisan key:generate
-
-    - name: Prepare SQLite Files
-      run: |
-        touch levelup.sqlite
-
-    - name: Generate Coverage Report
-      run: composer test-coverage
+    testing:
+      if: github.event_name == 'pull_request' && github.event.action != 'closed'
+      runs-on: ubuntu-latest
+      name: "Testing"
+      permissions:
+        contents: write
+      steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.3
+          coverage: xdebug
+          
+      - name: Install Dependencies
+        run: composer install --prefer-dist --no-progress
+  
+      - name: Prepare Laravel Application
+        run: |
+          cp .env.example .env
+          php artisan key:generate
+  
+      - name: Prepare SQLite Files
+        run: |
+          touch levelup.sqlite
+  
+      - name: Generate Coverage Report
+        run: composer test-coverage
