@@ -17,44 +17,44 @@ on:
     types: [submitted]
 
   jobs:
-  code-quality:
-    if: github.event_name == 'pull_request' && github.event.action != 'closed'
-    permissions:
-      contents: write
-    runs-on: ubuntu-latest
-    name: "Code Quality"
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-          ref: ${{ github.event.pull_request.head.ref }}
-          repository: ${{ github.event.pull_request.head.repo.full_name }}
+    code-quality:
+      if: github.event_name == 'pull_request' && github.event.action != 'closed'
+      permissions:
+        contents: write
+      runs-on: ubuntu-latest
+      name: "Code Quality"
+      steps:
+        - uses: actions/checkout@v4
+          with:
+            fetch-depth: 0
+            ref: ${{ github.event.pull_request.head.ref }}
+            repository: ${{ github.event.pull_request.head.repo.full_name }}
 
-      - name: Setup PHP
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: 8.3
-          
-      - name: Install Dependencies
-        run: composer install --prefer-dist --no-progress
+        - name: Setup PHP
+          uses: shivammathur/setup-php@v2
+          with:
+            php-version: 8.3
+            
+        - name: Install Dependencies
+          run: composer install --prefer-dist --no-progress
 
-      - name: Pull latest changes from remote
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git pull --rebase origin "${{ github.event.pull_request.head.ref }}"
+        - name: Pull latest changes from remote
+          run: |
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git pull --rebase origin "${{ github.event.pull_request.head.ref }}"
 
-      - name: Format and Analyze Code
-        run: |
-          composer format
-          composer analyze
+        - name: Format and Analyze Code
+          run: |
+            composer format
+            composer analyze
 
-      - name: Commit changes
-        uses: stefanzweifel/git-auto-commit-action@v5
-        with:
-          commit_message: "chore: auto format and analyze code"
-          skip_fetch: true
-
+        - name: Commit changes
+          uses: stefanzweifel/git-auto-commit-action@v5
+          with:
+            commit_message: "chore: auto format and analyze code"
+            skip_fetch: true
+            
   testing:
     if: github.event_name == 'pull_request' && github.event.action != 'closed'
     runs-on: ubuntu-latest
