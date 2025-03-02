@@ -15,7 +15,7 @@ class MailCategoryPolicy
      */
     public function viewAny(User $user): bool
     {
-        return $user->can('view_any_mail::category');
+        return $user->can('view_any_mail::mails::category');
     }
 
     /**
@@ -23,7 +23,7 @@ class MailCategoryPolicy
      */
     public function view(User $user, MailCategory $mailCategory): bool
     {
-        return $user->can('view_mail::category');
+        return $user->can('view_mail::mails::category');
     }
 
     /**
@@ -31,7 +31,7 @@ class MailCategoryPolicy
      */
     public function create(User $user): bool
     {
-        return $user->can('create_mail::category');
+        return $user->can('create_mail::mails::category');
     }
 
     /**
@@ -39,7 +39,7 @@ class MailCategoryPolicy
      */
     public function update(User $user, MailCategory $mailCategory): bool
     {
-        return $user->can('update_mail::category');
+        return $user->can('update_mail::mails::category');
     }
 
     /**
@@ -47,7 +47,7 @@ class MailCategoryPolicy
      */
     public function delete(User $user, MailCategory $mailCategory): bool
     {
-        return $user->can('delete_mail::category');
+        return $user->can('delete_mail::mails::category');
     }
 
     /**
@@ -55,7 +55,7 @@ class MailCategoryPolicy
      */
     public function deleteAny(User $user): bool
     {
-        return $user->can('delete_any_mail::category');
+        return $user->can('delete_any_mail::mails::category');
     }
 
     /**
@@ -63,7 +63,7 @@ class MailCategoryPolicy
      */
     public function forceDelete(User $user, MailCategory $mailCategory): bool
     {
-        return $user->can('force_delete_mail::category');
+        return $user->can('force_delete_mail::mails::category');
     }
 
     /**
@@ -71,7 +71,7 @@ class MailCategoryPolicy
      */
     public function forceDeleteAny(User $user): bool
     {
-        return $user->can('force_delete_any_mail::category');
+        return $user->can('force_delete_any_mail::mails::category');
     }
 
     /**
@@ -79,7 +79,7 @@ class MailCategoryPolicy
      */
     public function restore(User $user, MailCategory $mailCategory): bool
     {
-        return $user->can('restore_mail::category');
+        return $user->can('restore_mail::mails::category');
     }
 
     /**
@@ -87,7 +87,7 @@ class MailCategoryPolicy
      */
     public function restoreAny(User $user): bool
     {
-        return $user->can('restore_any_mail::category');
+        return $user->can('restore_any_mail::mails::category');
     }
 
     /**
@@ -95,7 +95,7 @@ class MailCategoryPolicy
      */
     public function replicate(User $user, MailCategory $mailCategory): bool
     {
-        return $user->can('replicate_mail::category');
+        return $user->can('replicate_mail::mails::category');
     }
 
     /**
@@ -103,6 +103,6 @@ class MailCategoryPolicy
      */
     public function reorder(User $user): bool
     {
-        return $user->can('reorder_mail::category');
+        return $user->can('reorder_mail::mails::category');
     }
 }

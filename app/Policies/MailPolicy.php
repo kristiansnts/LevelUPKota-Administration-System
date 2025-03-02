@@ -15,7 +15,7 @@ class MailPolicy
      */
     public function viewAny(User $user): bool
     {
-        return $user->can('view_any_mail');
+        return $user->can('view_any_mail::mails::out');
     }
 
     /**
@@ -23,7 +23,7 @@ class MailPolicy
      */
     public function view(User $user, Mail $mail): bool
     {
-        return $user->can('view_mail');
+        return $user->can('view_mail::mails::out');
     }
 
     /**
@@ -31,7 +31,7 @@ class MailPolicy
      */
     public function create(User $user): bool
     {
-        return $user->can('create_mail');
+        return $user->can('create_mail::mails::out');
     }
 
     /**
@@ -39,7 +39,7 @@ class MailPolicy
      */
     public function update(User $user, Mail $mail): bool
     {
-        return $user->can('update_mail');
+        return $user->can('update_mail::mails::out');
     }
 
     /**
@@ -47,7 +47,7 @@ class MailPolicy
      */
     public function delete(User $user, Mail $mail): bool
     {
-        return $user->can('delete_mail');
+        return $user->can('delete_mail::mails::out');
     }
 
     /**
@@ -55,7 +55,7 @@ class MailPolicy
      */
     public function deleteAny(User $user): bool
     {
-        return $user->can('delete_any_mail');
+        return $user->can('delete_any_mail::mails::out');
     }
 
     /**
@@ -63,7 +63,7 @@ class MailPolicy
      */
     public function forceDelete(User $user, Mail $mail): bool
     {
-        return $user->can('force_delete_mail');
+        return $user->can('force_delete_mail::mails::out');
     }
 
     /**
@@ -71,7 +71,7 @@ class MailPolicy
      */
     public function forceDeleteAny(User $user): bool
     {
-        return $user->can('force_delete_any_mail');
+        return $user->can('force_delete_any_mail::mails::out');
     }
 
     /**
@@ -79,7 +79,7 @@ class MailPolicy
      */
     public function restore(User $user, Mail $mail): bool
     {
-        return $user->can('restore_mail');
+        return $user->can('restore_mail::mails::out');
     }
 
     /**
@@ -87,7 +87,7 @@ class MailPolicy
      */
     public function restoreAny(User $user): bool
     {
-        return $user->can('restore_any_mail');
+        return $user->can('restore_any_mail::mails::out');
     }
 
     /**
@@ -95,7 +95,7 @@ class MailPolicy
      */
     public function replicate(User $user, Mail $mail): bool
     {
-        return $user->can('replicate_mail');
+        return $user->can('replicate_mail::mails::out');
     }
 
     /**
@@ -103,6 +103,6 @@ class MailPolicy
      */
     public function reorder(User $user): bool
     {
-        return $user->can('reorder_mail');
+        return $user->can('reorder_mail::mails::out');
     }
 }
