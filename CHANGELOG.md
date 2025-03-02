@@ -1,3 +1,21 @@
+# [1.7.0](https://github.com/kristiansnts/LevelUPKota-Administration-System/compare/v1.6.0...v1.7.0) (2025-03-02)
+
+
+### Bug Fixes
+
+* **main:** add pint.json ([23d0558](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/23d0558173f5dbe7e3fb43414ad6cfa7d1293614))
+* **main:** fix merge ([86a7e75](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/86a7e75c5662e486e597ef10d6b29889c152445a))
+* **main:** fix pr workflow and pre-commit ([f60cf54](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/f60cf5481a37e7a55e544ad4e874a5a5f801c51f))
+* **main:** fix pre-commit ([750ac49](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/750ac49e2d3449477c53027a2be243b4b19ee3ac))
+* **main:** update pre-commit ([4f73b4e](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/4f73b4ebd475cfbf0cdce12d6294dca661a91213))
+* **main:** update pre-commit ([d09d502](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/d09d502b892dd9cd69395d1361a53bb439feca61))
+* **main:** update pre-commit ([92b63b3](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/92b63b3e72cb2b0c3daf8015bd914778940fbb7f))
+
+
+### Features
+
+* **main:** add google drive flysystem ([976695c](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/976695c7165df2b4fda138a92149b5980e296401))
+
 # [1.6.0](https://github.com/kristiansnts/LevelUPKota-Administration-System/compare/v1.5.0...v1.6.0) (2025-03-02)
 
 
