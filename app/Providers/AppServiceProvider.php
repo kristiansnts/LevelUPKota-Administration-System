@@ -18,14 +18,14 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         try {
-            Storage::extend('google', function ($app, $config) {
+            Storage::extend('google', function ($app, $config): \Illuminate\Filesystem\FilesystemAdapter {
                 $options = [];
 
-                if (!empty($config['teamDriveId'] ?? null)) {
+                if (! empty($config['teamDriveId'] ?? null)) {
                     $options['teamDriveId'] = $config['teamDriveId'];
                 }
 
-                if (!empty($config['sharedFolderId'] ?? null)) {
+                if (! empty($config['sharedFolderId'] ?? null)) {
                     $options['sharedFolderId'] = $config['sharedFolderId'];
                 }
 
@@ -40,7 +40,7 @@ class AppServiceProvider extends ServiceProvider
 
                 return new \Illuminate\Filesystem\FilesystemAdapter($driver, $adapter);
             });
-        } catch (\Exception $e) {
+        } catch (\Exception) {
             // your exception handling logic
         }
     }
