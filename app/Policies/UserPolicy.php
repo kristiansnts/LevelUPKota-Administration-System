@@ -2,11 +2,10 @@
 
 namespace App\Policies;
 
-use App\Models\Mail;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class MailPolicy
+class UserPolicy
 {
     use HandlesAuthorization;
 
@@ -15,15 +14,15 @@ class MailPolicy
      */
     public function viewAny(User $user): bool
     {
-        return $user->can('view_any_mail::mails::out');
+        return $user->can('view_any_user::user');
     }
 
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, Mail $mail): bool
+    public function view(User $user): bool
     {
-        return $user->can('view_mail::mails::out');
+        return $user->can('view_user::user');
     }
 
     /**
@@ -31,23 +30,23 @@ class MailPolicy
      */
     public function create(User $user): bool
     {
-        return $user->can('create_mail::mails::out');
+        return $user->can('create_user::user');
     }
 
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, Mail $mail): bool
+    public function update(User $user): bool
     {
-        return $user->can('update_mail::mails::out');
+        return $user->can('update_user::user');
     }
 
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, Mail $mail): bool
+    public function delete(User $user): bool
     {
-        return $user->can('delete_mail::mails::out');
+        return $user->can('delete_user::user');
     }
 
     /**
@@ -55,15 +54,15 @@ class MailPolicy
      */
     public function deleteAny(User $user): bool
     {
-        return $user->can('delete_any_mail::mails::out');
+        return $user->can('delete_any_user::user');
     }
 
     /**
      * Determine whether the user can permanently delete.
      */
-    public function forceDelete(User $user, Mail $mail): bool
+    public function forceDelete(User $user): bool
     {
-        return $user->can('force_delete_mail::mails::out');
+        return $user->can('force_delete_user::user');
     }
 
     /**
@@ -71,15 +70,15 @@ class MailPolicy
      */
     public function forceDeleteAny(User $user): bool
     {
-        return $user->can('force_delete_any_mail::mails::out');
+        return $user->can('force_delete_any_user::user');
     }
 
     /**
      * Determine whether the user can restore.
      */
-    public function restore(User $user, Mail $mail): bool
+    public function restore(User $user): bool
     {
-        return $user->can('restore_mail::mails::out');
+        return $user->can('restore_user::user');
     }
 
     /**
@@ -87,15 +86,15 @@ class MailPolicy
      */
     public function restoreAny(User $user): bool
     {
-        return $user->can('restore_any_mail::mails::out');
+        return $user->can('restore_any_user::user');
     }
 
     /**
-     * Determine whether the user can replicate.
+     * Determine whether the user can bulk restore.
      */
-    public function replicate(User $user, Mail $mail): bool
+    public function replicate(User $user): bool
     {
-        return $user->can('replicate_mail::mails::out');
+        return $user->can('replicate_user::user');
     }
 
     /**
@@ -103,6 +102,6 @@ class MailPolicy
      */
     public function reorder(User $user): bool
     {
-        return $user->can('reorder_mail::mails::out');
+        return $user->can('reorder_user::user');
     }
 }
