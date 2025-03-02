@@ -1,3 +1,10 @@
+# [1.6.0](https://github.com/kristiansnts/LevelUPKota-Administration-System/compare/v1.5.0...v1.6.0) (2025-03-02)
+
+
+### Features
+
+* **migration:** add order on mail_category_user use for mail_code ([fe1a361](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/fe1a3618d6fa4b9deca6565e4236bc1b3c9b6de5))
+
 # [1.5.0](https://github.com/kristiansnts/LevelUPKota-Administration-System/compare/v1.4.1...v1.5.0) (2025-03-01)
 
 
