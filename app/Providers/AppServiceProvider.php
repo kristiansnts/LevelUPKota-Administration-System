@@ -21,6 +21,7 @@ class AppServiceProvider extends ServiceProvider
             /**
              * @param  \Illuminate\Filesystem\FilesystemAdapter  $driver
              * @param  array<string, mixed>  $config
+             *
              * @return \Illuminate\Filesystem\FilesystemAdapter
              */
             Storage::extend('google', function ($app, array $config): \Illuminate\Filesystem\FilesystemAdapter {
@@ -34,7 +35,7 @@ class AppServiceProvider extends ServiceProvider
                     $options['sharedFolderId'] = $config['sharedFolderId'];
                 }
 
-                if (!isset($config['clientId']) || !isset($config['clientSecret']) || !isset($config['refreshToken'])) {
+                if (! isset($config['clientId']) || ! isset($config['clientSecret']) || ! isset($config['refreshToken'])) {
                     throw new \InvalidArgumentException('Google Drive client configuration is incomplete');
                 }
 

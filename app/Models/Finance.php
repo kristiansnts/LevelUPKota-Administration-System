@@ -12,6 +12,8 @@ class Finance extends Model
     /** @use HasFactory<\Database\Factories\FinanceFactory> */
     use HasFactory;
 
+    protected $table = 'finances';
+
     protected $fillable = [
         'period',
         'transaction_date',
