@@ -1,3 +1,10 @@
+## [1.8.1](https://github.com/kristiansnts/LevelUPKota-Administration-System/compare/v1.8.0...v1.8.1) (2025-03-04)
+
+
+### Bug Fixes
+
+* **migration:** add transaction period and update user with avatar_url ([d744ed9](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/d744ed9bec427e5f20012831906a45506ad54b0e))
+
 # [1.8.0](https://github.com/kristiansnts/LevelUPKota-Administration-System/compare/v1.7.0...v1.8.0) (2025-03-04)
 
 
