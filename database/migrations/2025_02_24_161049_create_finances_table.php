@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('finances', function (Blueprint $table): void {
             $table->id();
-            $table->string('period');
+            $table->unsignedBigInteger('period_id');
             $table->date('transaction_date');
             $table->unsignedBigInteger('transaction_category_id');
             $table->string('description');
@@ -27,6 +27,7 @@ return new class extends Migration
 
             $table->foreign('transaction_category_id')->references('id')->on('transaction_category');
             $table->foreign('transaction_type_id')->references('id')->on('transaction_type');
+            $table->foreign('period_id')->references('id')->on('transaction_period');
         });
     }
 
