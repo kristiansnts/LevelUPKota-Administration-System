@@ -1,3 +1,11 @@
+# [1.8.0](https://github.com/kristiansnts/LevelUPKota-Administration-System/compare/v1.7.0...v1.8.0) (2025-03-04)
+
+
+### Features
+
+* **resource:** add mail resource ([c79e8c5](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/c79e8c50c27ed4fa7224051adac3636ef69f77dd))
+* **resource:** add Transaction resource ([a3ebf7f](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/a3ebf7ffc10e17d8358793ff1b9c9ed5d23ff25b))
+
 # [1.7.0](https://github.com/kristiansnts/LevelUPKota-Administration-System/compare/v1.6.0...v1.7.0) (2025-03-02)
 
 
