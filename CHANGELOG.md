@@ -1,3 +1,16 @@
+# [1.9.0](https://github.com/kristiansnts/LevelUPKota-Administration-System/compare/v1.8.1...v1.9.0) (2025-03-06)
+
+
+### Bug Fixes
+
+* **main:** edit Finance and TransactionPeriod ([a65d3a2](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/a65d3a2d6d5b2eb480cd2e1b4547b0b8b32062dd))
+* **main:** fix phpdoc on SocialiteController ([d39c90d](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/d39c90dced7b878abf74c2461b99f3703920b3b2))
+
+
+### Features
+
+* **main:** implement login by google with socialite ([24850be](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/24850bea357e2b5a5a36dfceea3bcfd1fc20fdd1))
+
 ## [1.8.1](https://github.com/kristiansnts/LevelUPKota-Administration-System/compare/v1.8.0...v1.8.1) (2025-03-04)
 
 
