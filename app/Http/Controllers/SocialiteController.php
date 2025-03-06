@@ -7,13 +7,21 @@ use Laravel\Socialite\Facades\Socialite;
 
 class SocialiteController extends Controller
 {
-    public function redirect(string $provider)
+    /**
+     * Redirect to the provider
+     */
+    public function redirect(string $provider): \Symfony\Component\HttpFoundation\RedirectResponse
     {
         $this->validateProvider($provider);
 
         return Socialite::driver($provider)->redirect();
     }
 
+    /**
+     * Handle the callback from the provider
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
     public function callback(string $provider)
     {
         $this->validateProvider($provider);
@@ -39,11 +47,19 @@ class SocialiteController extends Controller
         return redirect()->intended(route('filament.admin.pages.dashboard'));
     }
 
+    /**
+     * Validate the provider
+     *
+     * @return array{provider: string}
+     */
     protected function validateProvider(string $provider): array
     {
-        return validator(
+        /** @var array{provider: string} */
+        $validated = validator(
             ['provider' => $provider],
             ['provider' => 'in:google']
         )->validate();
+
+        return $validated;
     }
 }

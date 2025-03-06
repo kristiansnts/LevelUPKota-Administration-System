@@ -6,9 +6,9 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    public function up()
+    public function up(): void
     {
-        Schema::create('socialite_users', function (Blueprint $table) {
+        Schema::create('socialite_users', function (Blueprint $table): void {
             $table->id();
 
             $table->foreignId('user_id');
@@ -24,7 +24,7 @@ return new class extends Migration
         });
     }
 
-    public function down()
+    public function down(): void
     {
         Schema::dropIfExists('socialite_users');
     }
