@@ -55,11 +55,9 @@ class SocialiteController extends Controller
     protected function validateProvider(string $provider): array
     {
         /** @var array{provider: string} */
-        $validated = validator(
+        return validator(
             ['provider' => $provider],
             ['provider' => 'in:google']
         )->validate();
-
-        return $validated;
     }
 }
