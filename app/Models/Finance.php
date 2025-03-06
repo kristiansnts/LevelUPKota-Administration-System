@@ -15,7 +15,7 @@ class Finance extends Model
     protected $table = 'finances';
 
     protected $fillable = [
-        'period',
+        'period_id',
         'transaction_date',
         'transaction_category_id',
         'description',
@@ -49,5 +49,13 @@ class Finance extends Model
     public function user(): BelongsToMany
     {
         return $this->belongsToMany(User::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<\App\Models\TransactionPeriod, $this>
+     */
+    public function transactionPeriod(): BelongsTo
+    {
+        return $this->belongsTo(TransactionPeriod::class);
     }
 }

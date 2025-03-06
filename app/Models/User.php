@@ -28,6 +28,8 @@ class User extends Authenticatable
         'province_id',
         'district_id',
         'postal_code',
+        'google_id',
+        'avatar',
     ];
 
     /**

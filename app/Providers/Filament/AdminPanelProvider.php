@@ -57,6 +57,10 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->plugins([
                 \BezhanSalleh\FilamentShield\FilamentShieldPlugin::make(),
-            ]);
+            ])
+            ->renderHook(
+                'panels::auth.login.form.after',
+                fn () => view('auth.socialite.google')
+            );
     }
 }
