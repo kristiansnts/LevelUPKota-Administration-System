@@ -6,6 +6,7 @@ use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
+use Filament\Navigation\MenuItem;
 use Filament\Pages;
 use Filament\Panel;
 use Filament\PanelProvider;
@@ -17,6 +18,7 @@ use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
+use Joaopaulolndev\FilamentEditProfile\Pages\EditProfilePage;
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -57,6 +59,29 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->plugins([
                 \BezhanSalleh\FilamentShield\FilamentShieldPlugin::make(),
+                \Joaopaulolndev\FilamentEditProfile\FilamentEditProfilePlugin::make()
+                    ->slug('profile')
+                    ->shouldShowEditProfileForm(false)
+                    ->shouldRegisterNavigation(false)
+                    ->shouldShowBrowserSessionsForm(false)
+                    ->shouldShowEditPasswordForm(false)
+                    ->shouldShowDeleteAccountForm(false)
+                    ->customProfileComponents([
+                        \App\Livewire\CustomProfileComponent::class,
+                    ]),
+            ])
+            ->userMenuItems([
+                'profile' => MenuItem::make()
+                    ->label(function () {
+                        /**
+                         * @var \App\Models\User
+                         */
+                        $user = auth()->user();
+
+                        return $user->name;
+                    })
+                    ->url(fn (): string => EditProfilePage::getUrl())
+                    ->icon('heroicon-m-user-circle'),
             ])
             ->renderHook(
                 'panels::auth.login.form.after',

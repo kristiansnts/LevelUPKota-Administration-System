@@ -32,17 +32,17 @@ class SocialiteController extends Controller
 
         if ($user) {
             $user->update([$provider.'_id' => $response->getId()]);
+            auth()->login($user);
         } else {
-            $user = User::create([
+            $createdUser = User::create([
                 $provider.'_id' => $response->getId(),
                 'name' => $response->getName(),
                 'email' => $response->getEmail(),
                 'password' => '',
             ]);
-            $user->assignRole('guest');
+            $createdUser->assignRole('guest');
+            auth()->login($createdUser);
         }
-
-        auth()->login($user);
 
         return redirect()->intended(route('filament.admin.pages.dashboard'));
     }
