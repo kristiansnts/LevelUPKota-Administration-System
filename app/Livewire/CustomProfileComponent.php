@@ -52,7 +52,7 @@ class CustomProfileComponent extends Component implements HasForms
 
     public function save(): void
     {
-        if (!$this->form instanceof \Filament\Forms\Form) {
+        if (! $this->form instanceof \Filament\Forms\Form) {
             return;
         }
 
