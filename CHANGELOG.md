@@ -1,3 +1,11 @@
+## [1.12.1](https://github.com/kristiansnts/LevelUPKota-Administration-System/compare/v1.12.0...v1.12.1) (2025-03-08)
+
+
+### Bug Fixes
+
+* **main:** add shieldseeder for production ([fe32705](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/fe32705775617a3464db69991af8b7c51866c5ca))
+* **main:** update policies ([cf0c341](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/cf0c341a814bec76cbb4ec30fd90f4a18e7e41c3))
+
 # [1.12.0](https://github.com/kristiansnts/LevelUPKota-Administration-System/compare/v1.11.1...v1.12.0) (2025-03-08)
 
 
