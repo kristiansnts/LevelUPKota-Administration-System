@@ -1,3 +1,10 @@
+## [1.11.1](https://github.com/kristiansnts/LevelUPKota-Administration-System/compare/v1.11.0...v1.11.1) (2025-03-08)
+
+
+### Bug Fixes
+
+* **migration:** remove role on user ([9a4e565](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/9a4e56599d00ed6522e7b809184356dcf06a6eb7))
+
 # [1.11.0](https://github.com/kristiansnts/LevelUPKota-Administration-System/compare/v1.10.0...v1.11.0) (2025-03-08)
 
 
