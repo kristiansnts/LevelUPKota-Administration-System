@@ -1,3 +1,10 @@
+# [1.10.0](https://github.com/kristiansnts/LevelUPKota-Administration-System/compare/v1.9.0...v1.10.0) (2025-03-07)
+
+
+### Features
+
+* **main:** create profile page ([bce8b40](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/bce8b403b33e33676d7699359ca7c81a614a5007))
+
 # [1.9.0](https://github.com/kristiansnts/LevelUPKota-Administration-System/compare/v1.8.1...v1.9.0) (2025-03-06)
 
 
