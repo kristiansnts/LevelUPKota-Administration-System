@@ -1,3 +1,10 @@
+# [1.11.0](https://github.com/kristiansnts/LevelUPKota-Administration-System/compare/v1.10.0...v1.11.0) (2025-03-08)
+
+
+### Features
+
+* **main:** update databaseseeder ([c95130b](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/c95130b9329e618a689d846440abae5e0c0d2ca8))
+
 # [1.10.0](https://github.com/kristiansnts/LevelUPKota-Administration-System/compare/v1.9.0...v1.10.0) (2025-03-07)
 
 
