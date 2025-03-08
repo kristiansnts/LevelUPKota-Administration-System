@@ -1,3 +1,11 @@
+# [1.12.0](https://github.com/kristiansnts/LevelUPKota-Administration-System/compare/v1.11.1...v1.12.0) (2025-03-08)
+
+
+### Features
+
+* **main:** add filamentUser to user ([6de7e58](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/6de7e58420985841f348aae8f8945b5df400cdb7))
+* **main:** add filamentUser to user ([2747f46](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/2747f460c476887aca3a70e01c43f25eff3e75ae))
+
 ## [1.11.1](https://github.com/kristiansnts/LevelUPKota-Administration-System/compare/v1.11.0...v1.11.1) (2025-03-08)
 
 
