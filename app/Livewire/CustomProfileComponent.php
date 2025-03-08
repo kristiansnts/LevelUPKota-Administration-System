@@ -40,10 +40,6 @@ class CustomProfileComponent extends Component implements HasForms
 
     public function form(Form $form): Form
     {
-
-        $user = auth()->user();
-        dump($user->roles->pluck('name'));
-
         return $form
             ->schema([
                 PersonalInfoForm::make(),
