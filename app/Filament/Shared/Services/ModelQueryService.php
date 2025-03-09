@@ -14,7 +14,9 @@ class ModelQueryService
         /**
          * @var \App\Models\User
          */
-        return auth()->user();
+        $user = \Illuminate\Support\Facades\Auth::user();
+
+        return $user;
     }
 
     /**

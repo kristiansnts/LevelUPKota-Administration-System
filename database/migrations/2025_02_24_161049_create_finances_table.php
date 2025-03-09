@@ -21,6 +21,7 @@ return new class extends Migration
             $table->float('amount_in');
             $table->float('amount_out');
             $table->string('invoice_code');
+            // enum type is in transaction category
             $table->enum('type', ['income', 'expense']);
             $table->string('transaction_proof_link')->nullable();
             $table->timestamps();

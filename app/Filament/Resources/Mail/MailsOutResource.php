@@ -4,6 +4,7 @@ namespace App\Filament\Resources\Mail;
 
 use App\Filament\Resources\Mail\MailsOutResource\Actions\MailCodeCreateAction;
 use App\Filament\Resources\Mail\MailsOutResource\Pages;
+use App\Helpers\RouteHelper;
 use App\Models\Mail;
 use App\Models\MailCategory;
 use Filament\Forms;
@@ -35,25 +36,31 @@ class MailsOutResource extends Resource
                     ->schema([
                         Forms\Components\DatePicker::make('mail_date')
                             ->label('Tanggal Surat')
+                            ->native(false)
+                            ->live()
                             ->required(),
                         Forms\Components\Select::make('mail_category_id')
                             ->label('Kategori Surat')
                             ->searchable()
                             ->preload()
+                            ->live()
                             ->options(MailCategory::query()->pluck('description', 'id'))
                             ->required(),
                         Forms\Components\TextInput::make('sender_name')
                             ->label('Pengirim')
                             ->placeholder('Masukkan nama pengirim')
+                            ->live()
                             ->required(),
                         Forms\Components\TagsInput::make('receiver_name')
                             ->label('Penerima')
                             ->separator(',')
                             ->splitKeys(['Enter', 'Tab'])
+                            ->live()
                             ->placeholder('Masukkan nama penerima, bisa lebih dari satu')
                             ->required(),
                         Forms\Components\Textarea::make('description')
                             ->label('Keterangan')
+                            ->live()
                             ->required(),
                     ])->columnSpan(2),
                 Forms\Components\Section::make('Data Surat Keluar')
@@ -67,7 +74,8 @@ class MailsOutResource extends Resource
                         Forms\Components\FileUpload::make('link')
                             ->label('Upload Surat')
                             ->acceptedFileTypes(['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'])
-                            ->required(),
+                            ->required()
+                            ->visible(RouteHelper::isRouteName('filament.admin.resources.surat-keluar.edit')),
                     ])->columnSpan(1),
             ])->columns(3);
     }
