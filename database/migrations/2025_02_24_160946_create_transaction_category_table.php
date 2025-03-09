@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('description');
-            // enum type is in transaction category
+            $table->enum('type', ['income', 'expense']);
             $table->timestamps();
         });
     }

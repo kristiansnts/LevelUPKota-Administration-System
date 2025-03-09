@@ -3,8 +3,10 @@
 namespace App\Filament\Resources\Mail;
 
 use App\Filament\Resources\Mail\MailsInResource\Pages;
+use App\Filament\Shared\Services\ResourceScopeService;
 use App\Models\Mail;
 use App\Models\MailCategory;
+use App\Models\MailUser;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -88,7 +90,16 @@ class MailsInResource extends Resource
      */
     public static function getEloquentQuery(): Builder
     {
-        return parent::getEloquentQuery()->where('type', 'in');
+        /** @var \Illuminate\Database\Eloquent\Builder<MailUser> $mailIds */
+        $mailIds = ResourceScopeService::userScope(
+            MailUser::query(),
+            'mail_id'
+        );
+
+        /** @var \Illuminate\Database\Eloquent\Builder<Mail> */
+        return parent::getEloquentQuery()
+            ->whereIn('id', $mailIds)
+            ->where('type', 'in');
     }
 
     public static function getRelations(): array

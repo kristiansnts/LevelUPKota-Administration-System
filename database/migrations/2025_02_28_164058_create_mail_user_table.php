@@ -13,12 +13,12 @@ return new class extends Migration
     {
         Schema::create('mail_user', function (Blueprint $table): void {
             $table->id();
+            $table->unsignedBigInteger('city_id')->nullable();
+            $table->unsignedBigInteger('district_id')->nullable();
             $table->unsignedBigInteger('mail_id');
-            $table->unsignedBigInteger('user_id');
             $table->timestamps();
 
             $table->foreign('mail_id')->references('id')->on('mails');
-            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

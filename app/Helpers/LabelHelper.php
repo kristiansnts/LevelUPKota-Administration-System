@@ -11,10 +11,16 @@ class LabelHelper
         $user = ModelQueryService::getUserModel();
         $base = 'LUP';
 
-        dump($user);
+        /**
+         * @var string $districtName
+         */
+        $districtName = $user->district->dis_name ?? '';
+        /**
+         * @var string $cityName
+         */
+        $cityName = $user->city->city_name ?? '';
 
-        // Get district or city name through relationships
-        $workBase = $user->district?->dis_name ?? $user->city?->city_name ?? '';
+        $workBase = $districtName ?: $cityName;
 
         return sprintf('%s-%s', $base, $workBase);
     }

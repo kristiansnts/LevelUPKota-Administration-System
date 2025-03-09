@@ -24,13 +24,19 @@ class AddressForm
                     ->options(fn (): array => ModelQueryService::getProvinceOptions())
                     ->default($user->province_id)
                     ->searchable()
-                    ->required(),
+                    ->required()
+                    ->validationMessages([
+                        'required' => 'Provinsi tidak boleh kosong',
+                    ]),
                 Forms\Components\Select::make('city_id')
                     ->label('Kota')
                     ->options(fn (): array => ModelQueryService::getCityOptions())
                     ->default($user->city_id)
                     ->searchable()
-                    ->required(),
+                    ->required()
+                    ->validationMessages([
+                        'required' => 'Kota tidak boleh kosong',
+                    ]),
                 Forms\Components\Select::make('district_id')
                     ->label('Kecamatan')
                     ->options(fn (): array => ModelQueryService::getDistrictOptions())

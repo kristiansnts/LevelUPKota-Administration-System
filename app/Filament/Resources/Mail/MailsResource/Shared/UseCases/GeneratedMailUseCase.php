@@ -11,6 +11,9 @@ class GeneratedMailUseCase
         private readonly MailCategoryService $mailCategoryService,
     ) {}
 
+    /**
+     * @param  array<string, mixed>  $mailData
+     */
     public function generateMailCode(array $mailData): string
     {
         try {

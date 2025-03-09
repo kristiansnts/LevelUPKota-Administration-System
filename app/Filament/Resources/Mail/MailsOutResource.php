@@ -2,13 +2,17 @@
 
 namespace App\Filament\Resources\Mail;
 
+use App\Enums\MailStatusEnum;
 use App\Filament\Resources\Mail\MailsOutResource\Actions\MailCodeCreateAction;
 use App\Filament\Resources\Mail\MailsOutResource\Pages;
+use App\Filament\Shared\Services\ModelQueryService;
+use App\Filament\Shared\Services\ResourceScopeService;
 use App\Helpers\RouteHelper;
 use App\Models\Mail;
-use App\Models\MailCategory;
+use App\Models\MailUser;
 use Filament\Forms;
 use Filament\Forms\Form;
+use Filament\Forms\Get;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -44,7 +48,9 @@ class MailsOutResource extends Resource
                             ->searchable()
                             ->preload()
                             ->live()
-                            ->options(MailCategory::query()->pluck('description', 'id'))
+                            ->options(function (): array {
+                                return ModelQueryService::getMailCategoryOptions();
+                            })
                             ->required(),
                         Forms\Components\TextInput::make('sender_name')
                             ->label('Pengirim')
@@ -67,10 +73,12 @@ class MailsOutResource extends Resource
                     ->schema([
                         Forms\Components\TextInput::make('mail_code')
                             ->label('Nomor Surat')
-                            ->disabled()
+                            ->disabled(fn (Get $get): bool => $get('mail_code') === null)
                             ->hintActions([
                                 MailCodeCreateAction::make('mailCodeCreateAction'),
-                            ]),
+                            ])
+                            ->live()
+                            ->readOnly(),
                         Forms\Components\FileUpload::make('link')
                             ->label('Upload Surat')
                             ->acceptedFileTypes(['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'])
@@ -84,13 +92,33 @@ class MailsOutResource extends Resource
     {
         return $table
             ->columns([
-
+                Tables\Columns\TextColumn::make('mail_code')
+                    ->label('Nomor Surat'),
+                Tables\Columns\TextColumn::make('mail_date')
+                    ->label('Tanggal Surat'),
+                Tables\Columns\TextColumn::make('sender_name')
+                    ->label('Pengirim'),
+                Tables\Columns\TextColumn::make('receiver_name')
+                    ->label('Penerima'),
+                Tables\Columns\TextColumn::make('description')
+                    ->label('Keterangan'),
+                Tables\Columns\TextColumn::make('created_at')
+                    ->label('Tanggal Dibuat')
+                    ->dateTime('d-m-Y H:i:s'),
+                Tables\Columns\TextColumn::make('status')
+                    ->label('Status')
+                    ->badge()
+                    ->colors([
+                        'danger' => MailStatusEnum::DRAFT->value,
+                        'success' => MailStatusEnum::UPLOADED->value,
+                    ])
+                    ->formatStateUsing(fn (string $state): string => MailStatusEnum::from($state)->getLabel()),
             ])
             ->filters([
 
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\EditAction::make()->label('Edit dan Upload'),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -104,7 +132,16 @@ class MailsOutResource extends Resource
      */
     public static function getEloquentQuery(): Builder
     {
-        return parent::getEloquentQuery()->where('type', 'out');
+        /** @var \Illuminate\Database\Eloquent\Builder<MailUser> $mailIds */
+        $mailIds = ResourceScopeService::userScope(
+            MailUser::query(),
+            'mail_id'
+        );
+
+        /** @var \Illuminate\Database\Eloquent\Builder<Mail> */
+        return parent::getEloquentQuery()
+            ->whereIn('id', $mailIds)
+            ->where('type', 'out');
     }
 
     public static function getRelations(): array
