@@ -18,7 +18,7 @@ class CreateMailsCategory extends CreateRecord
 
     protected function afterCreate(): void
     {
-        if (!$this->record instanceof \Illuminate\Database\Eloquent\Model) {
+        if (! $this->record instanceof \Illuminate\Database\Eloquent\Model) {
             return;
         }
 
