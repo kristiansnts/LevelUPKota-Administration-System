@@ -2,8 +2,6 @@
 
 namespace App\Filament\Resources\Mail\MailsOutResource\Pages;
 
-use App\Enums\MailStatusEnum;
-use App\Enums\MailTypeEnum;
 use App\Filament\Resources\Mail\MailsOutResource;
 use App\Filament\Shared\Services\ModelQueryService;
 use App\Models\MailUser;
@@ -17,7 +15,6 @@ class CreateMailsOut extends CreateRecord
 
     public function mutateFormDataBeforeCreate(array $data): array
     {
-        $data['type'] = MailTypeEnum::OUT->value;
         $data['status'] = MailStatusEnum::DRAFT->value;
 
         return $data;

@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\Mail;
 
 use App\Enums\MailStatusEnum;
+use App\Enums\MailTypeEnum;
 use App\Filament\Resources\Mail\MailsOutResource\Actions\MailCodeCreateAction;
 use App\Filament\Resources\Mail\MailsOutResource\Pages;
 use App\Filament\Shared\Services\ModelQueryService;
@@ -24,7 +25,7 @@ class MailsOutResource extends Resource
 
     protected static ?string $modelLabel = 'Rekapitulasi Surat Keluar';
 
-    protected static ?string $navigationIcon = 'heroicon-o-envelope';
+    protected static ?string $navigationIcon = 'heroicon-c-envelope';
 
     protected static ?string $navigationGroup = 'Surat';
 
@@ -48,7 +49,7 @@ class MailsOutResource extends Resource
                             ->searchable()
                             ->preload()
                             ->live()
-                            ->options(fn(): array => ModelQueryService::getMailCategoryOptions())
+                            ->options(fn (): array => ModelQueryService::getMailCategoryOptions())
                             ->required(),
                         Forms\Components\TextInput::make('sender_name')
                             ->label('Pengirim')
@@ -83,6 +84,8 @@ class MailsOutResource extends Resource
                             ->required()
                             ->visible(RouteHelper::isRouteName('filament.admin.resources.surat-keluar.edit')),
                     ])->columnSpan(1),
+                Forms\Components\Hidden::make('type')
+                    ->default(MailTypeEnum::OUT->value),
             ])->columns(3);
     }
 
@@ -107,16 +110,23 @@ class MailsOutResource extends Resource
                     ->label('Status')
                     ->badge()
                     ->colors([
-                        'danger' => MailStatusEnum::DRAFT->value,
+                        'warning' => MailStatusEnum::DRAFT->value,
                         'success' => MailStatusEnum::UPLOADED->value,
                     ])
                     ->formatStateUsing(fn (string $state): string => MailStatusEnum::from($state)->getLabel()),
             ])
             ->filters([
-
+                Tables\Filters\SelectFilter::make('status')
+                    ->label('Status')
+                    ->options(MailStatusEnum::class),
             ])
             ->actions([
                 Tables\Actions\EditAction::make()->label('Edit dan Upload'),
+                Tables\Actions\ViewAction::make()
+                    ->label('Lihat Surat')
+                    ->icon('heroicon-o-eye')
+                    ->color('info')
+                    ->url(fn (Mail $record): string => $record->link ?? '#'),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -139,7 +149,7 @@ class MailsOutResource extends Resource
         /** @var \Illuminate\Database\Eloquent\Builder<Mail> */
         return parent::getEloquentQuery()
             ->whereIn('id', $mailIds)
-            ->where('type', 'out');
+            ->where('type', MailTypeEnum::OUT->value);
     }
 
     public static function getRelations(): array
