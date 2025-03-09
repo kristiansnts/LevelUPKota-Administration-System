@@ -35,13 +35,12 @@ class CreateMailsOut extends CreateRecord
 
     public function getRecord(): ?\App\Models\Mail
     {
-        /** @var \App\Models\Mail|null */
         return $this->record;
     }
 
     protected function afterCreate(): void
     {
-        if (!$this->record) {
+        if (!$this->record instanceof \Illuminate\Database\Eloquent\Model) {
             return;
         }
 

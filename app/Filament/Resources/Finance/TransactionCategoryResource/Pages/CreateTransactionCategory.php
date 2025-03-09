@@ -13,13 +13,12 @@ class CreateTransactionCategory extends CreateRecord
 
     public function getRecord(): ?\App\Models\TransactionCategory
     {
-        /** @var \App\Models\TransactionCategory|null */
         return $this->record;
     }
 
     protected function afterCreate(): void
     {
-        if (!$this->record) {
+        if (!$this->record instanceof \Illuminate\Database\Eloquent\Model) {
             return;
         }
 

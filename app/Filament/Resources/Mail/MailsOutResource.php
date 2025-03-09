@@ -48,9 +48,7 @@ class MailsOutResource extends Resource
                             ->searchable()
                             ->preload()
                             ->live()
-                            ->options(function (): array {
-                                return ModelQueryService::getMailCategoryOptions();
-                            })
+                            ->options(fn(): array => ModelQueryService::getMailCategoryOptions())
                             ->required(),
                         Forms\Components\TextInput::make('sender_name')
                             ->label('Pengirim')

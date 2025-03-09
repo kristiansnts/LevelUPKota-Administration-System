@@ -9,6 +9,7 @@ class ResourceScopeService
 {
     /**
      * @template TModel of Model
+     *
      * @param  Builder<TModel>  $query
      */
     public static function userScope(Builder $query, ?string $columnToPluck = null): mixed

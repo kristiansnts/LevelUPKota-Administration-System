@@ -13,13 +13,12 @@ class CreateTransactionType extends CreateRecord
 
     public function getRecord(): ?\App\Models\TransactionType
     {
-        /** @var \App\Models\TransactionType|null */
         return $this->record;
     }
 
     protected function afterCreate(): void
     {
-        if (!$this->record) {
+        if (!$this->record instanceof \Illuminate\Database\Eloquent\Model) {
             return;
         }
 

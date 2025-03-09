@@ -13,13 +13,12 @@ class CreateMailsCategory extends CreateRecord
 
     public function getRecord(): ?\App\Models\MailCategory
     {
-        /** @var \App\Models\MailCategory|null */
         return $this->record;
     }
 
     protected function afterCreate(): void
     {
-        if (!$this->record) {
+        if (!$this->record instanceof \Illuminate\Database\Eloquent\Model) {
             return;
         }
 
