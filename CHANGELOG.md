@@ -1,3 +1,16 @@
+# [1.13.0](https://github.com/kristiansnts/LevelUPKota-Administration-System/compare/v1.12.1...v1.13.0) (2025-03-09)
+
+
+### Bug Fixes
+
+* **resource:** fix generateMailNumber and fix userScope by city or district ([20b7324](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/20b73246b7c7134693c7a034b6487c0e962258b1))
+* **resource:** remove hardcoded string ([24e57ef](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/24e57efce855198df7a8bfbcb498e0f9fd2b79e7))
+
+
+### Features
+
+* **resource:** generateMailCode (WIP) ([d913ec7](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/d913ec7c484719e65db286bde6b485dc6aa1584c))
+
 ## [1.12.1](https://github.com/kristiansnts/LevelUPKota-Administration-System/compare/v1.12.0...v1.12.1) (2025-03-08)
 
 
