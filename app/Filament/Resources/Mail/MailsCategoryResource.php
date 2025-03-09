@@ -3,12 +3,15 @@
 namespace App\Filament\Resources\Mail;
 
 use App\Filament\Resources\Mail\MailsCategoryResource\Pages;
+use App\Filament\Shared\Services\ResourceScopeService;
 use App\Models\MailCategory;
+use App\Models\MailCategoryUser;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
 
 class MailsCategoryResource extends Resource
 {
@@ -71,6 +74,22 @@ class MailsCategoryResource extends Resource
         return [
 
         ];
+    }
+
+    /**
+     * @return Builder<MailCategory>
+     */
+    public static function getEloquentQuery(): Builder
+    {
+        /** @var \Illuminate\Database\Eloquent\Builder<MailCategoryUser> $mailCategoryIds */
+        $mailCategoryIds = ResourceScopeService::userScope(
+            MailCategoryUser::query(),
+            'mail_category_id'
+        );
+
+        /** @var \Illuminate\Database\Eloquent\Builder<MailCategory> */
+        return parent::getEloquentQuery()
+            ->whereIn('id', $mailCategoryIds);
     }
 
     public static function getPages(): array

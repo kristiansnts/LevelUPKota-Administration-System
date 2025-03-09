@@ -87,23 +87,6 @@ php artisan make:filament-resource ResourceName --panel=admin
 ```
 This will generate the necessary files under `app/Filament/Admin/Resources/ResourceNameResource.php`.
 
-## Creating Filament Resource Errors
-
-If you need to create a resource error for a specific resource within the `admin` panel, use:
-```sh
-php artisan make:resource-error Errors/ResourceError --panel=admin
-```
-This command will generate the error handling class within `app/Filament/Admin/Resources/Errors/ResourceError.php`.
-
-To list all existing resource errors:
-```sh
-php artisan list:resource-errors
-```
-To find a specific error by code:
-```sh
-php artisan find:resource-error <ErrorCode>
-```
-
 ## Default Admin Credentials
 
 After seeding the database, you can log in with:

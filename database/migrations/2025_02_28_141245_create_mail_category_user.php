@@ -13,12 +13,12 @@ return new class extends Migration
     {
         Schema::create('mail_category_user', function (Blueprint $table): void {
             $table->id();
-            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('city_id')->nullable();
+            $table->unsignedBigInteger('district_id')->nullable();
             $table->unsignedBigInteger('mail_category_id');
             $table->integer('order');
             $table->timestamps();
 
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('mail_category_id')->references('id')->on('mail_category')->onDelete('cascade');
         });
     }

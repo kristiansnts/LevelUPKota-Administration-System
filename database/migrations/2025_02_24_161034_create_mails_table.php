@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('receiver_name');
             $table->string('description');
             $table->enum('type', ['in', 'out']);
-            $table->string('link');
+            $table->string('link')->nullable();
             $table->string('status')->nullable();
             $table->timestamps();
 

@@ -2,12 +2,18 @@
 
 namespace App\Filament\Resources\Mail;
 
+use App\Enums\MailStatusEnum;
+use App\Enums\MailTypeEnum;
 use App\Filament\Resources\Mail\MailsOutResource\Actions\MailCodeCreateAction;
 use App\Filament\Resources\Mail\MailsOutResource\Pages;
+use App\Filament\Shared\Services\ModelQueryService;
+use App\Filament\Shared\Services\ResourceScopeService;
+use App\Helpers\RouteHelper;
 use App\Models\Mail;
-use App\Models\MailCategory;
+use App\Models\MailUser;
 use Filament\Forms;
 use Filament\Forms\Form;
+use Filament\Forms\Get;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -19,7 +25,7 @@ class MailsOutResource extends Resource
 
     protected static ?string $modelLabel = 'Rekapitulasi Surat Keluar';
 
-    protected static ?string $navigationIcon = 'heroicon-o-envelope';
+    protected static ?string $navigationIcon = 'heroicon-c-envelope';
 
     protected static ?string $navigationGroup = 'Surat';
 
@@ -35,40 +41,51 @@ class MailsOutResource extends Resource
                     ->schema([
                         Forms\Components\DatePicker::make('mail_date')
                             ->label('Tanggal Surat')
+                            ->native(false)
+                            ->live()
                             ->required(),
                         Forms\Components\Select::make('mail_category_id')
                             ->label('Kategori Surat')
                             ->searchable()
                             ->preload()
-                            ->options(MailCategory::query()->pluck('description', 'id'))
+                            ->live()
+                            ->options(fn (): array => ModelQueryService::getMailCategoryOptions())
                             ->required(),
                         Forms\Components\TextInput::make('sender_name')
                             ->label('Pengirim')
                             ->placeholder('Masukkan nama pengirim')
+                            ->live()
                             ->required(),
                         Forms\Components\TagsInput::make('receiver_name')
                             ->label('Penerima')
                             ->separator(',')
                             ->splitKeys(['Enter', 'Tab'])
+                            ->live()
                             ->placeholder('Masukkan nama penerima, bisa lebih dari satu')
                             ->required(),
                         Forms\Components\Textarea::make('description')
                             ->label('Keterangan')
+                            ->live()
                             ->required(),
                     ])->columnSpan(2),
                 Forms\Components\Section::make('Data Surat Keluar')
                     ->schema([
                         Forms\Components\TextInput::make('mail_code')
                             ->label('Nomor Surat')
-                            ->disabled()
+                            ->disabled(fn (Get $get): bool => $get('mail_code') === null)
                             ->hintActions([
                                 MailCodeCreateAction::make('mailCodeCreateAction'),
-                            ]),
+                            ])
+                            ->live()
+                            ->readOnly(),
                         Forms\Components\FileUpload::make('link')
                             ->label('Upload Surat')
                             ->acceptedFileTypes(['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'])
-                            ->required(),
+                            ->required()
+                            ->visible(RouteHelper::isRouteName('filament.admin.resources.surat-keluar.edit')),
                     ])->columnSpan(1),
+                Forms\Components\Hidden::make('type')
+                    ->default(MailTypeEnum::OUT->value),
             ])->columns(3);
     }
 
@@ -76,13 +93,40 @@ class MailsOutResource extends Resource
     {
         return $table
             ->columns([
-
+                Tables\Columns\TextColumn::make('mail_code')
+                    ->label('Nomor Surat'),
+                Tables\Columns\TextColumn::make('mail_date')
+                    ->label('Tanggal Surat'),
+                Tables\Columns\TextColumn::make('sender_name')
+                    ->label('Pengirim'),
+                Tables\Columns\TextColumn::make('receiver_name')
+                    ->label('Penerima'),
+                Tables\Columns\TextColumn::make('description')
+                    ->label('Keterangan'),
+                Tables\Columns\TextColumn::make('created_at')
+                    ->label('Tanggal Dibuat')
+                    ->dateTime('d-m-Y H:i:s'),
+                Tables\Columns\TextColumn::make('status')
+                    ->label('Status')
+                    ->badge()
+                    ->colors([
+                        'warning' => MailStatusEnum::DRAFT->value,
+                        'success' => MailStatusEnum::UPLOADED->value,
+                    ])
+                    ->formatStateUsing(fn (string $state): string => MailStatusEnum::from($state)->getLabel()),
             ])
             ->filters([
-
+                Tables\Filters\SelectFilter::make('status')
+                    ->label('Status')
+                    ->options(MailStatusEnum::class),
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\EditAction::make()->label('Edit dan Upload'),
+                Tables\Actions\ViewAction::make()
+                    ->label('Lihat Surat')
+                    ->icon('heroicon-o-eye')
+                    ->color('info')
+                    ->url(fn (Mail $record): string => $record->link ?? '#'),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -96,7 +140,16 @@ class MailsOutResource extends Resource
      */
     public static function getEloquentQuery(): Builder
     {
-        return parent::getEloquentQuery()->where('type', 'out');
+        /** @var \Illuminate\Database\Eloquent\Builder<MailUser> $mailIds */
+        $mailIds = ResourceScopeService::userScope(
+            MailUser::query(),
+            'mail_id'
+        );
+
+        /** @var \Illuminate\Database\Eloquent\Builder<Mail> */
+        return parent::getEloquentQuery()
+            ->whereIn('id', $mailIds)
+            ->where('type', MailTypeEnum::OUT->value);
     }
 
     public static function getRelations(): array

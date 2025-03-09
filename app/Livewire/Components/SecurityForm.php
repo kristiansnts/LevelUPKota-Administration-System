@@ -18,6 +18,9 @@ class SecurityForm
                     ->label('Kata Sandi Saat Ini')
                     ->password()
                     ->required()
+                    ->validationMessages([
+                        'required' => 'Kata sandi saat ini tidak boleh kosong',
+                    ])
                     ->visible(fn (): bool => ! RolesHelper::isGuest()),
                 Forms\Components\TextInput::make('password')
                     ->label('Kata Sandi')

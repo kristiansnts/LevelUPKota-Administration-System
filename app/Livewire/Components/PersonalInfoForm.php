@@ -23,17 +23,28 @@ class PersonalInfoForm
                     ->label('Nama')
                     ->placeholder('Masukkan Nama Anda')
                     ->default($user->name)
-                    ->required(),
+                    ->required()
+                    ->validationMessages([
+                        'required' => 'Nama tidak boleh kosong',
+                    ]),
                 Forms\Components\TextInput::make('email')
                     ->label('Email')
                     ->placeholder('Masukkan Email Anda')
                     ->default($user->email)
-                    ->required(),
+                    ->required()
+                    ->email()
+                    ->validationMessages([
+                        'required' => 'Email tidak boleh kosong',
+                        'email' => 'Format email tidak valid',
+                    ]),
                 Forms\Components\TextInput::make('phone_number')
                     ->label('Nomor Telepon')
                     ->placeholder('Masukkan Nomor Telepon Anda')
                     ->default($user->phone_number)
-                    ->required(),
+                    ->required()
+                    ->validationMessages([
+                        'required' => 'Nomor telepon tidak boleh kosong',
+                    ]),
             ]);
     }
 }

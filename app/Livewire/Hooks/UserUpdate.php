@@ -46,6 +46,10 @@ class UserUpdate
      */
     public static function updateRole(array $data): void
     {
+        if (! isset($data['jabatan'])) {
+            return;
+        }
+
         /**
          * @var \Spatie\Permission\Models\Role
          */

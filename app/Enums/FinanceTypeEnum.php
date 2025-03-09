@@ -2,7 +2,9 @@
 
 namespace App\Enums;
 
-enum FinanceType: string
+use Filament\Support\Contracts\HasLabel;
+
+enum FinanceTypeEnum: string implements HasLabel
 {
     case INCOME = 'income';
     case OUTCOME = 'outcome';

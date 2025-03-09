@@ -13,12 +13,12 @@ return new class extends Migration
     {
         Schema::create('finance_user', function (Blueprint $table): void {
             $table->id();
+            $table->unsignedBigInteger('city_id')->nullable();
+            $table->unsignedBigInteger('district_id')->nullable();
             $table->unsignedBigInteger('finance_id');
-            $table->unsignedBigInteger('user_id');
             $table->timestamps();
 
-            $table->foreign('finance_id')->references('id')->on('finances');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('finance_id')->references('id')->on('finances')->onDelete('cascade');
         });
     }
 

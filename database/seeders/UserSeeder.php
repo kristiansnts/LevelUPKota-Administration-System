@@ -18,6 +18,9 @@ class UserSeeder extends Seeder
             'name' => 'Admin',
             'email' => 'admin.levelup@gmail.com',
             'password' => Hash::make('password'),
+            'phone_number' => '083125180658',
+            'province_id' => 15,
+            'city_id' => 241,
         ]);
 
         $role = Role::create([

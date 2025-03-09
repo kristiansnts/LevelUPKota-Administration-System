@@ -6,31 +6,35 @@ use Filament\Notifications\Notification;
 
 class NotificationHelper
 {
-    public static function success(string $message): Notification
+    public static function success(string $message): void
     {
-        return Notification::make()
+        Notification::make()
             ->title($message)
-            ->success();
+            ->success()
+            ->send();
     }
 
-    public static function error(string $message): Notification
+    public static function error(string $message): void
     {
-        return Notification::make()
+        Notification::make()
             ->title($message)
-            ->danger();
+            ->danger()
+            ->send();
     }
 
-    public static function warning(string $message): Notification
+    public static function warning(string $message): void
     {
-        return Notification::make()
+        Notification::make()
             ->title($message)
-            ->warning();
+            ->warning()
+            ->send();
     }
 
-    public static function info(string $message): Notification
+    public static function info(string $message): void
     {
-        return Notification::make()
+        Notification::make()
             ->title($message)
-            ->info();
+            ->info()
+            ->send();
     }
 }

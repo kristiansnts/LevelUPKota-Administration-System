@@ -53,7 +53,7 @@ class CustomProfileComponent extends Component implements HasForms
     public function save(): void
     {
         if (! $this->form instanceof \Filament\Forms\Form) {
-            return;
+            $this->form = $this->form($this->makeForm());
         }
 
         /** @var array<string, mixed> */
@@ -61,6 +61,12 @@ class CustomProfileComponent extends Component implements HasForms
 
         if (! RolesHelper::isGuest() && ! UserPasswordUseCase::checkCurrentPassword($data)) {
             NotificationHelper::error('Kata Sandi Saat Ini Salah');
+
+            return;
+        }
+
+        if (! isset($data['province_id']) && ! isset($data['city_id'])) {
+            NotificationHelper::error('Provinsi dan Kota tidak boleh kosong');
 
             return;
         }
