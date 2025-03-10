@@ -1,3 +1,10 @@
+## [1.13.1](https://github.com/kristiansnts/LevelUPKota-Administration-System/compare/v1.13.0...v1.13.1) (2025-03-10)
+
+
+### Bug Fixes
+
+* **resource:** fix some doc error ([bfaf605](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/bfaf60541985f9050114534f69e17e7c9c9dfb03))
+
 # [1.13.0](https://github.com/kristiansnts/LevelUPKota-Administration-System/compare/v1.12.1...v1.13.0) (2025-03-09)
 
 
