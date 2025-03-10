@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Mail;
 
+use App\Enums\MailTypeEnum;
 use App\Filament\Resources\Mail\MailsInResource\Pages;
 use App\Filament\Shared\Services\ResourceScopeService;
 use App\Models\Mail;
@@ -34,6 +35,7 @@ class MailsInResource extends Resource
                     ->schema([
                         Forms\Components\DatePicker::make('mail_date')
                             ->label('Tanggal Surat')
+                            ->native(false)
                             ->required(),
                         Forms\Components\Select::make('mail_category_id')
                             ->label('Kategori Surat')
@@ -60,8 +62,10 @@ class MailsInResource extends Resource
                             ->label('Nomor Surat'),
                         Forms\Components\FileUpload::make('link')
                             ->label('Upload Surat')
-                            ->acceptedFileTypes(['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'])
-                            ->required(),
+                            ->default('#')
+                            ->acceptedFileTypes(['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document']),
+                        Forms\Components\Hidden::make('type')
+                            ->default(MailTypeEnum::IN->value),
                     ])->columnSpan(1),
             ])->columns(3);
     }
@@ -70,13 +74,31 @@ class MailsInResource extends Resource
     {
         return $table
             ->columns([
+                Tables\Columns\TextColumn::make('mail_code')
+                    ->label('Nomor Surat'),
+                Tables\Columns\TextColumn::make('mail_date')
+                    ->label('Tanggal Surat')
+                    ->dateTime('d M Y'),
+                Tables\Columns\TextColumn::make('sender_name')
+                    ->label('Pengirim'),
+                Tables\Columns\TextColumn::make('receiver_name')
+                    ->label('Penerima'),
+                Tables\Columns\TextColumn::make('mailCategory.description')
+                    ->label('Kategori'),
+                Tables\Columns\TextColumn::make('description')
+                    ->label('Keterangan'),
 
             ])
             ->filters([
 
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\EditAction::make()
+                    ->label('Edit')
+                    ->icon('heroicon-c-pencil'),
+                Tables\Actions\ViewAction::make()
+                    ->label('Lihat')
+                    ->icon('heroicon-c-eye'),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

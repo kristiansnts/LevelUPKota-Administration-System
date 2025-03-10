@@ -11,21 +11,16 @@ class CreateTransactionType extends CreateRecord
 {
     protected static string $resource = TransactionTypeResource::class;
 
-    public function getRecord(): ?\App\Models\TransactionType
-    {
-        return $this->record;
-    }
-
     protected function afterCreate(): void
     {
-        if (! $this->record instanceof \Illuminate\Database\Eloquent\Model) {
+        if (! $this->record instanceof \App\Models\TransactionType) {
             return;
         }
 
         $user = ModelQueryService::getUserModel();
 
         TransactionTypeUser::create([
-            'transaction_type_id' => $this->getRecord()?->id,
+            'transaction_type_id' => $this->record->id,
             'city_id' => $user->city_id,
             'district_id' => $user->district_id ?? null,
         ]);

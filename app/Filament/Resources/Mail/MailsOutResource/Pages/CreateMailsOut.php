@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Mail\MailsOutResource\Pages;
 
+use App\Enums\MailStatusEnum;
 use App\Filament\Resources\Mail\MailsOutResource;
 use App\Filament\Shared\Services\ModelQueryService;
 use App\Models\MailUser;
@@ -30,21 +31,16 @@ class CreateMailsOut extends CreateRecord
         ];
     }
 
-    public function getRecord(): ?\App\Models\Mail
-    {
-        return $this->record;
-    }
-
     protected function afterCreate(): void
     {
-        if (! $this->record instanceof \Illuminate\Database\Eloquent\Model) {
+        if (! $this->record instanceof \App\Models\Mail) {
             return;
         }
 
         $user = ModelQueryService::getUserModel();
 
         MailUser::create([
-            'mail_id' => $this->getRecord()?->id,
+            'mail_id' => $this->record->id,
             'city_id' => $user->city_id,
             'district_id' => $user->district_id ?? null,
         ]);

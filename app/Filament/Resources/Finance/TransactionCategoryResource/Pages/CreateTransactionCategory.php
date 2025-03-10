@@ -11,21 +11,16 @@ class CreateTransactionCategory extends CreateRecord
 {
     protected static string $resource = TransactionCategoryResource::class;
 
-    public function getRecord(): ?\App\Models\TransactionCategory
-    {
-        return $this->record;
-    }
-
     protected function afterCreate(): void
     {
-        if (! $this->record instanceof \Illuminate\Database\Eloquent\Model) {
+        if (! $this->record instanceof \App\Models\TransactionCategory) {
             return;
         }
 
         $user = ModelQueryService::getUserModel();
 
         TransactionCategoryUser::create([
-            'transaction_category_id' => $this->getRecord()?->id,
+            'transaction_category_id' => $this->record->id,
             'city_id' => $user->city_id,
             'district_id' => $user->district_id ?? null,
         ]);
