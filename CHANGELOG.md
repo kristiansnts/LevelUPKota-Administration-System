@@ -1,3 +1,15 @@
+# [1.14.0](https://github.com/kristiansnts/LevelUPKota-Administration-System/compare/v1.13.2...v1.14.0) (2025-03-11)
+
+
+### Bug Fixes
+
+* **auth:** fix type on Registration ([97f7880](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/97f7880ffe3d1e13fe35d925ce65f0aeb976a793))
+
+
+### Features
+
+* **auth:** add registration page logic ([a937123](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/a937123281f5c5ed14bdf66aafea6815a2121226))
+
 ## [1.13.2](https://github.com/kristiansnts/LevelUPKota-Administration-System/compare/v1.13.1...v1.13.2) (2025-03-11)
 
 
