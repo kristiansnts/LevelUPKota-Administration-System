@@ -38,7 +38,6 @@ class SocialiteController extends Controller
                 $provider.'_id' => $response->getId(),
                 'name' => $response->getName(),
                 'email' => $response->getEmail(),
-                'password' => '',
             ]);
             $createdUser->assignRole('guest');
             auth()->login($createdUser);

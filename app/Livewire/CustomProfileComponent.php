@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Filament\Shared\Services\ModelQueryService;
 use App\Filament\Shared\UseCases\UserPasswordUseCase;
 use App\Helpers\NotificationHelper;
 use App\Helpers\RolesHelper;
@@ -43,9 +44,9 @@ class CustomProfileComponent extends Component implements HasForms
         return $form
             ->schema([
                 PersonalInfoForm::make(),
-                RoleForm::make(),
+                RoleForm::make()->visible(fn (): bool => RolesHelper::isGuest()),
                 AddressForm::make(),
-                SecurityForm::make(),
+                SecurityForm::make()->visible(fn (): bool => RolesHelper::isGuest() && empty(ModelQueryService::getUserModel()->password)),
             ])
             ->statePath('data');
     }

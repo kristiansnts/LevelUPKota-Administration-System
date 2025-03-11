@@ -3,7 +3,6 @@
 namespace App\Livewire\Components;
 
 use App\Filament\Shared\Services\ModelQueryService;
-use App\Helpers\RolesHelper;
 use Filament\Forms;
 use Filament\Forms\Components\Component;
 use Spatie\Permission\Models\Role;
@@ -38,6 +37,6 @@ class RoleForm
                         return $role?->name;
                     })
                     ->required(),
-            ])->visible(RolesHelper::isGuest());
+            ]);
     }
 }

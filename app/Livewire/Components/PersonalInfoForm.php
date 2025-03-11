@@ -5,6 +5,7 @@ namespace App\Livewire\Components;
 use App\Filament\Shared\Services\ModelQueryService;
 use Filament\Forms;
 use Filament\Forms\Components\Component;
+use Ysfkaya\FilamentPhoneInput\Forms\PhoneInput;
 
 class PersonalInfoForm
 {
@@ -37,7 +38,7 @@ class PersonalInfoForm
                         'required' => 'Email tidak boleh kosong',
                         'email' => 'Format email tidak valid',
                     ]),
-                Forms\Components\TextInput::make('phone_number')
+                PhoneInput::make('phone_number')
                     ->label('Nomor Telepon')
                     ->placeholder('Masukkan Nomor Telepon Anda')
                     ->default($user->phone_number)
