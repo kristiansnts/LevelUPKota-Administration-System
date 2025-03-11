@@ -29,8 +29,14 @@ class Registration extends BaseRegister
             ->required();
     }
 
+    /**
+     * Handle the registration process
+     *
+     * @param  array<string, mixed>  $data
+     */
     public function handleRegistration(array $data): Model
     {
+        /** @var \App\Models\User $user */
         $user = $this->getUserModel()::create($data);
         $user->assignRole('guest');
 
