@@ -1,5 +1,8 @@
-on: push
-name: 🚀 Deploy website on push
+on:
+  release:
+    types: [published]
+    
+name: 🚀 Deploy website after release
 jobs:
   web-deploy:
     name: 🎉 Deploy
