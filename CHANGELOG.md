@@ -1,3 +1,10 @@
+## [1.13.2](https://github.com/kristiansnts/LevelUPKota-Administration-System/compare/v1.13.1...v1.13.2) (2025-03-11)
+
+
+### Bug Fixes
+
+* **deploy:** change deploy to on release ([44edfc2](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/44edfc2a66d82d6c7e1593bd29362992085ff567))
+
 ## [1.13.1](https://github.com/kristiansnts/LevelUPKota-Administration-System/compare/v1.13.0...v1.13.1) (2025-03-10)
 
 
