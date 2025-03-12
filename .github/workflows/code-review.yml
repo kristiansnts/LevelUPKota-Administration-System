@@ -22,8 +22,7 @@ jobs:
           
       - name: Install dependencies
         run: |
-          cd $GITHUB_WORKSPACE
-          npm install parse-diff minimatch glob
+          npm install -g parse-diff minimatch glob
           
       - name: Run OpenRouter Code Review
         uses: kristiansnts/openrouter-review-ai@master
