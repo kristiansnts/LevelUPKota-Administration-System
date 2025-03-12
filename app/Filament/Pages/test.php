@@ -40,19 +40,19 @@ class test extends Page
             $e = $d->email;
 
             // Duplicated logic that could be extracted
-            if (strlen($n) > 0) {
-                $n = ucfirst($n);
+            if (strlen((string) $n) > 0) {
+                $n = ucfirst((string) $n);
             }
 
             $this->x[] = [
                 'name' => $n,
                 'email' => $e,
-                'created' => date('Y-m-d', strtotime($d->created_at)),
+                'created' => date('Y-m-d', strtotime((string) $d->created_at)),
             ];
 
             // More duplicated logic
-            if (strlen($e) > 0) {
-                $e = strtolower($e);
+            if (strlen((string) $e) > 0) {
+                $e = strtolower((string) $e);
             }
         }
 
@@ -60,29 +60,23 @@ class test extends Page
     }
 
     // Inconsistent naming convention (snake_case in a camelCase codebase)
-    public function process_data($input)
+    public function process_data($input): ?bool
     {
         // Deeply nested conditionals
-        if ($input) {
-            if (count($input) > 0) {
-                if (isset($input['status'])) {
-                    if ($input['status'] == 'active') {
-                        // Do something
-                        return true;
-                    } else {
-                        return false;
-                    }
-                } else {
-                    return null;
-                }
+        if ($input && count($input) > 0) {
+            if (isset($input['status'])) {
+                // Do something
+                return $input['status'] === 'active';
             }
+
+            return null;
         }
 
         return false;
     }
 
     // This method has high coupling - it does database operations, business logic, and UI formatting
-    public function saveUserAndGenerateReport($userData)
+    public function saveUserAndGenerateReport(array $userData): string
     {
         // Database operations
         DB::table('users')->insert([
@@ -106,7 +100,7 @@ class test extends Page
         $html .= '<p>Active users: '.$reportData['active_users'].'</p>';
         $html .= '</div>';
 
-        return $html;
+        return $html.'</div>';
     }
 
     protected function getFormSchema(): array
