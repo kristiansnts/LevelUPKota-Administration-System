@@ -1,3 +1,10 @@
+# [1.15.0](https://github.com/kristiansnts/LevelUPKota-Administration-System/compare/v1.14.0...v1.15.0) (2025-03-12)
+
+
+### Features
+
+* **action:** add code-review yml ([415eef0](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/415eef0f27e8959c4e02576712df4d6f936aa24a))
+
 # [1.14.0](https://github.com/kristiansnts/LevelUPKota-Administration-System/compare/v1.13.2...v1.14.0) (2025-03-11)
 
 
