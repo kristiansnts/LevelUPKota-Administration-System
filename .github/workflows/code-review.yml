@@ -17,7 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Run OpenRouter Code Review
-        uses: kristiansnts/openrouter-review-ai@main
+        uses: kristiansnts/openrouter-review-ai@master
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           openrouter-api-key: ${{ secrets.OPENROUTER_API_KEY }}
