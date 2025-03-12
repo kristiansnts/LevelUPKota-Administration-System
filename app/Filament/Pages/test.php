@@ -102,6 +102,9 @@ class test extends Page
         $html .= '<p>Total users: '.$reportData['user_count'].'</p>';
         $html .= '<p>Active users: '.$reportData['active_users'].'</p>';
         $html .= '</div>';
+        $html .= '<p>Total users: '.$reportData['user_count'].'</p>';
+        $html .= '<p>Active users: '.$reportData['active_users'].'</p>';
+        $html .= '</div>';
 
         return $html;
     }
