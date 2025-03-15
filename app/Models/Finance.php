@@ -19,10 +19,10 @@ class Finance extends Model
         'transaction_date',
         'transaction_category_id',
         'description',
-        'transaction_type_id',
+        'payment_method_id',
         'amount',
         'invoice_code',
-        'type',
+        'transaction_proof_link',
         'balance',
     ];
 
@@ -35,11 +35,11 @@ class Finance extends Model
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<\App\Models\TransactionType, $this>
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<\App\Models\PaymentMethod, $this>
      */
-    public function transactionType(): BelongsTo
+    public function paymentMethod(): BelongsTo
     {
-        return $this->belongsTo(TransactionType::class);
+        return $this->belongsTo(PaymentMethod::class);
     }
 
     /**

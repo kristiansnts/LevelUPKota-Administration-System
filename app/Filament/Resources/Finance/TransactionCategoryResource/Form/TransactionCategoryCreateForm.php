@@ -25,7 +25,7 @@ class TransactionCategoryCreateForm
                 ->placeholder('Masukkan detail kategori transaksi')
                 ->required()
                 ->rows(3),
-            Forms\Components\Select::make('type')
+            Forms\Components\Select::make('transaction_type')
                 ->label('Tipe')
                 ->options(FinanceTypeEnum::class)
                 ->required(),

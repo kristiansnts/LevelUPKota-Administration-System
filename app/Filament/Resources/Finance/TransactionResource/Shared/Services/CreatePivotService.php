@@ -3,10 +3,10 @@
 namespace App\Filament\Resources\Finance\TransactionResource\Shared\Services;
 
 use App\Filament\Shared\Services\ModelQueryService;
+use App\Models\PaymentMethod;
+use App\Models\PaymentMethodUser;
 use App\Models\TransactionCategory;
 use App\Models\TransactionCategoryUser;
-use App\Models\TransactionType;
-use App\Models\TransactionTypeUser;
 use App\Models\User;
 
 class CreatePivotService
@@ -55,19 +55,19 @@ class CreatePivotService
      *
      * @param  array<string, mixed>  $data
      */
-    public function createTransactionTypePivot(array $data): int
+    public function createPaymentMethodPivot(array $data): int
     {
         /**
-         * @var TransactionType $transactionType
+         * @var PaymentMethod $paymentMethod
          */
-        $transactionType = TransactionType::create($data);
+        $paymentMethod = PaymentMethod::create($data);
 
-        TransactionTypeUser::create([
-            'transaction_type_id' => $transactionType->id,
+        PaymentMethodUser::create([
+            'payment_method_id' => $paymentMethod->id,
             'city_id' => $this->user->city_id,
             'district_id' => $this->user->district_id ?? null,
         ]);
 
-        return $transactionType->id;
+        return $paymentMethod->id;
     }
 }

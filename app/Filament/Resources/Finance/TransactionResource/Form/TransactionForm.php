@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Finance\TransactionResource\Form;
 
+use App\Filament\Resources\Finance\PaymentMethodResource\Form\PaymentMethodCreateForm;
 use App\Filament\Resources\Finance\TransactionCategoryResource\Form\TransactionCategoryCreateForm;
 use App\Filament\Resources\Finance\TransactionResource\Shared\UseCases\CreateOptionUseCase;
 use Filament\Forms;
@@ -37,6 +38,7 @@ class TransactionForm extends Form
                             Forms\Components\DatePicker::make('transaction_date')
                                 ->label('Tanggal Transaksi')
                                 ->native(false)
+                                ->displayFormat('l, d F Y')
                                 ->required(),
                             Forms\Components\TextInput::make('description')
                                 ->label('Keterangan')
@@ -58,31 +60,26 @@ class TransactionForm extends Form
                                 ->createOptionModalHeading('Buat Kategori Transaksi')
                                 ->createOptionUsing(function (array $data): int {
                                     /** @var array<string, mixed> $data */
-                                    return CreateOptionUseCase::make()->createTransactionCategory($data);
+                                    /** @var \App\Filament\Resources\Finance\TransactionResource\Shared\UseCases\CreateOptionUseCase $useCase */
+                                    $useCase = app(CreateOptionUseCase::class);
+
+                                    return $useCase->createTransactionCategory($data);
                                 })
                                 ->searchable()
                                 ->preload()
                                 ->required(),
-                            Forms\Components\Select::make('transaction_type_id')
-                                ->label('Tipe Transaksi')
-                                ->createOptionForm([
-                                    Forms\Components\TextInput::make('name')
-                                        ->label('Nama')
-                                        ->placeholder('Masukkan nama tipe transaksi co: Cash, QRIS, Transfer BCA a/n ...')
-                                        ->required()
-                                        ->maxLength(255),
-                                    Forms\Components\Textarea::make('description')
-                                        ->label('Deskripsi')
-                                        ->placeholder('Masukkan detail tipe transaksi')
-                                        ->required()
-                                        ->rows(3),
-                                ])
+                            Forms\Components\Select::make('payment_method_id')
+                                ->label('Metode Pembayaran')
+                                ->createOptionForm(fn (): array => PaymentMethodCreateForm::getFormSchema())
                                 ->createOptionUsing(function (array $data): int {
                                     /** @var array<string, mixed> $data */
-                                    return CreateOptionUseCase::make()->createTransactionType($data);
+                                    /** @var \App\Filament\Resources\Finance\TransactionResource\Shared\UseCases\CreateOptionUseCase $useCase */
+                                    $useCase = app(CreateOptionUseCase::class);
+
+                                    return $useCase->createPaymentMethod($data);
                                 })
-                                ->createOptionModalHeading('Buat Tipe Transaksi')
-                                ->relationship('transactionType', 'name')
+                                ->createOptionModalHeading('Buat Metode Pembayaran')
+                                ->relationship('paymentMethod', 'name')
                                 ->searchable()
                                 ->preload()
                                 ->required(),

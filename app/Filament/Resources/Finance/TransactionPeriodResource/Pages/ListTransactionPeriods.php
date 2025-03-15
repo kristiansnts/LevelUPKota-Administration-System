@@ -12,9 +12,12 @@ class ListTransactionPeriods extends ListRecords
 
     protected function getHeaderActions(): array
     {
+        /** @var string $createActionLabel */
+        $createActionLabel = config('constants.resources.transactionPeriod.create');
+
         return [
             Actions\CreateAction::make()
-                ->label('Tambah Periode Transaksi'),
+                ->label($createActionLabel),
         ];
     }
 }

@@ -25,12 +25,20 @@ class CreateTransaction extends CreateRecord
 
         $previousBalance = $lastTransaction ? $lastTransaction->balance : 0;
 
-        if ($transaction->transactionCategory && $transaction->transactionCategory->type === FinanceTypeEnum::INCOME->value) {
-            $transaction->balance = $previousBalance + $transaction->amount;
-        } else {
-            $transaction->balance = $previousBalance - $transaction->amount;
+        $transaction->balance = $this->calculateNewBalance($transaction, $previousBalance);
+        $transaction->save();
+    }
+
+    /**
+     * Calculate the new balance based on transaction type and amount
+     */
+    protected function calculateNewBalance(Finance $transaction, float $previousBalance): float
+    {
+        if ($transaction->transactionCategory &&
+            $transaction->transactionCategory->transaction_type === FinanceTypeEnum::INCOME->value) {
+            return $previousBalance + $transaction->amount;
         }
 
-        $transaction->save();
+        return $previousBalance - $transaction->amount;
     }
 }

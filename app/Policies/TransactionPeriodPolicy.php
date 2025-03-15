@@ -2,11 +2,11 @@
 
 namespace App\Policies;
 
-use App\Models\TransactionType;
+use App\Models\TransactionPeriod;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class TransactionTypePolicy
+class TransactionPeriodPolicy
 {
     use HandlesAuthorization;
 
@@ -15,15 +15,15 @@ class TransactionTypePolicy
      */
     public function viewAny(User $user): bool
     {
-        return $user->can('view_any_finance::transaction::type');
+        return $user->can('view_any_finance::transaction::period');
     }
 
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, TransactionType $transactionType): bool
+    public function view(User $user, TransactionPeriod $transactionPeriod): bool
     {
-        return $user->can('view_finance::transaction::type');
+        return $user->can('view_finance::transaction::period');
     }
 
     /**
@@ -31,23 +31,23 @@ class TransactionTypePolicy
      */
     public function create(User $user): bool
     {
-        return $user->can('create_finance::transaction::type');
+        return $user->can('create_finance::transaction::period');
     }
 
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, TransactionType $transactionType): bool
+    public function update(User $user, TransactionPeriod $transactionPeriod): bool
     {
-        return $user->can('update_finance::transaction::type');
+        return $user->can('update_finance::transaction::period');
     }
 
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, TransactionType $transactionType): bool
+    public function delete(User $user, TransactionPeriod $transactionPeriod): bool
     {
-        return $user->can('delete_finance::transaction::type');
+        return $user->can('delete_finance::transaction::period');
     }
 
     /**
@@ -55,15 +55,15 @@ class TransactionTypePolicy
      */
     public function deleteAny(User $user): bool
     {
-        return $user->can('delete_any_finance::transaction::type');
+        return $user->can('delete_any_finance::transaction::period');
     }
 
     /**
      * Determine whether the user can permanently delete.
      */
-    public function forceDelete(User $user, TransactionType $transactionType): bool
+    public function forceDelete(User $user, TransactionPeriod $transactionPeriod): bool
     {
-        return $user->can('force_delete_finance::transaction::type');
+        return $user->can('force_delete_finance::transaction::period');
     }
 
     /**
@@ -71,15 +71,15 @@ class TransactionTypePolicy
      */
     public function forceDeleteAny(User $user): bool
     {
-        return $user->can('force_delete_any_finance::transaction::type');
+        return $user->can('force_delete_any_finance::transaction::period');
     }
 
     /**
      * Determine whether the user can restore.
      */
-    public function restore(User $user, TransactionType $transactionType): bool
+    public function restore(User $user, TransactionPeriod $transactionPeriod): bool
     {
-        return $user->can('restore_finance::transaction::type');
+        return $user->can('restore_finance::transaction::period');
     }
 
     /**
@@ -87,15 +87,15 @@ class TransactionTypePolicy
      */
     public function restoreAny(User $user): bool
     {
-        return $user->can('restore_any_finance::transaction::type');
+        return $user->can('restore_any_finance::transaction::period');
     }
 
     /**
      * Determine whether the user can replicate.
      */
-    public function replicate(User $user, TransactionType $transactionType): bool
+    public function replicate(User $user, TransactionPeriod $transactionPeriod): bool
     {
-        return $user->can('replicate_finance::transaction::type');
+        return $user->can('replicate_finance::transaction::period');
     }
 
     /**
@@ -103,6 +103,6 @@ class TransactionTypePolicy
      */
     public function reorder(User $user): bool
     {
-        return $user->can('reorder_finance::transaction::type');
+        return $user->can('reorder_finance::transaction::period');
     }
 }

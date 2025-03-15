@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('description');
-            $table->enum('type', ['income', 'expense']);
+            $table->enum('transaction_type', ['income', 'expense']);
             $table->timestamps();
         });
     }

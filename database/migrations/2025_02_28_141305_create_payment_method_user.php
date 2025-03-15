@@ -11,14 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('transaction_type_user', function (Blueprint $table): void {
+        Schema::create('payment_method_user', function (Blueprint $table): void {
             $table->id();
             $table->unsignedBigInteger('city_id')->nullable();
             $table->unsignedBigInteger('district_id')->nullable();
-            $table->unsignedBigInteger('transaction_type_id');
+            $table->unsignedBigInteger('payment_method_id');
             $table->timestamps();
 
-            $table->foreign('transaction_type_id')->references('id')->on('transaction_type')->onDelete('cascade');
+            $table->foreign('payment_method_id')->references('id')->on('payment_methods')->onDelete('cascade');
         });
     }
 
@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('transaction_type_user');
+        Schema::dropIfExists('payment_method_user');
     }
 };

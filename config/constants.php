@@ -16,15 +16,20 @@ return [
             'edit' => 'Ubah Transaksi',
             'delete' => 'Hapus Transaksi',
         ],
-        'transactionType' => [
-            'create' => 'Tambah Tipe Transaksi',
-            'edit' => 'Ubah Tipe Transaksi',
-            'delete' => 'Hapus Tipe Transaksi',
+        'paymentMethod' => [
+            'create' => 'Tambah Metode Pembayaran',
+            'edit' => 'Ubah Metode Pembayaran',
+            'delete' => 'Hapus Metode Pembayaran',
         ],
         'transactionCategory' => [
             'create' => 'Tambah Kategori Transaksi',
             'edit' => 'Ubah Kategori Transaksi',
             'delete' => 'Hapus Kategori Transaksi',
+        ],
+        'transactionPeriod' => [
+            'create' => 'Tambah Periode Transaksi',
+            'edit' => 'Ubah Periode Transaksi',
+            'delete' => 'Hapus Periode Transaksi',
         ],
     ],
 ];

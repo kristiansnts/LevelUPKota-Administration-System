@@ -38,7 +38,7 @@ class EditTransaction extends EditRecord
         $runningBalance = $previousTransaction ? $previousTransaction->balance : 0;
 
         foreach ($affectedTransactions as $affectedTransaction) {
-            if ($affectedTransaction->transactionCategory && $affectedTransaction->transactionCategory->type === FinanceTypeEnum::INCOME->value) {
+            if ($affectedTransaction->transactionCategory && $affectedTransaction->transactionCategory->transaction_type === FinanceTypeEnum::INCOME->value) {
                 $runningBalance += $affectedTransaction->amount;
             } else {
                 $runningBalance -= $affectedTransaction->amount;

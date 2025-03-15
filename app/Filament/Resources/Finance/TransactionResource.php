@@ -2,9 +2,9 @@
 
 namespace App\Filament\Resources\Finance;
 
-use App\Enums\FinanceTypeEnum;
 use App\Filament\Resources\Finance\TransactionResource\Form\TransactionForm;
 use App\Filament\Resources\Finance\TransactionResource\Pages;
+use App\Filament\Resources\Finance\TransactionResource\Shared\FormState\AmountFormState;
 use App\Models\Finance;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -43,20 +43,20 @@ class TransactionResource extends Resource
                 Tables\Columns\TextColumn::make('description')
                     ->label('Keterangan')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('transactionType.name')
-                    ->label('Tipe Transaksi')
+                Tables\Columns\TextColumn::make('paymentMethod.name')
+                    ->label('Metode Pembayaran')
                     ->searchable(),
                 \Pelmered\FilamentMoneyField\Tables\Columns\MoneyColumn::make('amount_in')
                     ->label('Dana Masuk')
                     ->getStateUsing(function ($record): int {
                         /** @var Finance $record */
-                        return self::getAmountIn($record);
+                        return AmountFormState::getAmountIn($record);
                     }),
                 \Pelmered\FilamentMoneyField\Tables\Columns\MoneyColumn::make('amount_out')
                     ->label('Dana Keluar')
                     ->getStateUsing(function ($record): int {
                         /** @var Finance $record */
-                        return self::getAmountOut($record);
+                        return AmountFormState::getAmountOut($record);
                     }),
                 Tables\Columns\TextColumn::make('invoice_code')
                     ->label('Nomor Kwitansi')
@@ -98,23 +98,5 @@ class TransactionResource extends Resource
             'create' => Pages\CreateTransaction::route('/create'),
             'edit' => Pages\EditTransaction::route('/{record}/edit'),
         ];
-    }
-
-    private static function getAmountIn(?Finance $record): int
-    {
-        if (!$record instanceof \App\Models\Finance || ! $record->transactionCategory || ! isset($record->transactionCategory->type) || (!property_exists($record, 'amount') || $record->amount === null)) {
-            return 0;
-        }
-
-        return $record->transactionCategory->type === FinanceTypeEnum::INCOME->value ? (int) $record->amount : 0;
-    }
-
-    private static function getAmountOut(?Finance $record): int
-    {
-        if (!$record instanceof \App\Models\Finance || ! $record->transactionCategory || ! isset($record->transactionCategory->type) || (!property_exists($record, 'amount') || $record->amount === null)) {
-            return 0;
-        }
-
-        return $record->transactionCategory->type === FinanceTypeEnum::EXPENSE->value ? (int) $record->amount : 0;
     }
 }

@@ -5,22 +5,22 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class TransactionTypeUser extends Model
+class PaymentMethodUser extends Model
 {
-    protected $table = 'transaction_type_user';
+    protected $table = 'payment_method_user';
 
     protected $fillable = [
-        'transaction_type_id',
+        'payment_method_id',
         'city_id',
         'district_id',
     ];
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<\App\Models\TransactionType, $this>
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<\App\Models\PaymentMethod, $this>
      */
-    public function transactionType(): BelongsTo
+    public function paymentMethod(): BelongsTo
     {
-        return $this->belongsTo(TransactionType::class);
+        return $this->belongsTo(PaymentMethod::class);
     }
 
     /**
