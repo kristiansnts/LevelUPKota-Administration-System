@@ -12,8 +12,14 @@ class ListTransactions extends ListRecords
 
     protected function getHeaderActions(): array
     {
+        /**
+         * @var string
+         */
+        $createLabel = config('constants.resources.transaction.create');
+
         return [
-            Actions\CreateAction::make(),
+            Actions\CreateAction::make()
+                ->label($createLabel),
         ];
     }
 }

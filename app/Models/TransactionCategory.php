@@ -11,5 +11,6 @@ class TransactionCategory extends Model
     protected $fillable = [
         'name',
         'description',
+        'type',
     ];
 }

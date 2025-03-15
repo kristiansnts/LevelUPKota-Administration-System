@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Finance;
 
+use App\Filament\Resources\Finance\TransactionCategoryResource\Form\TransactionCategoryCreateForm;
 use App\Filament\Resources\Finance\TransactionCategoryResource\Pages;
 use App\Models\TransactionCategory;
 use Filament\Forms;
@@ -29,18 +30,7 @@ class TransactionCategoryResource extends Resource
         return $form
             ->schema([
                 Forms\Components\Section::make('Informasi Kategori Transaksi')
-                    ->schema([
-                        Forms\Components\TextInput::make('name')
-                            ->label('Nama')
-                            ->placeholder('Masukkan nama kategori transaksi co: Persembahan Kasih, Donasi, ...')
-                            ->required()
-                            ->maxLength(255),
-                        Forms\Components\Textarea::make('description')
-                            ->label('Deskripsi')
-                            ->placeholder('Masukkan detail kategori transaksi')
-                            ->required()
-                            ->rows(3),
-                    ]),
+                    ->schema(TransactionCategoryCreateForm::getFormSchema()),
             ]);
     }
 

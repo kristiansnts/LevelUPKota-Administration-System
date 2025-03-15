@@ -12,9 +12,14 @@ class ListTransactionTypes extends ListRecords
 
     protected function getHeaderActions(): array
     {
+        /**
+         * @var string
+         */
+        $createLabel = config('constants.resources.transactionType.create');
+
         return [
             Actions\CreateAction::make()
-                ->label('Tambah Tipe Transaksi'),
+                ->label($createLabel),
         ];
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Finance;
 
+use App\Filament\Resources\Finance\TransactionTypeResource\Form\TransactionTypeCreateForm;
 use App\Filament\Resources\Finance\TransactionTypeResource\Pages;
 use App\Models\TransactionType;
 use Filament\Forms;
@@ -29,18 +30,7 @@ class TransactionTypeResource extends Resource
         return $form
             ->schema([
                 Forms\Components\Section::make('Informasi Tipe Transaksi')
-                    ->schema([
-                        Forms\Components\TextInput::make('name')
-                            ->label('Nama')
-                            ->placeholder('Masukkan nama tipe transaksi co: Cash, QRIS, Transfer BCA a/n ...')
-                            ->required()
-                            ->maxLength(255),
-                        Forms\Components\Textarea::make('description')
-                            ->label('Deskripsi')
-                            ->placeholder('Masukkan detail tipe transaksi')
-                            ->required()
-                            ->rows(3),
-                    ]),
+                    ->schema(TransactionTypeCreateForm::getFormSchema()),
             ]);
     }
 

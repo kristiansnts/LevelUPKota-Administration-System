@@ -12,9 +12,12 @@ class ListTransactionCategories extends ListRecords
 
     protected function getHeaderActions(): array
     {
+        /** @var string $createLabel */
+        $createLabel = config('constants.resources.transactionCategory.create');
+
         return [
             Actions\CreateAction::make()
-                ->label('Tambah Kategori Transaksi'),
+                ->label($createLabel),
         ];
     }
 }

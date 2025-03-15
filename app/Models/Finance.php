@@ -20,11 +20,10 @@ class Finance extends Model
         'transaction_category_id',
         'description',
         'transaction_type_id',
-        'amount_in',
-        'amount_out',
+        'amount',
         'invoice_code',
         'type',
-        'transaction_proof_link',
+        'balance',
     ];
 
     /**
@@ -56,6 +55,6 @@ class Finance extends Model
      */
     public function transactionPeriod(): BelongsTo
     {
-        return $this->belongsTo(TransactionPeriod::class);
+        return $this->belongsTo(TransactionPeriod::class, 'period_id');
     }
 }
