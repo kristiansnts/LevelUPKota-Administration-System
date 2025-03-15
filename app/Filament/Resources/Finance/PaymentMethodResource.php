@@ -2,35 +2,35 @@
 
 namespace App\Filament\Resources\Finance;
 
-use App\Filament\Resources\Finance\TransactionCategoryResource\Form\TransactionCategoryCreateForm;
-use App\Filament\Resources\Finance\TransactionCategoryResource\Pages;
-use App\Models\TransactionCategory;
+use App\Filament\Resources\Finance\PaymentMethodResource\Form\PaymentMethodCreateForm;
+use App\Filament\Resources\Finance\PaymentMethodResource\Pages;
+use App\Models\PaymentMethod;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 
-class TransactionCategoryResource extends Resource
+class PaymentMethodResource extends Resource
 {
-    protected static ?string $model = TransactionCategory::class;
+    protected static ?string $model = PaymentMethod::class;
 
-    protected static ?string $modelLabel = 'Kategori Transaksi';
+    protected static ?string $modelLabel = 'Metode Pembayaran';
 
     protected static ?string $navigationGroup = 'Keuangan';
 
-    protected static ?string $navigationLabel = 'Kategori Transaksi';
+    protected static ?string $navigationLabel = 'Metode Pembayaran';
 
-    protected static ?string $slug = 'kategori-transaksi';
+    protected static ?string $slug = 'metode-pembayaran';
 
-    protected static ?string $navigationIcon = 'heroicon-o-hashtag';
+    protected static ?string $navigationIcon = 'heroicon-o-credit-card';
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Forms\Components\Section::make('Informasi Kategori Transaksi')
-                    ->schema(TransactionCategoryCreateForm::getFormSchema()),
+                Forms\Components\Section::make('Informasi Metode Pembayaran')
+                    ->schema(PaymentMethodCreateForm::getFormSchema()),
             ]);
     }
 
@@ -39,7 +39,7 @@ class TransactionCategoryResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('name')
-                    ->label('Kategori Transaksi')
+                    ->label('Metode Pembayaran')
                     ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('description')
@@ -71,9 +71,9 @@ class TransactionCategoryResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListTransactionCategories::route('/'),
-            'create' => Pages\CreateTransactionCategory::route('/create'),
-            'edit' => Pages\EditTransactionCategory::route('/{record}/edit'),
+            'index' => Pages\ListPaymentMethods::route('/'),
+            'create' => Pages\CreatePaymentMethod::route('/create'),
+            'edit' => Pages\EditPaymentMethod::route('/{record}/edit'),
         ];
     }
 }

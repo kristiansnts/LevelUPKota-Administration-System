@@ -4,13 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class TransactionCategory extends Model
+class PaymentMethod extends Model
 {
-    protected $table = 'transaction_category';
+    protected $table = 'payment_methods';
 
     protected $fillable = [
         'name',
         'description',
-        'transaction_type',
     ];
 }

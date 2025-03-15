@@ -102,11 +102,11 @@ class User extends Authenticatable implements FilamentUser
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany<\App\Models\TransactionType, $this>
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany<\App\Models\PaymentMethod, $this>
      */
-    public function transactionTypes(): BelongsToMany
+    public function paymentMethods(): BelongsToMany
     {
-        return $this->belongsToMany(TransactionType::class);
+        return $this->belongsToMany(PaymentMethod::class);
     }
 
     public function canAccessPanel(Panel $panel): bool

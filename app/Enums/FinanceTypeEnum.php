@@ -7,13 +7,13 @@ use Filament\Support\Contracts\HasLabel;
 enum FinanceTypeEnum: string implements HasLabel
 {
     case INCOME = 'income';
-    case OUTCOME = 'outcome';
+    case EXPENSE = 'expense';
 
     public function getLabel(): string
     {
         return match ($this) {
             self::INCOME => 'Pemasukan',
-            self::OUTCOME => 'Pengeluaran',
+            self::EXPENSE => 'Pengeluaran',
         };
     }
 }
