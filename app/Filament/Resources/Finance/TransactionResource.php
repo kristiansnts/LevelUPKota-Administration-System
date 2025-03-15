@@ -102,7 +102,7 @@ class TransactionResource extends Resource
 
     private static function getAmountIn(?Finance $record): int
     {
-        if ($record === null || !$record->transactionCategory || !isset($record->transactionCategory->type) || !isset($record->amount)) {
+        if (!$record instanceof \App\Models\Finance || ! $record->transactionCategory || ! isset($record->transactionCategory->type) || (!property_exists($record, 'amount') || $record->amount === null)) {
             return 0;
         }
 
@@ -111,7 +111,7 @@ class TransactionResource extends Resource
 
     private static function getAmountOut(?Finance $record): int
     {
-        if ($record === null || !$record->transactionCategory || !isset($record->transactionCategory->type) || !isset($record->amount)) {
+        if (!$record instanceof \App\Models\Finance || ! $record->transactionCategory || ! isset($record->transactionCategory->type) || (!property_exists($record, 'amount') || $record->amount === null)) {
             return 0;
         }
 
