@@ -1,3 +1,11 @@
+# [1.16.0](https://github.com/kristiansnts/LevelUPKota-Administration-System/compare/v1.15.0...v1.16.0) (2025-03-15)
+
+
+### Features
+
+* **finance:** improve clean code based on php standard ([d452b35](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/d452b35a9c25a21ddd20cb9681850591e3370a66))
+* **finance:** improve finance resource with make changes for ([1b386c1](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/1b386c1b1542be3fa6a5b7022a321a2aebbe75d1))
+
 # [1.15.0](https://github.com/kristiansnts/LevelUPKota-Administration-System/compare/v1.14.0...v1.15.0) (2025-03-12)
 
 
