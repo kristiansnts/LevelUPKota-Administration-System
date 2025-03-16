@@ -6,7 +6,7 @@ use App\Enums\MailStatusEnum;
 use App\Enums\MailTypeEnum;
 use App\Filament\Resources\Mail\MailsOutResource\Actions\MailCodeCreateAction;
 use App\Filament\Resources\Mail\MailsOutResource\Pages;
-use App\Filament\Shared\Services\ModelQueryService;
+use App\Filament\Resources\Mail\MailsResource\Form\MailInfoForm;
 use App\Filament\Shared\Services\ResourceScopeService;
 use App\Helpers\RouteHelper;
 use App\Models\Mail;
@@ -38,36 +38,7 @@ class MailsOutResource extends Resource
         return $form
             ->schema([
                 Forms\Components\Section::make('Informasi Surat Keluar')
-                    ->schema([
-                        Forms\Components\DatePicker::make('mail_date')
-                            ->label('Tanggal Surat')
-                            ->native(false)
-                            ->live()
-                            ->required(),
-                        Forms\Components\Select::make('mail_category_id')
-                            ->label('Kategori Surat')
-                            ->searchable()
-                            ->preload()
-                            ->live()
-                            ->options(fn (): array => ModelQueryService::getMailCategoryOptions())
-                            ->required(),
-                        Forms\Components\TextInput::make('sender_name')
-                            ->label('Pengirim')
-                            ->placeholder('Masukkan nama pengirim')
-                            ->live()
-                            ->required(),
-                        Forms\Components\TagsInput::make('receiver_name')
-                            ->label('Penerima')
-                            ->separator(',')
-                            ->splitKeys(['Enter', 'Tab'])
-                            ->live()
-                            ->placeholder('Masukkan nama penerima, bisa lebih dari satu')
-                            ->required(),
-                        Forms\Components\Textarea::make('description')
-                            ->label('Keterangan')
-                            ->live()
-                            ->required(),
-                    ])->columnSpan(2),
+                    ->schema(MailInfoForm::getFormSchema())->columnSpan(2),
                 Forms\Components\Section::make('Data Surat Keluar')
                     ->schema([
                         Forms\Components\TextInput::make('mail_code')
@@ -78,10 +49,8 @@ class MailsOutResource extends Resource
                             ])
                             ->live()
                             ->readOnly(),
-                        Forms\Components\FileUpload::make('link')
-                            ->label('Upload Surat')
-                            ->acceptedFileTypes(['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'])
-                            ->required()
+                        Forms\Components\TextInput::make('link')
+                            ->label('Upload Link Surat')
                             ->visible(RouteHelper::isRouteName('filament.admin.resources.surat-keluar.edit')),
                     ])->columnSpan(1),
                 Forms\Components\Hidden::make('type')

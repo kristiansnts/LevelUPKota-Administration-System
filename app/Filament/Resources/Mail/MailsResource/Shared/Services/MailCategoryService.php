@@ -4,12 +4,15 @@ namespace App\Filament\Resources\Mail\MailsResource\Shared\Services;
 
 use App\Enums\RomanMonthEnum;
 use App\Filament\Resources\Mail\MailsResource\Shared\Repositories\Eloquents\MailCategoryRepositoryImpl;
+use App\Filament\Resources\Mail\MailsResource\Shared\Repositories\Eloquents\MailUserRepositoryImpl;
+use App\Filament\Shared\Services\ModelQueryService;
 use App\Helpers\LabelHelper;
 
 class MailCategoryService
 {
     public function __construct(
-        private readonly MailCategoryRepositoryImpl $mailCategoryRepository
+        private readonly MailCategoryRepositoryImpl $mailCategoryRepository,
+        private readonly MailUserRepositoryImpl $mailUserRepository
     ) {}
 
     /**
@@ -64,7 +67,7 @@ class MailCategoryService
         /**
          * @var string $mailNumber
          */
-        $mailNumber = $this->generateMailNumber($categoryId);
+        $mailNumber = $this->generateMailNumber();
 
         return sprintf(
             '%s/%s/%s/%s-%s',
@@ -76,29 +79,19 @@ class MailCategoryService
         );
     }
 
-    private function generateMailNumber(int $id): string
+    private function generateMailNumber(): string
     {
+        $user = ModelQueryService::getUserModel();
         /**
-         * @var int|null $count
+         * @var int $count
          */
-        $count = $this->mailCategoryRepository->getMailCategoryCountByCategoryId($id);
-
-        if (is_null($count)) {
-            return '001';
-        }
+        $count = $this->mailUserRepository->getTotalMailCountByAddressId($user->city_id, $user->district_id);
 
         /**
          * @var string $countToStr
          */
         $countToStr = (string) $count;
 
-        /**
-         * @var string $mailNumber
-         */
-        $mailNumber = str_pad($countToStr, 3, '0', STR_PAD_LEFT);
-
-        $this->mailCategoryRepository->setMailCategoryCountByCategoryId($id);
-
-        return $mailNumber;
+        return str_pad($countToStr, 3, '0', STR_PAD_LEFT);
     }
 }
