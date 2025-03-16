@@ -1,3 +1,10 @@
+## [1.17.5](https://github.com/kristiansnts/LevelUPKota-Administration-System/compare/v1.17.4...v1.17.5) (2025-03-16)
+
+
+### Bug Fixes
+
+* **composer:** fix ftp-deploy ([5e88815](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/5e88815f53d7be54e3b5843feda2f2d4c7c39fac))
+
 ## [1.17.4](https://github.com/kristiansnts/LevelUPKota-Administration-System/compare/v1.17.3...v1.17.4) (2025-03-16)
 
 
