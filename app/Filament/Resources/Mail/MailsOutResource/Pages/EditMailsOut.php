@@ -21,6 +21,7 @@ class EditMailsOut extends EditRecord
         if ($link !== null && $this->record instanceof \Illuminate\Database\Eloquent\Model) {
             $this->record->update([
                 'status' => MailStatusEnum::UPLOADED->value,
+                'link' => $link,
             ]);
         }
     }

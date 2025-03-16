@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Mail;
 
+use App\Enums\MailStatusEnum;
 use App\Filament\Resources\Mail\MailsResource\Pages;
 use App\Filament\Shared\Services\ResourceScopeService;
 use App\Models\Mail;
@@ -38,13 +39,37 @@ class MailsResource extends Resource
     {
         return $table
             ->columns([
-
+                Tables\Columns\TextColumn::make('mail_code')
+                    ->label('Nomor Surat'),
+                Tables\Columns\TextColumn::make('mail_date')
+                    ->label('Tanggal Surat'),
+                Tables\Columns\TextColumn::make('sender_name')
+                    ->label('Pengirim'),
+                Tables\Columns\TextColumn::make('receiver_name')
+                    ->label('Penerima'),
+                Tables\Columns\TextColumn::make('description')
+                    ->label('Keterangan'),
+                Tables\Columns\TextColumn::make('created_at')
+                    ->label('Tanggal Dibuat')
+                    ->dateTime('d-m-Y H:i:s'),
+                Tables\Columns\TextColumn::make('status')
+                    ->label('Status')
+                    ->badge()
+                    ->colors([
+                        'warning' => MailStatusEnum::DRAFT->value,
+                        'success' => MailStatusEnum::UPLOADED->value,
+                    ])
+                    ->formatStateUsing(fn (string $state): string => MailStatusEnum::from($state)->getLabel()),
             ])
             ->filters([
 
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\ViewAction::make()
+                    ->label('Lihat Surat')
+                    ->icon('heroicon-o-eye')
+                    ->color('info')
+                    ->url(fn (Mail $record) => $record->link ?? '#'),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

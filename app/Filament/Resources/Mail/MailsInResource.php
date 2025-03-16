@@ -2,11 +2,11 @@
 
 namespace App\Filament\Resources\Mail;
 
-use App\Enums\MailTypeEnum;
 use App\Filament\Resources\Mail\MailsInResource\Pages;
+use App\Filament\Resources\Mail\MailsResource\Form\MailDataForm;
+use App\Filament\Resources\Mail\MailsResource\Form\MailInfoForm;
 use App\Filament\Shared\Services\ResourceScopeService;
 use App\Models\Mail;
-use App\Models\MailCategory;
 use App\Models\MailUser;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -32,41 +32,9 @@ class MailsInResource extends Resource
         return $form
             ->schema([
                 Forms\Components\Section::make('Informasi Surat Masuk')
-                    ->schema([
-                        Forms\Components\DatePicker::make('mail_date')
-                            ->label('Tanggal Surat')
-                            ->native(false)
-                            ->required(),
-                        Forms\Components\Select::make('mail_category_id')
-                            ->label('Kategori Surat')
-                            ->searchable()
-                            ->preload()
-                            ->options(MailCategory::query()->pluck('description', 'id'))
-                            ->required(),
-                        Forms\Components\TextInput::make('sender_name')
-                            ->label('Pengirim')
-                            ->required(),
-                        Forms\Components\TagsInput::make('receiver_name')
-                            ->label('Penerima')
-                            ->separator(',')
-                            ->splitKeys(['Enter', 'Tab'])
-                            ->placeholder('Masukkan penerima')
-                            ->required(),
-                        Forms\Components\Textarea::make('description')
-                            ->label('Keterangan')
-                            ->required(),
-                    ])->columnSpan(2),
+                    ->schema(MailInfoForm::getFormSchema())->columnSpan(2),
                 Forms\Components\Section::make('Data Surat Masuk')
-                    ->schema([
-                        Forms\Components\TextInput::make('mail_code')
-                            ->label('Nomor Surat'),
-                        Forms\Components\FileUpload::make('link')
-                            ->label('Upload Surat')
-                            ->default('#')
-                            ->acceptedFileTypes(['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document']),
-                        Forms\Components\Hidden::make('type')
-                            ->default(MailTypeEnum::IN->value),
-                    ])->columnSpan(1),
+                    ->schema(MailDataForm::getFormSchema())->columnSpan(1),
             ])->columns(3);
     }
 

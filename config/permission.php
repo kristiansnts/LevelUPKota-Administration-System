@@ -199,4 +199,6 @@ return [
 
         'store' => 'default',
     ],
+
+    'testing' => true,
 ];

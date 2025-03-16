@@ -3,6 +3,7 @@
 namespace App\Helpers;
 
 use App\Filament\Shared\Services\ModelQueryService;
+use App\Models\CityCode;
 
 class LabelHelper
 {
@@ -11,14 +12,18 @@ class LabelHelper
         $user = ModelQueryService::getUserModel();
         $base = 'LUP';
 
-        /**
-         * @var string $districtName
-         */
-        $districtName = $user->district->dis_name ?? '';
-        /**
-         * @var string $cityName
-         */
-        $cityName = $user->city->city_name ?? '';
+        $districtName = '';
+        $cityName = '';
+
+        if ($user->district_id) {
+            $districtCode = CityCode::where('district_id', $user->district_id)->first();
+            $districtName = $districtCode ? $districtCode->code : '';
+        }
+
+        if ($user->city_id && empty($districtName)) {
+            $cityCode = CityCode::where('city_id', $user->city_id)->first();
+            $cityName = $cityCode ? $cityCode->code : '';
+        }
 
         $workBase = $districtName ?: $cityName;
 

@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Mail;
 
+use App\Filament\Resources\Mail\MailsCategoryResource\Form\MailCategoryCreateForm;
 use App\Filament\Resources\Mail\MailsCategoryResource\Pages;
 use App\Filament\Shared\Services\ResourceScopeService;
 use App\Models\MailCategory;
@@ -31,14 +32,8 @@ class MailsCategoryResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('name')
-                    ->label('Kode Surat')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('description')
-                    ->label('Jenis Surat')
-                    ->required()
-                    ->maxLength(255),
+                Forms\Components\Section::make('Kategori Surat')
+                    ->schema(MailCategoryCreateForm::getFormSchema()),
             ]);
     }
 

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Filament\Resources\Mail\MailsOutResource\Actions;
 
 use App\Filament\Resources\Mail\MailsResource\Shared\UseCases\GeneratedMailUseCase;
+use App\Helpers\NotificationHelper;
 use Filament\Forms\Components\Actions\Action;
 use Filament\Forms\Get;
 use Filament\Forms\Set;
@@ -21,10 +22,14 @@ class MailCodeCreateAction extends Action
 
         $this->label('Buat Nomor Surat')
             ->button()
-            ->disabled(fn (Get $get): bool => ! $this->checkFormFilled($get))
             ->size(ActionSize::ExtraSmall)
             ->icon('heroicon-m-magnifying-glass')
             ->action(function (Get $get, Set $set): void {
+                if ($this->checkRequiredFieldsEmpty($get)) {
+                    NotificationHelper::error('Harap mengisi semua Informasi Surat');
+
+                    return;
+                }
                 $formData = [
                     'mail_date' => $get('mail_date'),
                     'mail_category_id' => $get('mail_category_id'),
@@ -43,37 +48,22 @@ class MailCodeCreateAction extends Action
             });
     }
 
-    private function checkFormFilled(Get $get): bool
+    private function checkRequiredFieldsEmpty(Get $get): bool
     {
-        return $this->isDateFormFilled($get) &&
-            $this->isCategoryFormFilled($get) &&
-            $this->isSenderFormFilled($get) &&
-            $this->isReceiverFormFilled($get) &&
-            $this->isDescriptionFormFilled($get);
-    }
+        $requiredFields = [
+            'mail_date',
+            'mail_category_id',
+            'sender_name',
+            'receiver_name',
+            'description',
+        ];
 
-    private function isDateFormFilled(Get $get): bool
-    {
-        return ! empty($get('mail_date') ?? null);
-    }
+        foreach ($requiredFields as $field) {
+            if (empty($get($field) ?? null)) {
+                return true;
+            }
+        }
 
-    private function isCategoryFormFilled(Get $get): bool
-    {
-        return ! empty($get('mail_category_id') ?? null);
-    }
-
-    private function isSenderFormFilled(Get $get): bool
-    {
-        return ! empty($get('sender_name') ?? null);
-    }
-
-    private function isReceiverFormFilled(Get $get): bool
-    {
-        return ! empty($get('receiver_name') ?? null);
-    }
-
-    private function isDescriptionFormFilled(Get $get): bool
-    {
-        return ! empty($get('description') ?? null);
+        return false;
     }
 }
