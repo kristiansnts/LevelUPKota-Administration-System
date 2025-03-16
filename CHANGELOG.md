@@ -1,3 +1,10 @@
+## [1.17.1](https://github.com/kristiansnts/LevelUPKota-Administration-System/compare/v1.17.0...v1.17.1) (2025-03-16)
+
+
+### Bug Fixes
+
+* **composer:** production error ([523a63a](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/523a63a0b23ca0a00ca8d0de2c5736c65b2b67b7))
+
 # [1.17.0](https://github.com/kristiansnts/LevelUPKota-Administration-System/compare/v1.16.1...v1.17.0) (2025-03-16)
 
 
