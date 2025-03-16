@@ -1,3 +1,10 @@
+# [1.17.0](https://github.com/kristiansnts/LevelUPKota-Administration-System/compare/v1.16.1...v1.17.0) (2025-03-16)
+
+
+### Features
+
+* **mails:** improve mail and mail logic ([268fa09](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/268fa098885dd1cd5d4d0cbb3715c9cbc4b33586))
+
 ## [1.16.1](https://github.com/kristiansnts/LevelUPKota-Administration-System/compare/v1.16.0...v1.16.1) (2025-03-15)
 
 
