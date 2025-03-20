@@ -1,3 +1,10 @@
+## [1.17.7](https://github.com/kristiansnts/LevelUPKota-Administration-System/compare/v1.17.6...v1.17.7) (2025-03-20)
+
+
+### Bug Fixes
+
+* **composer:** add db indonesia_teritory ([1f33f0b](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/1f33f0b5441120ae13601f5956a220cf9646a9f1))
+
 ## [1.17.6](https://github.com/kristiansnts/LevelUPKota-Administration-System/compare/v1.17.5...v1.17.6) (2025-03-17)
 
 
