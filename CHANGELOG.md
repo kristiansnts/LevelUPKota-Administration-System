@@ -1,3 +1,10 @@
+# [1.18.0](https://github.com/kristiansnts/LevelUPKota-Administration-System/compare/v1.17.8...v1.18.0) (2025-03-20)
+
+
+### Features
+
+* **workflow:** Delete .github/workflows/deploy.yml ([0e0c08b](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/0e0c08b2d415381833f17ca100089098ca103f47))
+
 ## [1.17.8](https://github.com/kristiansnts/LevelUPKota-Administration-System/compare/v1.17.7...v1.17.8) (2025-03-20)
 
 
