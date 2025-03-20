@@ -123,4 +123,14 @@ return [
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
 
+    /*
+    |--------------------------------------------------------------------------
+    | Asset URL
+    |--------------------------------------------------------------------------
+    |
+    | This URL is used to generate URLs for assets.
+    |
+    */
+    'asset_url' => env('ASSET_URL', null),
+
 ];
