@@ -1,3 +1,11 @@
+## [1.17.8](https://github.com/kristiansnts/LevelUPKota-Administration-System/compare/v1.17.7...v1.17.8) (2025-03-20)
+
+
+### Bug Fixes
+
+* **composer:** add asset_url ([53fe8b2](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/53fe8b205b1e83499f0b6302d5acc338f62fb457))
+* **composer:** add demo city and seeder demo ([0ca7464](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/0ca7464eea8e031f0a3daaafcf979ee9ac6aa3a0))
+
 ## [1.17.7](https://github.com/kristiansnts/LevelUPKota-Administration-System/compare/v1.17.6...v1.17.7) (2025-03-20)
 
 
