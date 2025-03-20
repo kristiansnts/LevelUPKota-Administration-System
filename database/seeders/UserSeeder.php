@@ -33,5 +33,19 @@ class UserSeeder extends Seeder
             'name' => config('constants.roles.guest'),
         ]);
 
+        Role::create([
+            'name' => 'demo',
+        ]);
+
+        $demoUser = User::factory()->create([
+            'name' => 'Akun Demo',
+            'email' => 'akundemo@gmail.com',
+            'password' => Hash::make('demo'),
+            'phone_number' => '1234567890',
+            'province_id' => 100,
+            'city_id' => 1000,
+        ]);
+
+        $demoUser->assignRole('demo');
     }
 }
