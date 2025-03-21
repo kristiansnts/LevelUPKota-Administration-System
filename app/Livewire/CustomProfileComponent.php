@@ -31,8 +31,6 @@ class CustomProfileComponent extends Component implements HasForms
 
     protected static int $sort = 0;
 
-    protected ?Form $form = null;
-
     public function mount(): void
     {
         $this->form = $this->form($this->makeForm());
@@ -66,6 +64,7 @@ class CustomProfileComponent extends Component implements HasForms
             return;
         }
 
+        // Debug: Check province/city validation
         if (! isset($data['province_id']) && ! isset($data['city_id'])) {
             NotificationHelper::error('Provinsi dan Kota tidak boleh kosong');
 
