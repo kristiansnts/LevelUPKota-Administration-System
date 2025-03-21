@@ -43,9 +43,23 @@ return [
         ],
 
         'indonesia_territory' => [
-            'driver' => env('DB_CONNECTION_INDONESIA_TERRITORY', 'sqlite'),
-            'database' => env('DB_DATABASE_INDONESIA_TERRITORY_SQLITE', database_path('indonesia_territory.sqlite')),
+            'driver' => 'mysql',
+            'url' => env('DB_URL_INDONESIA_TERRITORY'),
+            'host' => env('DB_HOST_INDONESIA_TERRITORY', '127.0.0.1'),
+            'port' => env('DB_PORT_INDONESIA_TERRITORY', '3306'),
+            'database' => env('DB_DATABASE_INDONESIA_TERRITORY', 'laravel'),
+            'username' => env('DB_USERNAME_INDONESIA_TERRITORY', 'root'),
+            'password' => env('DB_PASSWORD_INDONESIA_TERRITORY', ''),
+            'unix_socket' => env('DB_SOCKET_INDONESIA_TERRITORY', ''),
+            'charset' => env('DB_CHARSET_INDONESIA_TERRITORY', 'utf8mb4'),
+            'collation' => env('DB_COLLATION_INDONESIA_TERRITORY', 'utf8mb4_unicode_ci'),
             'prefix' => '',
+            'prefix_indexes' => true,
+            'strict' => true,
+            'engine' => null,
+            'options' => extension_loaded('pdo_mysql') ? array_filter([
+                PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
+            ]) : [],
         ],
 
         'mysql' => [
