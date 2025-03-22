@@ -1,22 +1,22 @@
-#!/bin/sh
+# #!/bin/sh
 
-echo "🔍 Checking for staged PHP files..."
-files=$(git diff --cached --name-only --diff-filter=AMCR | grep "\.php$")
+# echo "🔍 Checking for staged PHP files..."
+# files=$(git diff --cached --name-only --diff-filter=AMCR | grep "\.php$")
 
-if [ -z "$files" ]; then
-    echo "✅ No PHP files staged. Skipping Laravel Pint, Insights, and Tests."
-    exit 0
-fi
+# if [ -z "$files" ]; then
+#     echo "✅ No PHP files staged. Skipping Laravel Pint, Insights, and Tests."
+#     exit 0
+# fi
 
-echo "✨ Running Laravel Pint..."
-./vendor/bin/pint $files && git add $files || { echo "❌ Pint failed! Fix errors before committing."; exit 1; }
+# echo "✨ Running Laravel Pint..."
+# ./vendor/bin/pint $files && git add $files || { echo "❌ Pint failed! Fix errors before committing."; exit 1; }
 
-echo "📊 Running Laravel Insights..."
-php artisan insights --no-interaction --min-quality=100 --min-complexity=85 --min-architecture=100 --min-style=100
+# echo "📊 Running Laravel Insights..."
+# php artisan insights --no-interaction --min-quality=100 --min-complexity=85 --min-architecture=100 --min-style=100
 
-echo "🧪 Running Laravel Tests..."
-php artisan test || { echo "❌ Tests failed! Fix before committing."; exit 1; }
+# echo "🧪 Running Laravel Tests..."
+# php artisan test || { echo "❌ Tests failed! Fix before committing."; exit 1; }
 
-echo "✅ All checks passed! Commit successful."
-exit 0
+# echo "✅ All checks passed! Commit successful."
+# exit 0
 

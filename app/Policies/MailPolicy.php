@@ -2,8 +2,8 @@
 
 namespace App\Policies;
 
-use App\Models\Mail;
 use App\Models\User;
+use App\Models\Mail;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class MailPolicy

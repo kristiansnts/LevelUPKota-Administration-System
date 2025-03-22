@@ -19,7 +19,7 @@ return new class extends Migration
             $table->integer('order');
             $table->timestamps();
 
-            $table->foreign('mail_category_id')->references('id')->on('mail_category')->onDelete('cascade');
+            $table->foreign('mail_category_id')->references('id')->on('mail_categories')->onDelete('cascade');
         });
     }
 

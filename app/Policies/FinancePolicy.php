@@ -2,8 +2,8 @@
 
 namespace App\Policies;
 
-use App\Models\Finance;
 use App\Models\User;
+use App\Models\Finance;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class FinancePolicy

@@ -1,14 +1,14 @@
-name: Deploy via git-ftp
-on: push
-jobs:
-  deploy:
-    name: Deploy
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v1
-    - name: git-ftp push
-      uses: stackcci/git-ftp-deploy@1.0.0
-      with:
-        url: "ftp://${{ secrets.FTP_SERVER }}"
-        user: ${{ secrets.FTP_USERNAME }}
-        password: ${{ secrets.FTP_PASSWORD }}
+# name: Deploy via git-ftp
+# on: push
+# jobs:
+#   deploy:
+#     name: Deploy
+#     runs-on: ubuntu-latest
+#     steps:
+#     - uses: actions/checkout@v1
+#     - name: git-ftp push
+#       uses: stackcci/git-ftp-deploy@1.0.0
+#       with:
+#         url: "ftp://${{ secrets.FTP_SERVER }}"
+#         user: ${{ secrets.FTP_USERNAME }}
+#         password: ${{ secrets.FTP_PASSWORD }}

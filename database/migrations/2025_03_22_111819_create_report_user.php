@@ -11,12 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('transaction_period', function (Blueprint $table): void {
+        Schema::create('report_user', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->date('start_date');
-            $table->date('end_date');
+            $table->unsignedBigInteger('report_id');
+            $table->unsignedBigInteger('city_id')->nullable();
+            $table->unsignedBigInteger('district_id')->nullable();
             $table->timestamps();
+
+            $table->foreign('report_id')->references('id')->on('reports');
         });
     }
 
@@ -25,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('transaction_period');
+        Schema::dropIfExists('report_user');
     }
 };
