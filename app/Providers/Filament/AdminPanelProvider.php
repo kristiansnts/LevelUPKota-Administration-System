@@ -43,7 +43,6 @@ class AdminPanelProvider extends PanelProvider
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
             ->widgets([
                 Widgets\AccountWidget::class,
-                Widgets\FilamentInfoWidget::class,
             ])
             ->middleware([
                 EncryptCookies::class,
@@ -87,6 +86,10 @@ class AdminPanelProvider extends PanelProvider
                     })
                     ->url(fn (): string => EditProfilePage::getUrl())
                     ->icon('heroicon-m-user-circle'),
+                'logout' => MenuItem::make()
+                    ->label('Logout')
+                    ->postAction(fn () => auth()->logout())
+                    ->icon('heroicon-m-arrow-left-on-rectangle'),
             ])
             ->renderHook(
                 'panels::auth.login.form.after',

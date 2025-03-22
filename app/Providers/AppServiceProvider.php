@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\Helpers\EnvironmentHelper;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -10,7 +12,12 @@ class AppServiceProvider extends ServiceProvider
     /**
      * Register any application services.
      */
-    public function register(): void {}
+    public function register(): void
+    {
+        if (EnvironmentHelper::isProduction()) {
+            URL::forceScheme('https');
+        }
+    }
 
     /**
      * Bootstrap any application services.
