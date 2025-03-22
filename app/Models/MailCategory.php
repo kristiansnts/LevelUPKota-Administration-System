@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class MailCategory extends Model
 {
-    protected $table = 'mail_category';
+    protected $table = 'mail_categories';
 
     protected $fillable = [
         'name',

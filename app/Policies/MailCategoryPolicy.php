@@ -2,8 +2,8 @@
 
 namespace App\Policies;
 
-use App\Models\MailCategory;
 use App\Models\User;
+use App\Models\MailCategory;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class MailCategoryPolicy

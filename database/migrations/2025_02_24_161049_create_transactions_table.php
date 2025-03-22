@@ -11,9 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('finances', function (Blueprint $table): void {
+        Schema::create('transactions', function (Blueprint $table): void {
             $table->id();
-            $table->unsignedBigInteger('period_id');
             $table->date('transaction_date');
             $table->unsignedBigInteger('transaction_category_id');
             $table->string('description');
@@ -24,9 +23,8 @@ return new class extends Migration
             $table->string('transaction_proof_link')->nullable();
             $table->timestamps();
 
-            $table->foreign('transaction_category_id')->references('id')->on('transaction_category');
+            $table->foreign('transaction_category_id')->references('id')->on('transaction_categories');
             $table->foreign('payment_method_id')->references('id')->on('payment_methods');
-            $table->foreign('period_id')->references('id')->on('transaction_period');
         });
     }
 

@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string('status')->nullable();
             $table->timestamps();
 
-            $table->foreign('mail_category_id')->references('id')->on('mail_category');
+            $table->foreign('mail_category_id')->references('id')->on('mail_categories');
         });
     }
 

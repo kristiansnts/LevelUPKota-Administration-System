@@ -5,22 +5,22 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class FinanceUser extends Model
+class ReportUser extends Model
 {
-    protected $table = 'finance_user';
+    protected $table = 'report_user';
 
     protected $fillable = [
-        'finance_id',
+        'report_id',
         'city_id',
         'district_id',
     ];
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<\App\Models\Finance, $this>
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<\App\Models\Report, $this>
      */
-    public function finance(): BelongsTo
+    public function report(): BelongsTo
     {
-        return $this->belongsTo(Finance::class);
+        return $this->belongsTo(Report::class);
     }
 
     /**

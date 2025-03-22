@@ -7,15 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
-class Finance extends Model
+class Transaction extends Model
 {
-    /** @use HasFactory<\Database\Factories\FinanceFactory> */
+    /** @use HasFactory<\Database\Factories\TransactionFactory> */
     use HasFactory;
 
-    protected $table = 'finances';
+    protected $table = 'transactions';
 
     protected $fillable = [
-        'period_id',
         'transaction_date',
         'transaction_category_id',
         'description',
