@@ -4,22 +4,29 @@ namespace App\Filament\Resources\Finance\TransactionResource\Pages;
 
 use App\Enums\FinanceTypeEnum;
 use App\Filament\Resources\Finance\TransactionResource;
-use App\Models\Finance;
+use App\Models\Transaction;
 use Filament\Resources\Pages\CreateRecord;
+use Filament\Actions;
 
 class CreateTransaction extends CreateRecord
 {
     protected static string $resource = TransactionResource::class;
 
+    protected function mutateFormDataBeforeCreate(array $data): array
+    {
+        $data['report_id'] = $this->data['report_id'];
+        return $data;
+    }
+
     protected function afterCreate(): void
     {
         /**
-         * @var Finance $transaction
+         * @var Transaction $transaction
          */
         $transaction = $this->record;
         $transactionId = $transaction->getKey();
 
-        $lastTransaction = Finance::where('id', '<', $transactionId)
+        $lastTransaction = Transaction::where('id', '<', $transactionId)
             ->latest('id')
             ->first();
 
@@ -32,7 +39,7 @@ class CreateTransaction extends CreateRecord
     /**
      * Calculate the new balance based on transaction type and amount
      */
-    protected function calculateNewBalance(Finance $transaction, float $previousBalance): float
+    protected function calculateNewBalance(Transaction $transaction, float $previousBalance): float
     {
         if ($transaction->transactionCategory &&
             $transaction->transactionCategory->transaction_type === FinanceTypeEnum::INCOME->value) {
@@ -40,5 +47,10 @@ class CreateTransaction extends CreateRecord
         }
 
         return $previousBalance - $transaction->amount;
+    }
+
+    public function getRedirectUrl(): string
+    {
+        return $this->previousUrl;
     }
 }

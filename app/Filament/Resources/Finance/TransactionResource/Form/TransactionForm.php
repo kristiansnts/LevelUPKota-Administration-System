@@ -29,12 +29,6 @@ class TransactionForm extends Form
                 ->schema([
                     Forms\Components\Section::make('Informasi Transaksi')
                         ->schema([
-                            Forms\Components\Select::make('period_id')
-                                ->label('Periode')
-                                ->searchable()
-                                ->relationship('transactionPeriod', 'name')
-                                ->preload()
-                                ->required(),
                             Forms\Components\DatePicker::make('transaction_date')
                                 ->label('Tanggal Transaksi')
                                 ->native(false)
@@ -50,6 +44,8 @@ class TransactionForm extends Form
                             Forms\Components\TextInput::make('invoice_code')
                                 ->label('Nomor Kwitansi')
                                 ->required(),
+                            Forms\Components\Hidden::make('report_id')
+                                ->default(request()->query('report_id')),
                         ]),
                     Forms\Components\Section::make('Transaksi Kategori & Tipe')
                         ->schema([

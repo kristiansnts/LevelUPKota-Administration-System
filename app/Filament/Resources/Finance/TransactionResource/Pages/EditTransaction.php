@@ -4,7 +4,7 @@ namespace App\Filament\Resources\Finance\TransactionResource\Pages;
 
 use App\Enums\FinanceTypeEnum;
 use App\Filament\Resources\Finance\TransactionResource;
-use App\Models\Finance;
+use App\Models\Transaction;
 use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
 
@@ -19,19 +19,25 @@ class EditTransaction extends EditRecord
         ];
     }
 
+    protected function mutateFormDataBeforeSave(array $data): array
+    {
+        $data['report_id'] = $this->record->report_id;
+        return $data;
+    }
+
     protected function afterSave(): void
     {
         /**
-         * @var Finance $transaction
+         * @var Transaction $transaction
          */
         $transaction = $this->record;
         $transactionId = $transaction->getKey();
 
-        $affectedTransactions = Finance::where('id', '>=', $transactionId)
+        $affectedTransactions = Transaction::where('id', '>=', $transactionId)
             ->orderBy('id')
             ->get();
 
-        $previousTransaction = Finance::where('id', '<', $transactionId)
+        $previousTransaction = Transaction::where('id', '<', $transactionId)
             ->latest('id')
             ->first();
 
@@ -49,5 +55,10 @@ class EditTransaction extends EditRecord
                 $affectedTransaction->saveQuietly();
             }
         }
+    }
+
+    public function getRedirectUrl(): string
+    {
+        return $this->previousUrl;
     }
 }

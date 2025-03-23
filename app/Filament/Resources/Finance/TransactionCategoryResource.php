@@ -23,6 +23,8 @@ class TransactionCategoryResource extends Resource
 
     protected static ?string $slug = 'kategori-transaksi';
 
+    protected static bool $shouldRegisterNavigation = false;
+
     protected static ?string $navigationIcon = 'heroicon-o-hashtag';
 
     public static function form(Form $form): Form

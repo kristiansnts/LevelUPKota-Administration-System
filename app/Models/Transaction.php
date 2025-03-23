@@ -23,6 +23,11 @@ class Transaction extends Model
         'invoice_code',
         'transaction_proof_link',
         'balance',
+        'report_id',
+    ];
+
+    protected $casts = [
+        'transaction_date' => 'date',
     ];
 
     /**
@@ -50,10 +55,10 @@ class Transaction extends Model
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<\App\Models\TransactionPeriod, $this>
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<\App\Models\Report, $this>
      */
-    public function transactionPeriod(): BelongsTo
+    public function report(): BelongsTo
     {
-        return $this->belongsTo(TransactionPeriod::class, 'period_id');
+        return $this->belongsTo(Report::class);
     }
 }

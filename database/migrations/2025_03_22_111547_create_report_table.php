@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('title');
             $table->string('period');
             $table->boolean('is_done')->default(false);
-            $table->unsignedBigInteger('transaction_id');
+            $table->unsignedBigInteger('transaction_id')->nullable();
             $table->timestamps();
 
             $table->foreign('transaction_id')->references('id')->on('transactions');

@@ -19,7 +19,7 @@ class Report extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany<\App\Models\Transaction, $this>
      */
-    public function transaction(): HasMany
+    public function transactions(): HasMany
     {
         return $this->hasMany(Transaction::class);
     }
