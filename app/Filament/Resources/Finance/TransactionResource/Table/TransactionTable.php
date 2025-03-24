@@ -14,7 +14,8 @@ class TransactionTable extends Tables\Table
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('transaction_date')
-                    ->label('Tanggal Transaksi'),
+                    ->label('Tanggal Transaksi')
+                    ->dateTime('l, d F Y'),
                 Tables\Columns\TextColumn::make('transactionCategory.name')
                     ->label('Kategori Transaksi'),
                 Tables\Columns\TextColumn::make('description')
@@ -42,9 +43,6 @@ class TransactionTable extends Tables\Table
                     ->label('Saldo'),
             ])
             ->defaultSort('transaction_date', 'desc')
-            ->filters([
-
-            ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),

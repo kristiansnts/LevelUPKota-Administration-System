@@ -10,6 +10,10 @@ use Filament\Tables\Table;
 use Filament\Tables;
 use Illuminate\Database\Eloquent\Model;
 use App\Filament\Resources\Finance\TransactionResource;
+use App\Filament\Resources\Finance\ReportResource\Pages\PreviewReport;
+use App\Filament\Resources\Finance\ReportResource\Pages\EditReport;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 
 class TransactionsRelationManager extends RelationManager
 {
@@ -29,7 +33,9 @@ class TransactionsRelationManager extends RelationManager
         return TransactionTable::table($table)
             ->recordTitleAttribute('description')
             ->headerActions([
-                Tables\Actions\CreateAction::make()->label('Catat Transaksi')
+                Tables\Actions\CreateAction::make()
+                    ->label('Catat Transaksi')
+                    ->hidden(fn (): bool => $this->getPageClass() === PreviewReport::class)
                     ->mutateFormDataUsing(function (array $data): array {
                         $data['report_id'] = $this->getOwnerRecord()->id;
                         return $data;
@@ -37,18 +43,28 @@ class TransactionsRelationManager extends RelationManager
                     ->url(fn (): string => TransactionResource::getUrl('create', ['report_id' => $this->getOwnerRecord()->id])),
             ])
             ->actions([
-                Tables\Actions\EditAction::make()
-                    ->icon('heroicon-o-pencil')
-                    ->color('warning')
-                    ->mutateFormDataUsing(function (array $data): array {
+                Tables\Actions\ActionGroup::make([
+                    Tables\Actions\EditAction::make()
+                            ->label('Ubah Transaksi')
+                            ->icon('heroicon-o-pencil')
+                            ->color('warning')
+                            ->mutateFormDataUsing(function (array $data): array {
                         $data['report_id'] = $this->getOwnerRecord()->id;
                         return $data;
                     })
                     ->url(fn (Model $record): string => TransactionResource::getUrl('edit', ['record' => $record->id])),
-                Tables\Actions\ViewAction::make('bukti_transaksi')
-                    ->label('Bukti Transaksi')
-                    ->icon('heroicon-o-eye')
-                    ->color('info')
+                    Tables\Actions\DeleteAction::make()
+                        ->label('Hapus Transaksi')
+                        ->icon('heroicon-o-trash')
+                        ->color('danger'),
+                    Tables\Actions\ViewAction::make('bukti_transaksi')
+                        ->label('Bukti Transaksi')
+                        ->icon('heroicon-o-eye')
+                        ->color('info')
+                ])
+                ->button()
+                ->label('Aksi')
+                ->hidden(fn (): bool => $this->getPageClass() === PreviewReport::class),
             ]);
     }
 }

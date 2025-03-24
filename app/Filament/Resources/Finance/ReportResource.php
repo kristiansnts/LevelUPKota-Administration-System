@@ -61,29 +61,41 @@ class ReportResource extends Resource
                         )->getLabel();
                     })
                     ->badge()
-                    ->color(fn (string $state): string => match (ReportStatus::tryFrom($state)) {
-                        ReportStatus::DRAFT => 'gray',
+                    ->color(fn (Report $record): string => match (ReportStatus::from($record->is_done ? 'true' : 'false')) {
+                        ReportStatus::DRAFT => 'warning',
                         ReportStatus::SUBMITTED => 'success',
                         default => 'gray',
                     }),
             ])
             ->filters([
-                //
+                Tables\Filters\SelectFilter::make('is_done')
+                    ->label('Status')
+                    ->options(ReportStatus::class),
+                Tables\Filters\SelectFilter::make('period')
+                    ->label('Periode')
+                    ->preload()
+                    ->searchable()
+                    ->options(fn () => Report::query()
+                        ->distinct()
+                        ->pluck('period', 'period')
+                        ->all()
+                    ),
             ])
             ->actions([
-                Tables\Actions\EditAction::make()->visible(fn (Report $record): bool => self::canEdit($record)),
-                Tables\Actions\ViewAction::make(),
+                Tables\Actions\EditAction::make()
+                    ->label('Ubah Laporan')
+                    ->visible(fn (Report $record): bool => ReportStatus::from($record->is_done ? 'true' : 'false') === ReportStatus::DRAFT),
+                Tables\Actions\Action::make('preview')
+                    ->label('Lihat Laporan')
+                    ->icon('heroicon-o-eye')
+                    ->color('info')
+                    ->url(fn (Report $record): string => ReportResource::getUrl('preview', ['record' => $record->id])),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
             ]);
-    }
-
-    public static function canEdit(\Illuminate\Database\Eloquent\Model $record): bool
-    {
-        return ReportStatus::from($record->is_done ? 'true' : 'false') === ReportStatus::DRAFT;
     }
 
     public static function getRelations(): array
@@ -99,6 +111,7 @@ class ReportResource extends Resource
             'index' => Pages\ListReports::route('/'),
             'create' => Pages\CreateReport::route('/create'),
             'edit' => Pages\EditReport::route('/{record}/edit'),
+            'preview' => Pages\PreviewReport::route('/{record}/preview'),
         ];
     }
 }
