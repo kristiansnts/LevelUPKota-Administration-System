@@ -12,6 +12,8 @@ use Illuminate\Database\Eloquent\Model;
 use App\Filament\Resources\Finance\TransactionResource;
 use App\Filament\Resources\Finance\ReportResource\Pages\PreviewReport;
 use App\Helpers\StringHelper;
+use Illuminate\Support\HtmlString;
+use Filament\Support\Enums\MaxWidth;
 
 class TransactionsRelationManager extends RelationManager
 {
@@ -41,29 +43,31 @@ class TransactionsRelationManager extends RelationManager
                     ->url(fn (): string => TransactionResource::getUrl('create', ['report_id' => $this->getOwnerRecord()->id])),
             ])
             ->actions([
-                Tables\Actions\ActionGroup::make([
-                    Tables\Actions\EditAction::make()
-                            ->label('Ubah Transaksi')
-                            ->icon('heroicon-o-pencil')
-                            ->color('warning')
-                            ->mutateFormDataUsing(function (array $data): array {
-                        $data['report_id'] = $this->getOwnerRecord()->id;
-                        return $data;
-                    })
-                    ->url(fn (Model $record): string => TransactionResource::getUrl('edit', ['record' => $record->id])),
-                    Tables\Actions\DeleteAction::make()
-                        ->label('Hapus Transaksi')
-                        ->icon('heroicon-o-trash')
-                        ->color('danger'),
+                Tables\Actions\EditAction::make()
+                        ->label('Ubah Transaksi')
+                        ->icon('heroicon-o-pencil')
+                        ->color('warning')
+                        ->hidden(fn (): bool => $this->getPageClass() === PreviewReport::class)
+                        ->mutateFormDataUsing(function (array $data): array {
+                            $data['report_id'] = $this->getOwnerRecord()->id;
+                            return $data;
+                        })
+                        ->url(fn (Model $record): string => TransactionResource::getUrl('edit', ['record' => $record->id])),
                     Tables\Actions\ViewAction::make('bukti_transaksi')
                         ->label('Bukti Transaksi')
                         ->icon('heroicon-o-eye')
                         ->color('info')
-                        ->url(fn (Model $record): string => StringHelper::getTransactionProofLink($record->transaction_proof_link)),
-                ])
-                ->button()
-                ->label('Aksi')
-                ->hidden(fn (): bool => $this->getPageClass() === PreviewReport::class),
+                        ->hidden(fn (): bool => $this->getPageClass() === PreviewReport::class)
+                        ->form([])
+                        ->modalWidth(MaxWidth::Small)
+                        ->modalHeading('Bukti Transaksi')
+                        ->modalContent(fn ($record) => new HtmlString('
+                            <iframe 
+                                src="'.StringHelper::getTransactionProofLink($record->transaction_proof_link).'" 
+                                style="width: 100%; height: 250px; border: none;"
+                                title="Bukti Transaksi"
+                            ></iframe>
+                        ')),
             ]);
     }
 }
