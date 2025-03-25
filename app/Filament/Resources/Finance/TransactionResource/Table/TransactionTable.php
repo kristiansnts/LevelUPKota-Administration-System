@@ -7,6 +7,7 @@ use App\Models\Transaction;
 use Filament\Tables;
 use Filament\Tables\Table;
 
+
 class TransactionTable extends Tables\Table
 {
     public static function table(Table $table): Table

@@ -11,9 +11,7 @@ use Filament\Tables;
 use Illuminate\Database\Eloquent\Model;
 use App\Filament\Resources\Finance\TransactionResource;
 use App\Filament\Resources\Finance\ReportResource\Pages\PreviewReport;
-use App\Filament\Resources\Finance\ReportResource\Pages\EditReport;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
+use App\Helpers\StringHelper;
 
 class TransactionsRelationManager extends RelationManager
 {
@@ -61,6 +59,7 @@ class TransactionsRelationManager extends RelationManager
                         ->label('Bukti Transaksi')
                         ->icon('heroicon-o-eye')
                         ->color('info')
+                        ->url(fn (Model $record): string => StringHelper::getTransactionProofLink($record->transaction_proof_link)),
                 ])
                 ->button()
                 ->label('Aksi')
