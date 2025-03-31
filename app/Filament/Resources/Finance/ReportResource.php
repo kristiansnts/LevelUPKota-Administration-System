@@ -12,8 +12,8 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use App\Enums\ReportStatus;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
-use Illuminate\Database\Eloquent\Model;
+use App\Filament\Shared\Services\ResourceScopeService;
+use App\Models\ReportUser;
 
 class ReportResource extends Resource
 {
@@ -96,6 +96,22 @@ class ReportResource extends Resource
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
             ]);
+    }
+
+    /**
+     * @return Builder<Report>
+     */
+    public static function getEloquentQuery(): Builder
+    {
+        /** @var \Illuminate\Database\Eloquent\Builder<ReportUser> $reportIds */
+        $reportIds = ResourceScopeService::userScope(
+            ReportUser::query(),
+            'report_id'
+        );
+
+        /** @var \Illuminate\Database\Eloquent\Builder<Report> */
+        return parent::getEloquentQuery()
+            ->whereIn('id', $reportIds);
     }
 
     public static function getRelations(): array

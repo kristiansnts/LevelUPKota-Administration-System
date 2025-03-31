@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Mail extends Model
 {
@@ -20,8 +21,8 @@ class Mail extends Model
         'receiver_name',
         'description',
         'type',
-        'link',
-        'status',
+        'file_name',
+        'file_id',
     ];
 
     protected $casts = [
@@ -42,5 +43,10 @@ class Mail extends Model
     public function user(): BelongsToMany
     {
         return $this->belongsToMany(User::class);
+    }
+
+    public function mailUsers(): HasMany
+    {
+        return $this->hasMany(MailUser::class);
     }
 }

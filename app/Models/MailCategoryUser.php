@@ -13,7 +13,6 @@ class MailCategoryUser extends Model
         'mail_category_id',
         'city_id',
         'district_id',
-        'order',
     ];
 
     /**

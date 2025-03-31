@@ -5,10 +5,10 @@ namespace App\Filament\Resources\Mail\MailsResource\Shared\Services;
 use App\Enums\RomanMonthEnum;
 use App\Filament\Resources\Mail\MailsResource\Shared\Repositories\Eloquents\MailCategoryRepositoryImpl;
 use App\Filament\Resources\Mail\MailsResource\Shared\Repositories\Eloquents\MailUserRepositoryImpl;
-use App\Filament\Shared\Services\ModelQueryService;
 use App\Helpers\LabelHelper;
+use App\Filament\Shared\Services\ModelQueryService;
 
-class MailCategoryService
+class MailCodeService
 {
     public function __construct(
         private readonly MailCategoryRepositoryImpl $mailCategoryRepository,
@@ -94,4 +94,5 @@ class MailCategoryService
 
         return str_pad($countToStr, 3, '0', STR_PAD_LEFT);
     }
+    
 }

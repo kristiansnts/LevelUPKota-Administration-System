@@ -12,6 +12,8 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
+use App\Helpers\StringHelper;
+use Filament\Tables\Actions\Action;
 
 class MailsResource extends Resource
 {
@@ -39,38 +41,52 @@ class MailsResource extends Resource
     {
         return $table
             ->columns([
+                Tables\Columns\TextColumn::make('file_name')
+                    ->label('Status')
+                    ->badge()
+                    ->formatStateUsing(function (Mail $record): string {
+                        $state = empty($record->file_name) ? MailStatusEnum::DRAFT->value : MailStatusEnum::UPLOADED->value;
+                        return MailStatusEnum::from($state)->getLabel();
+                    })
+                    ->color(function (Mail $record): string {
+                        return empty($record->file_name) ? 'warning' : 'success';
+                    }),
                 Tables\Columns\TextColumn::make('mail_code')
                     ->label('Nomor Surat'),
                 Tables\Columns\TextColumn::make('mail_date')
+                    ->dateTime('d M Y')
                     ->label('Tanggal Surat'),
                 Tables\Columns\TextColumn::make('sender_name')
+                    ->searchable()
                     ->label('Pengirim'),
                 Tables\Columns\TextColumn::make('receiver_name')
+                    ->searchable()
                     ->label('Penerima'),
                 Tables\Columns\TextColumn::make('description')
+                    ->searchable()
                     ->label('Keterangan'),
                 Tables\Columns\TextColumn::make('created_at')
-                    ->label('Tanggal Dibuat')
-                    ->dateTime('d-m-Y H:i:s'),
-                Tables\Columns\TextColumn::make('status')
-                    ->label('Status')
-                    ->badge()
-                    ->colors([
-                        'warning' => MailStatusEnum::DRAFT->value,
-                        'success' => MailStatusEnum::UPLOADED->value,
-                    ])
-                    ->formatStateUsing(fn (string $state): string => MailStatusEnum::from($state)->getLabel()),
+                    ->dateTime('d M Y')
+                    ->label('Tanggal Dibuat'),
             ])
             ->filters([
-
+                Tables\Filters\SelectFilter::make('file_name')
+                    ->label('Status')
+                    ->options(MailStatusEnum::class),
             ])
+            ->filtersTriggerAction(
+                fn (Action $action): Action => $action
+                    ->button()
+                    ->label('Filter'),
+            )
             ->actions([
                 Tables\Actions\ViewAction::make()
-                    ->label('Lihat Surat')
+                    ->label('Lihat')
                     ->icon('heroicon-o-eye')
                     ->color('info')
-                    ->url(fn (Mail $record) => $record->link ?? '#'),
-            ])
+                    ->url(fn (Mail $record): string => StringHelper::getMailLink($record->file_name)),
+            ], position: Tables\Enums\ActionsPosition::BeforeColumns)
+            ->actionsColumnLabel('Aksi')
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),

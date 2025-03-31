@@ -13,6 +13,7 @@ class MailUser extends Model
         'mail_id',
         'city_id',
         'district_id',
+        'order',
     ];
 
     /**

@@ -22,3 +22,4 @@ yarn-error.log
 /.vscode
 /.zed
 .sqlite
+service_account_key.json

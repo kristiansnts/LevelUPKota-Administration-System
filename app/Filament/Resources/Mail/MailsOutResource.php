@@ -18,6 +18,11 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
+use App\Helpers\StringHelper;
+use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
+use Filament\Forms\Components\Actions\Action;
 
 class MailsOutResource extends Resource
 {
@@ -49,9 +54,46 @@ class MailsOutResource extends Resource
                             ])
                             ->live()
                             ->readOnly(),
-                        Forms\Components\TextInput::make('link')
-                            ->label('Upload Link Surat')
-                            ->visible(RouteHelper::isRouteName('filament.admin.resources.surat-keluar.edit')),
+                        Forms\Components\FileUpload::make('file_name')
+                            ->label('Upload Surat')
+                            ->disk('google')
+                            ->directory(function () {
+                                return StringHelper::setMailOutDirNameByAddress();
+                            })
+                            ->hintActions([
+                                Action::make('delete_file')
+                                    ->label('Hapus File')
+                                    ->icon('heroicon-o-trash')
+                                    ->color('danger')
+                                    ->requiresConfirmation('Apakah Anda yakin ingin menghapus file ini?')
+                                    ->visible(function (?Mail $record): bool {
+                                        return $record && !empty($record->file_name);
+                                    })
+                                    ->action(function (Action $action, Mail $record) {
+                                        $fileName = Mail::where('id', $record->id)->first()->file_name;
+                                        if ($fileName) {
+                                            Storage::disk('google')->delete($fileName);
+
+                                            Mail::where('id', $record->id)->update([
+                                                'file_name' => null,
+                                                'file_id' => null,
+                                            ]);
+                                        }
+
+                                        $action->getComponent()->state(null);
+                                        $action->getComponent()->getLivewire()->js('window.location.reload()');
+                                    }),
+                            ])
+                            ->getUploadedFileNameForStorageUsing(
+                                function (TemporaryUploadedFile $file, Get $get): string {
+                                    $mailCode = $get('mail_code');
+                                    $mailNumber = explode('/', $mailCode)[0];
+                                    $mailCategory = explode('/', $mailCode)[2];
+                                    $description = $get('description');
+                                    return "{$mailNumber} - {$mailCategory} - {$description}." . $file->getClientOriginalExtension();
+                              }
+                            )
+                            ->visibility('public')
                     ])->columnSpan(1),
                 Forms\Components\Hidden::make('type')
                     ->default(MailTypeEnum::OUT->value),
@@ -62,9 +104,20 @@ class MailsOutResource extends Resource
     {
         return $table
             ->columns([
+                Tables\Columns\TextColumn::make('file_name')
+                    ->label('Status')
+                    ->badge()
+                    ->formatStateUsing(function (Mail $record): string {
+                        $state = empty($record->file_name) ? MailStatusEnum::DRAFT->value : MailStatusEnum::UPLOADED->value;
+                        return MailStatusEnum::from($state)->getLabel();
+                    })
+                    ->color(function (Mail $record): string {
+                        return empty($record->file_name) ? 'warning' : 'success';
+                    }),
                 Tables\Columns\TextColumn::make('mail_code')
                     ->label('Nomor Surat'),
                 Tables\Columns\TextColumn::make('mail_date')
+                    ->dateTime('d M Y')
                     ->label('Tanggal Surat'),
                 Tables\Columns\TextColumn::make('sender_name')
                     ->label('Pengirim'),
@@ -75,14 +128,6 @@ class MailsOutResource extends Resource
                 Tables\Columns\TextColumn::make('created_at')
                     ->label('Tanggal Dibuat')
                     ->dateTime('d-m-Y H:i:s'),
-                Tables\Columns\TextColumn::make('status')
-                    ->label('Status')
-                    ->badge()
-                    ->colors([
-                        'warning' => MailStatusEnum::DRAFT->value,
-                        'success' => MailStatusEnum::UPLOADED->value,
-                    ])
-                    ->formatStateUsing(fn (string $state): string => MailStatusEnum::from($state)->getLabel()),
             ])
             ->filters([
                 Tables\Filters\SelectFilter::make('status')
@@ -90,13 +135,19 @@ class MailsOutResource extends Resource
                     ->options(MailStatusEnum::class),
             ])
             ->actions([
-                Tables\Actions\EditAction::make()->label('Edit dan Upload'),
+                Tables\Actions\EditAction::make()
+                    ->label('Edit dan Upload')
+                    ->icon('heroicon-c-pencil'),
                 Tables\Actions\ViewAction::make()
                     ->label('Lihat Surat')
                     ->icon('heroicon-o-eye')
                     ->color('info')
-                    ->url(fn (Mail $record): string => $record->link ?? '#'),
-            ])
+                    ->url(fn (Mail $record): string => StringHelper::getMailLink($record->file_name))
+                    ->extraAttributes([
+                        'target' => '_blank',
+                    ]),
+            ], position: Tables\Enums\ActionsPosition::BeforeColumns)
+            ->actionsColumnLabel('Aksi')
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
