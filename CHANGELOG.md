@@ -1,3 +1,10 @@
+# [1.21.0](https://github.com/kristiansnts/LevelUPKota-Administration-System/compare/v1.20.1...v1.21.0) (2025-03-31)
+
+
+### Features
+
+* **deploy:** Update deploy.yml ([d712c46](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/d712c46be09b5bbfad8de5c20aa3323bf31d8e83))
+
 ## [1.20.1](https://github.com/kristiansnts/LevelUPKota-Administration-System/compare/v1.20.0...v1.20.1) (2025-03-31)
 
 
