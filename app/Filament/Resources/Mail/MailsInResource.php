@@ -56,9 +56,8 @@ class MailsInResource extends Resource
                                     ->icon('heroicon-o-trash')
                                     ->color('danger')
                                     ->requiresConfirmation('Apakah Anda yakin ingin menghapus file ini?')
-                                    ->visible(function (Mail $record): bool {
-                                        $fileName = $record->file_name;
-                                        return !empty($fileName);
+                                    ->visible(function (?Mail $record): bool {
+                                        return $record && !empty($record->file_name);
                                     })
                                     ->action(function (Action $action, Mail $record) {
                                         $fileName = Mail::where('id', $record->id)->first()->file_name;
