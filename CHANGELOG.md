@@ -1,3 +1,22 @@
+# [1.20.0](https://github.com/kristiansnts/LevelUPKota-Administration-System/compare/v1.19.0...v1.20.0) (2025-03-31)
+
+
+### Bug Fixes
+
+* **logout:** add logout functional ([f9f41ce](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/f9f41ce05f6b81d5a547b9cb83f62debe29c4778))
+* **workflow:** Update release.yml ([05d3a0b](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/05d3a0be5913c8e6646e69a9f9b712db76a7beb1))
+
+
+### Features
+
+* **db:** add db for indonesiat_territory ([fe953ac](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/fe953ac42a0e5367b7cc50d43b7ec20eddd9ea09))
+* **db:** fix edit profile ([d7e166f](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/d7e166f3a7dcdd42253039bc2f93a5bc7aebb735))
+* **mail:** enhance mail management with file upload handling, status indicators, and new mail code generation ([c2ecb52](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/c2ecb527e25f4e7be66526b3babf7d613c6c4bf5))
+* **resource:** add report resource ([2d28879](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/2d28879ecb632b71226217be9a1518a306f9e35b))
+* **transaction:** implement transaction proof link functionality and enhance file upload handling ([b6721fb](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/b6721fb4c3581de0bbfe4fc59472c40ef442ff87))
+* **transactions:** add transaction user model and enhance transaction resource with report filtering and proof link display ([17aa45d](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/17aa45dfcc54f5b7c39f72f2e66f6b7a267c072f))
+* **transactions:** enhance transaction actions with proof link modal and visibility control ([affb3b8](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/affb3b8fb795920bad0453412fb4c255fe453b40))
+
 # [1.19.0](https://github.com/kristiansnts/LevelUPKota-Administration-System/compare/v1.18.0...v1.19.0) (2025-03-20)
 
 
