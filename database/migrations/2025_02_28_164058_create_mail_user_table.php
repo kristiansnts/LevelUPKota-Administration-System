@@ -16,6 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('city_id')->nullable();
             $table->unsignedBigInteger('district_id')->nullable();
             $table->unsignedBigInteger('mail_id');
+            $table->integer('order')->default(0);
             $table->timestamps();
 
             $table->foreign('mail_id')->references('id')->on('mails');

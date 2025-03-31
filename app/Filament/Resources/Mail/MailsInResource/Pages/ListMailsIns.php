@@ -14,7 +14,7 @@ class ListMailsIns extends ListRecords
     {
         return [
             Actions\CreateAction::make()
-                ->label('Tambah Surat Masuk'),
+                ->label('Catat Surat Masuk'),
         ];
     }
 }

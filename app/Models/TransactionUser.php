@@ -5,23 +5,22 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class MailUser extends Model
+class TransactionUser extends Model
 {
-    protected $table = 'mail_user';
+    protected $table = 'transaction_user';
 
     protected $fillable = [
-        'mail_id',
+        'transaction_id',
         'city_id',
         'district_id',
-        'order',
     ];
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<\App\Models\Mail, $this>
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<\App\Models\Transaction, $this>
      */
-    public function mail(): BelongsTo
+    public function transaction(): BelongsTo
     {
-        return $this->belongsTo(Mail::class);
+        return $this->belongsTo(Transaction::class);
     }
 
     /**

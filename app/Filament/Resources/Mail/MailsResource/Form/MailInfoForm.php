@@ -4,6 +4,8 @@ namespace App\Filament\Resources\Mail\MailsResource\Form;
 
 use App\Filament\Shared\Services\ModelQueryService;
 use Filament\Forms;
+use App\Filament\Resources\Mail\MailsCategoryResource\Form\MailCategoryCreateForm;
+use App\Filament\Resources\Mail\MailsResource\Shared\UseCases\CreateOptionUseCase;
 
 class MailInfoForm
 {
@@ -22,6 +24,14 @@ class MailInfoForm
                 ->searchable()
                 ->preload()
                 ->options(fn (): array => ModelQueryService::getMailCategoryOptions())
+                ->createOptionForm(MailCategoryCreateForm::getFormSchema())
+                ->createOptionUsing(function (array $data): int {
+                    /** @var array<string, mixed> $data */
+                    /** @var \App\Filament\Resources\Mail\MailsResource\Shared\UseCases\CreateOptionUseCase $useCase */
+                    $useCase = app(CreateOptionUseCase::class);
+
+                    return $useCase->createMailCategoryUser($data);
+                })
                 ->required(),
             Forms\Components\TextInput::make('sender_name')
                 ->label('Pengirim')

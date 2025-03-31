@@ -23,6 +23,8 @@ class PaymentMethodResource extends Resource
 
     protected static ?string $slug = 'metode-pembayaran';
 
+    protected static bool $shouldRegisterNavigation = false;
+
     protected static ?string $navigationIcon = 'heroicon-o-credit-card';
 
     public static function form(Form $form): Form

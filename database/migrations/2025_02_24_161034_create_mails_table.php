@@ -18,10 +18,10 @@ return new class extends Migration
             $table->unsignedBigInteger('mail_category_id');
             $table->string('sender_name');
             $table->string('receiver_name');
-            $table->string('description');
+            $table->string('description'); 
             $table->enum('type', ['in', 'out']);
-            $table->string('link')->nullable();
-            $table->string('status')->nullable();
+            $table->string('file_name')->nullable();
+            $table->string('file_id')->nullable();
             $table->timestamps();
 
             $table->foreign('mail_category_id')->references('id')->on('mail_categories');

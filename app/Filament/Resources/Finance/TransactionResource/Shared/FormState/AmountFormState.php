@@ -3,14 +3,14 @@
 namespace App\Filament\Resources\Finance\TransactionResource\Shared\FormState;
 
 use App\Enums\FinanceTypeEnum;
-use App\Models\Finance;
+use App\Models\Transaction;
 
 class AmountFormState
 {
     /**
      * Get the amount in for a given transaction record
      */
-    public static function getAmountIn(?Finance $record): int
+    public static function getAmountIn(?Transaction $record): int
     {
         return self::getAmountByType($record, FinanceTypeEnum::INCOME);
     }
@@ -18,7 +18,7 @@ class AmountFormState
     /**
      * Get the amount out for a given transaction record
      */
-    public static function getAmountOut(?Finance $record): int
+    public static function getAmountOut(?Transaction $record): int
     {
         return self::getAmountByType($record, FinanceTypeEnum::EXPENSE);
     }
@@ -26,22 +26,22 @@ class AmountFormState
     /**
      * Get the amount for a given transaction record based on type
      */
-    private static function getAmountByType(?Finance $record, FinanceTypeEnum $type): int
+    private static function getAmountByType(?Transaction $record, FinanceTypeEnum $type): int
     {
         if (! self::isValidTransactionRecord($record)) {
             return 0;
         }
 
-        /** @var Finance $record */
+        /** @var Transaction $record */
         return $record->transactionCategory?->transaction_type === $type->value ? (int) $record->amount : 0;
     }
 
     /**
      * Check if the finance record is valid for transaction calculations
      */
-    private static function isValidTransactionRecord(?Finance $record): bool
+    private static function isValidTransactionRecord(?Transaction $record): bool
     {
-        return $record instanceof Finance
+        return $record instanceof Transaction
             && $record->transactionCategory !== null
             && $record->transactionCategory->transaction_type !== null
             && $record->amount !== null;

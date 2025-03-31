@@ -7,6 +7,11 @@ use App\Filament\Resources\Finance\TransactionCategoryResource\Form\TransactionC
 use App\Filament\Resources\Finance\TransactionResource\Shared\UseCases\CreateOptionUseCase;
 use Filament\Forms;
 use Filament\Forms\Form;
+use App\Helpers\StringHelper;
+use App\Filament\Shared\Component\GoogleDriveFileUpload;
+use Illuminate\Support\HtmlString;
+use Filament\Forms\Components\Placeholder;
+use App\Filament\Resources\Finance\TransactionResource\Pages\EditTransaction;
 
 class TransactionForm extends Form
 {
@@ -29,12 +34,6 @@ class TransactionForm extends Form
                 ->schema([
                     Forms\Components\Section::make('Informasi Transaksi')
                         ->schema([
-                            Forms\Components\Select::make('period_id')
-                                ->label('Periode')
-                                ->searchable()
-                                ->relationship('transactionPeriod', 'name')
-                                ->preload()
-                                ->required(),
                             Forms\Components\DatePicker::make('transaction_date')
                                 ->label('Tanggal Transaksi')
                                 ->native(false)
@@ -50,6 +49,7 @@ class TransactionForm extends Form
                             Forms\Components\TextInput::make('invoice_code')
                                 ->label('Nomor Kwitansi')
                                 ->required(),
+                            
                         ]),
                     Forms\Components\Section::make('Transaksi Kategori & Tipe')
                         ->schema([
@@ -89,14 +89,30 @@ class TransactionForm extends Form
                 ->description('Bukti transaksi berupa gambar')
                 ->icon('heroicon-o-document-text')
                 ->schema([
+                    Placeholder::make('transaction_proof_link')
+                        ->label('Preview Bukti Transaksi')
+                        ->content(function ($record) {
+                            /** @var \App\Models\Transaction $record */
+                            if (!$record?->transaction_proof_link) return null;
+                            
+                            return new HtmlString(
+                                '<iframe src="' . StringHelper::getTransactionProofLink($record->transaction_proof_link) . 
+                                '" width="250" height="250" allow="autoplay"></iframe>'
+                            );
+                        })
+                        ->visible(fn ($livewire): bool => $livewire instanceof EditTransaction),
                     Forms\Components\FileUpload::make('transaction_proof_link')
                         ->label('Upload Bukti Transaksi')
-                        ->image()
+                        ->disk('google')
+                        ->directory(function () {
+                            return StringHelper::setTransactionDirNameByAddress();
+                        })
+                        ->getUploadedFileUsing(fn () => null)
                         ->imageEditor()
                         ->imageEditorAspectRatios([
                             '16:9',
                             '4:3',
-                        ]),
+                        ])
                 ])->columnSpan(1),
         ];
     }

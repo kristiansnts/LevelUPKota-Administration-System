@@ -4,6 +4,7 @@ namespace App\Filament\Resources\Mail\MailsResource\Shared\Repositories\Eloquent
 
 use App\Filament\Resources\Mail\MailsResource\Shared\Repositories\Contracts\MailUserRepository;
 use App\Models\MailUser;
+use App\Enums\MailTypeEnum;
 
 class MailUserRepositoryImpl implements MailUserRepository
 {
@@ -19,7 +20,12 @@ class MailUserRepositoryImpl implements MailUserRepository
 
     public function getTotalMailCountByAddressId(?int $cityId, ?int $districtId): int
     {
-        $totalMailCount = MailUser::where('city_id', $cityId)->where('district_id', $districtId)->count();
+        $totalMailCount = MailUser::where('city_id', $cityId)
+            ->where('district_id', $districtId)
+            ->whereHas('mail', function($query) {
+                $query->where('type', MailTypeEnum::OUT->value);
+            })
+            ->count();
 
         return $totalMailCount + 1;
     }

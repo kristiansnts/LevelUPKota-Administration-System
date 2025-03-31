@@ -2,13 +2,13 @@
 
 namespace App\Filament\Resources\Mail\MailsResource\Shared\UseCases;
 
-use App\Filament\Resources\Mail\MailsResource\Shared\Services\MailCategoryService;
+use App\Filament\Resources\Mail\MailsResource\Shared\Services\MailCodeService;
 use App\Helpers\NotificationHelper;
 
 class GeneratedMailUseCase
 {
     public function __construct(
-        private readonly MailCategoryService $mailCategoryService,
+        private readonly MailCodeService $mailCodeService,
     ) {}
 
     /**
@@ -17,7 +17,7 @@ class GeneratedMailUseCase
     public function generateMailCode(array $mailData): string
     {
         try {
-            return $this->mailCategoryService->generateMailCode($mailData);
+            return $this->mailCodeService->generateMailCode($mailData);
         } catch (\Exception $e) {
             NotificationHelper::error('Gagal membuat nomor surat');
             throw $e;
