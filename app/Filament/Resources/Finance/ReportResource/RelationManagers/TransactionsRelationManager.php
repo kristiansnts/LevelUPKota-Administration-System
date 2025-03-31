@@ -25,7 +25,11 @@ class TransactionsRelationManager extends RelationManager
     public function form(Form $form): Form
     {
         return $form
-            ->schema(TransactionForm::getFormSchema());
+            ->schema([
+                ...TransactionForm::getFormSchema(),
+                Forms\Components\Hidden::make('report_id')
+                    ->default(request()->query('report_id')),
+            ]);
     }
 
     public function table(Table $table): Table

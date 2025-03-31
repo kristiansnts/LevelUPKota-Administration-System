@@ -40,6 +40,9 @@ class TransactionTable extends Tables\Table
                 Tables\Columns\TextColumn::make('invoice_code')
                     ->label('Nomor Kwitansi')
                     ->searchable(),
+                Tables\Columns\TextColumn::make('report.title')
+                    ->label('Laporan')
+                    ->searchable(),
                 \Pelmered\FilamentMoneyField\Tables\Columns\MoneyColumn::make('balance')
                     ->label('Saldo'),
             ])

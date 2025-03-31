@@ -7,6 +7,8 @@ use App\Filament\Resources\Finance\TransactionResource;
 use App\Models\Transaction;
 use Filament\Resources\Pages\CreateRecord;
 use Filament\Actions;
+use App\Filament\Shared\Services\ModelQueryService;
+use App\Models\TransactionUser;
 
 class CreateTransaction extends CreateRecord
 {
@@ -20,6 +22,19 @@ class CreateTransaction extends CreateRecord
 
     protected function afterCreate(): void
     {
+
+        if (! $this->record instanceof \App\Models\Transaction) {
+            return;
+        }
+
+        $user = ModelQueryService::getUserModel();
+
+        TransactionUser::create([
+            'transaction_id' => $this->record->id,
+            'city_id' => $user->city_id,
+            'district_id' => $user->district_id ?? null,
+        ]);
+
         /**
          * @var Transaction $transaction
          */

@@ -49,8 +49,7 @@ class TransactionForm extends Form
                             Forms\Components\TextInput::make('invoice_code')
                                 ->label('Nomor Kwitansi')
                                 ->required(),
-                            Forms\Components\Hidden::make('report_id')
-                                ->default(request()->query('report_id')),
+                            
                         ]),
                     Forms\Components\Section::make('Transaksi Kategori & Tipe')
                         ->schema([
