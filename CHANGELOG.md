@@ -1,3 +1,10 @@
+# [1.22.0](https://github.com/kristiansnts/LevelUPKota-Administration-System/compare/v1.21.0...v1.22.0) (2025-04-01)
+
+
+### Features
+
+* **docker:** set up Docker environment with PostgreSQL and MySQL support, including configuration for Indonesia territory database and Nginx server ([b070156](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/b070156ccf725e223e795bf6c21003458908f5e9))
+
 # [1.21.0](https://github.com/kristiansnts/LevelUPKota-Administration-System/compare/v1.20.1...v1.21.0) (2025-03-31)
 
 
