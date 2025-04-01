@@ -107,6 +107,29 @@ class TransactionForm extends Form
                         ->directory(function () {
                             return StringHelper::setTransactionDirNameByAddress();
                         })
+                        ->hintActions([
+                            Action::make('delete_file')
+                                ->label('Hapus File')
+                                ->icon('heroicon-o-trash')
+                                ->color('danger')
+                                ->requiresConfirmation('Apakah Anda yakin ingin menghapus file ini?')
+                                ->visible(function (?Transaction $record): bool {
+                                    return $record && !empty($record->transaction_proof_link);
+                                })
+                                ->action(function (Action $action, Transaction $record) {
+                                    $fileName = Transaction::where('id', $record->id)->first()->transaction_proof_link;
+                                    if ($fileName) {
+                                        Storage::disk('google')->delete($fileName);
+
+                                        Transaction::where('id', $record->id)->update([
+                                            'transaction_proof_link' => null,
+                                        ]);
+                                    }
+
+                                    $action->getComponent()->state(null);
+                                    $action->getComponent()->getLivewire()->js('window.location.reload()');
+                                }),
+                        ])
                         ->getUploadedFileUsing(fn () => null)
                         ->imageEditor()
                         ->imageEditorAspectRatios([
