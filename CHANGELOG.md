@@ -1,3 +1,10 @@
+## [1.23.1](https://github.com/kristiansnts/LevelUPKota-Administration-System/compare/v1.23.0...v1.23.1) (2025-04-01)
+
+
+### Bug Fixes
+
+* **transaction:** update visibility condition for transaction proof link in form schema ([5b7a27b](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/5b7a27b9ddd358d0de7acdad8f07b4da2f71f77c))
+
 # [1.23.0](https://github.com/kristiansnts/LevelUPKota-Administration-System/compare/v1.22.0...v1.23.0) (2025-04-01)
 
 
