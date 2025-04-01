@@ -8,10 +8,12 @@ use App\Filament\Resources\Finance\TransactionResource\Shared\UseCases\CreateOpt
 use Filament\Forms;
 use Filament\Forms\Form;
 use App\Helpers\StringHelper;
-use App\Filament\Shared\Component\GoogleDriveFileUpload;
 use Illuminate\Support\HtmlString;
 use Filament\Forms\Components\Placeholder;
+use Filament\Forms\Components\Actions\Action;
 use App\Filament\Resources\Finance\TransactionResource\Pages\EditTransaction;
+use Illuminate\Support\Facades\Storage;
+use App\Models\Transaction;
 
 class TransactionForm extends Form
 {
@@ -100,7 +102,7 @@ class TransactionForm extends Form
                                 '" width="250" height="250" allow="autoplay"></iframe>'
                             );
                         })
-                        ->visible(fn ($livewire): bool => $livewire instanceof EditTransaction),
+                        ->visible(fn ($livewire): bool => $livewire instanceof EditTransaction && !empty($record->transaction_proof_link)),
                     Forms\Components\FileUpload::make('transaction_proof_link')
                         ->label('Upload Bukti Transaksi')
                         ->disk('google')
