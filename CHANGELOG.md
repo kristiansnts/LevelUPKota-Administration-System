@@ -1,3 +1,31 @@
+# [1.23.0](https://github.com/kristiansnts/LevelUPKota-Administration-System/compare/v1.22.0...v1.23.0) (2025-04-01)
+
+
+### Features
+
+* **transaction:** add file deletion action to transaction form with confirmation and state management ([43fd7fb](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/43fd7fbe61bf88d0a77bdb1b05269f7057869cb6))
+
+# [1.22.0](https://github.com/kristiansnts/LevelUPKota-Administration-System/compare/v1.21.0...v1.22.0) (2025-04-01)
+
+
+### Features
+
+* **docker:** set up Docker environment with PostgreSQL and MySQL support, including configuration for Indonesia territory database and Nginx server ([b070156](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/b070156ccf725e223e795bf6c21003458908f5e9))
+
+# [1.21.0](https://github.com/kristiansnts/LevelUPKota-Administration-System/compare/v1.20.1...v1.21.0) (2025-03-31)
+
+
+### Features
+
+* **deploy:** Update deploy.yml ([d712c46](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/d712c46be09b5bbfad8de5c20aa3323bf31d8e83))
+
+## [1.20.1](https://github.com/kristiansnts/LevelUPKota-Administration-System/compare/v1.20.0...v1.20.1) (2025-03-31)
+
+
+### Bug Fixes
+
+* **mail:** improve visibility check for file deletion action in mail resource ([fa014a2](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/fa014a2833ba6252faa808f08d8eb8cfdde6092d))
+
 # [1.20.0](https://github.com/kristiansnts/LevelUPKota-Administration-System/compare/v1.19.0...v1.20.0) (2025-03-31)
 
 
