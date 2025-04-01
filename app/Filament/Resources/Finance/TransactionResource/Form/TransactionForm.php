@@ -102,7 +102,7 @@ class TransactionForm extends Form
                                 '" width="250" height="250" allow="autoplay"></iframe>'
                             );
                         })
-                        ->visible(fn ($livewire): bool => $livewire instanceof EditTransaction && !empty($record->transaction_proof_link)),
+                        ->visible(fn ($livewire): bool => $livewire instanceof EditTransaction && !empty($livewire->record->transaction_proof_link)),
                     Forms\Components\FileUpload::make('transaction_proof_link')
                         ->label('Upload Bukti Transaksi')
                         ->disk('google')
