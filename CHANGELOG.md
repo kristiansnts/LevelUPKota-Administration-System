@@ -1,3 +1,10 @@
+# [1.23.0](https://github.com/kristiansnts/LevelUPKota-Administration-System/compare/v1.22.0...v1.23.0) (2025-04-01)
+
+
+### Features
+
+* **transaction:** add file deletion action to transaction form with confirmation and state management ([43fd7fb](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/43fd7fbe61bf88d0a77bdb1b05269f7057869cb6))
+
 # [1.22.0](https://github.com/kristiansnts/LevelUPKota-Administration-System/compare/v1.21.0...v1.22.0) (2025-04-01)
 
 
