@@ -2,12 +2,10 @@
 
 namespace App\Filament\Resources\Mail\MailsOutResource\Pages;
 
-use App\Enums\MailStatusEnum;
 use App\Filament\Resources\Mail\MailsOutResource;
-use App\Filament\Shared\Services\ModelQueryService;
-use App\Models\MailUser;
+use App\Filament\Resources\Mail\MailsResource\Shared\Services\CreatePivotMailService;
+use App\Filament\Resources\Mail\MailsResource\Shared\Services\UpdateFileIdGoogleService;
 use Filament\Resources\Pages\CreateRecord;
-use Illuminate\Support\Facades\Storage;
 
 class CreateMailsOut extends CreateRecord
 {
@@ -36,17 +34,8 @@ class CreateMailsOut extends CreateRecord
             return;
         }
 
-        $user = ModelQueryService::getUserModel();
+        (new CreatePivotMailService())->createMailUserPivot($this->record);
 
-        MailUser::create([
-            'mail_id' => $this->record->id,
-            'city_id' => $user->city_id,
-            'district_id' => $user->district_id ?? null,
-        ]);
-
-        $adapter = Storage::disk('google')->getAdapter();
-        $fileId = $adapter->getMetadata($this->record->file_name);
-        $this->record->file_id = $fileId['extraMetadata']['id'];
-        $this->record->save();
+        (new UpdateFileIdGoogleService())->updateFileId($this->record);
     }
 }

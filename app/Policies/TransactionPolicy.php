@@ -3,10 +3,10 @@
 namespace App\Policies;
 
 use App\Models\User;
-use App\Models\TransactionPeriod;
+use App\Models\Transaction;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class TransactionPeriodPolicy
+class TransactionPolicy
 {
     use HandlesAuthorization;
 
@@ -15,15 +15,15 @@ class TransactionPeriodPolicy
      */
     public function viewAny(User $user): bool
     {
-        return $user->can('view_any_finance::transaction::period');
+        return $user->can('view_any_finance::transaction');
     }
 
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, TransactionPeriod $transactionPeriod): bool
+    public function view(User $user, Transaction $transaction): bool
     {
-        return $user->can('view_finance::transaction::period');
+        return $user->can('view_finance::transaction');
     }
 
     /**
@@ -31,23 +31,23 @@ class TransactionPeriodPolicy
      */
     public function create(User $user): bool
     {
-        return $user->can('create_finance::transaction::period');
+        return $user->can('create_finance::transaction');
     }
 
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, TransactionPeriod $transactionPeriod): bool
+    public function update(User $user, Transaction $transaction): bool
     {
-        return $user->can('update_finance::transaction::period');
+        return $user->can('update_finance::transaction');
     }
 
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, TransactionPeriod $transactionPeriod): bool
+    public function delete(User $user, Transaction $transaction): bool
     {
-        return $user->can('delete_finance::transaction::period');
+        return $user->can('delete_finance::transaction');
     }
 
     /**
@@ -55,15 +55,15 @@ class TransactionPeriodPolicy
      */
     public function deleteAny(User $user): bool
     {
-        return $user->can('delete_any_finance::transaction::period');
+        return $user->can('delete_any_finance::transaction');
     }
 
     /**
      * Determine whether the user can permanently delete.
      */
-    public function forceDelete(User $user, TransactionPeriod $transactionPeriod): bool
+    public function forceDelete(User $user, Transaction $transaction): bool
     {
-        return $user->can('force_delete_finance::transaction::period');
+        return $user->can('force_delete_finance::transaction');
     }
 
     /**
@@ -71,15 +71,15 @@ class TransactionPeriodPolicy
      */
     public function forceDeleteAny(User $user): bool
     {
-        return $user->can('force_delete_any_finance::transaction::period');
+        return $user->can('force_delete_any_finance::transaction');
     }
 
     /**
      * Determine whether the user can restore.
      */
-    public function restore(User $user, TransactionPeriod $transactionPeriod): bool
+    public function restore(User $user, Transaction $transaction): bool
     {
-        return $user->can('restore_finance::transaction::period');
+        return $user->can('restore_finance::transaction');
     }
 
     /**
@@ -87,15 +87,15 @@ class TransactionPeriodPolicy
      */
     public function restoreAny(User $user): bool
     {
-        return $user->can('restore_any_finance::transaction::period');
+        return $user->can('restore_any_finance::transaction');
     }
 
     /**
      * Determine whether the user can replicate.
      */
-    public function replicate(User $user, TransactionPeriod $transactionPeriod): bool
+    public function replicate(User $user, Transaction $transaction): bool
     {
-        return $user->can('replicate_finance::transaction::period');
+        return $user->can('replicate_finance::transaction');
     }
 
     /**
@@ -103,6 +103,6 @@ class TransactionPeriodPolicy
      */
     public function reorder(User $user): bool
     {
-        return $user->can('reorder_finance::transaction::period');
+        return $user->can('reorder_finance::transaction');
     }
 }

@@ -22,7 +22,6 @@ return new class extends Migration
             $table->unsignedBigInteger('city_id')->nullable();
             $table->unsignedBigInteger('district_id')->nullable();
             $table->string('google_id')->nullable();
-            $table->string('avatar')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

@@ -2,13 +2,11 @@
 
 namespace App\Filament\Resources\Finance\TransactionResource\Pages;
 
-use App\Enums\FinanceTypeEnum;
 use App\Filament\Resources\Finance\TransactionResource;
 use App\Models\Transaction;
 use Filament\Resources\Pages\CreateRecord;
-use Filament\Actions;
-use App\Filament\Shared\Services\ModelQueryService;
-use App\Models\TransactionUser;
+use App\Filament\Resources\Finance\TransactionResource\Shared\Services\TransactionService;
+use App\Filament\Resources\Finance\TransactionResource\Shared\Services\CreatePivotService;
 
 class CreateTransaction extends CreateRecord
 {
@@ -22,46 +20,18 @@ class CreateTransaction extends CreateRecord
 
     protected function afterCreate(): void
     {
-
-        if (! $this->record instanceof \App\Models\Transaction) {
+        if (! $this->record instanceof Transaction) {
             return;
         }
-
-        $user = ModelQueryService::getUserModel();
-
-        TransactionUser::create([
-            'transaction_id' => $this->record->id,
-            'city_id' => $user->city_id,
-            'district_id' => $user->district_id ?? null,
-        ]);
-
         /**
          * @var Transaction $transaction
          */
         $transaction = $this->record;
         $transactionId = $transaction->getKey();
 
-        $lastTransaction = Transaction::where('id', '<', $transactionId)
-            ->latest('id')
-            ->first();
+        CreatePivotService::make()->createTransactionUserPivot($transactionId);
 
-        $previousBalance = $lastTransaction ? $lastTransaction->balance : 0;
-
-        $transaction->balance = $this->calculateNewBalance($transaction, $previousBalance);
-        $transaction->save();
-    }
-
-    /**
-     * Calculate the new balance based on transaction type and amount
-     */
-    protected function calculateNewBalance(Transaction $transaction, float $previousBalance): float
-    {
-        if ($transaction->transactionCategory &&
-            $transaction->transactionCategory->transaction_type === FinanceTypeEnum::INCOME->value) {
-            return $previousBalance + $transaction->amount;
-        }
-
-        return $previousBalance - $transaction->amount;
+        (new TransactionService())->createTransaction($transaction, $transactionId);
     }
 
     public function getRedirectUrl(): string

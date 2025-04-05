@@ -13,9 +13,13 @@ class MailCategoryCreateForm
     {
         return [
             TextInput::make('name')
+                ->label('Nama')     
+                ->placeholder('Masukkan nama kategori surat, contoh: SK, SP, dll.')
                 ->required()
                 ->maxLength(255),
             TextInput::make('description')
+                ->label('Keterangan')
+                ->placeholder('Masukkan keterangan kategori surat, contoh: Surat Keputusan, Surat Pemberitahuan, dll.')
                 ->required()
                 ->maxLength(255),
         ];

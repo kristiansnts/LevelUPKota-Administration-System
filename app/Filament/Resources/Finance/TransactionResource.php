@@ -60,6 +60,9 @@ class TransactionResource extends Resource
                     ->icon('heroicon-o-eye')
                     ->color('info')
                     ->form([])
+                    ->visible(function (?Transaction $record): bool {
+                        return $record && !empty($record->transaction_proof_link);
+                    })
                     ->modalWidth(MaxWidth::Small)
                     ->modalHeading('Bukti Transaksi')
                     ->modalContent(fn ($record) => new HtmlString('

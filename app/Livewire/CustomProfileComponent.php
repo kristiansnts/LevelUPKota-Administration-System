@@ -44,7 +44,7 @@ class CustomProfileComponent extends Component implements HasForms
                 PersonalInfoForm::make(),
                 RoleForm::make()->visible(fn (): bool => RolesHelper::isGuest()),
                 AddressForm::make(),
-                SecurityForm::make()->visible(fn (): bool => RolesHelper::isGuest() && empty(ModelQueryService::getUserModel()->password)),
+                SecurityForm::make(),
             ])
             ->statePath('data');
     }

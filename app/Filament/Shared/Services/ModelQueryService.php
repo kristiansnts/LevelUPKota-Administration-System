@@ -8,6 +8,10 @@ use App\Models\MailCategory;
 use App\Models\MailCategoryUser;
 use App\Models\Province;
 use App\Models\User;
+use App\Models\TransactionCategory;
+use App\Models\TransactionCategoryUser;
+use App\Models\PaymentMethod;
+use App\Models\PaymentMethodUser;
 
 class ModelQueryService
 {
@@ -68,6 +72,38 @@ class ModelQueryService
         return MailCategory::query()
             ->whereIn('id', $mailCategoryIds)
             ->pluck('description', 'id')
+            ->toArray();
+    }
+
+    public static function getTransactionCategoryOptions(): array
+    {
+        /**
+         * @var array<int, string>
+         */
+        $transactionCategoryIds = ResourceScopeService::userScope(
+            TransactionCategoryUser::query(),
+            'transaction_category_id'
+        );
+
+        return TransactionCategory::query()
+            ->whereIn('id', $transactionCategoryIds)
+            ->pluck('name', 'id')
+            ->toArray();
+    }
+
+    public static function getPaymentMethodOptions(): array
+    {
+        /**
+         * @var array<int, string>
+         */
+        $paymentMethodIds = ResourceScopeService::userScope(
+            PaymentMethodUser::query(),
+            'payment_method_id'
+        );
+
+        return PaymentMethod::query()
+            ->whereIn('id', $paymentMethodIds)
+            ->pluck('name', 'id')
             ->toArray();
     }
 }
