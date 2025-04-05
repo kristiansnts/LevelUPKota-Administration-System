@@ -19,13 +19,13 @@ class MailsResource extends Resource
 {
     protected static ?string $model = Mail::class;
 
-    protected static ?string $slug = 'list-file-surat';
-
-    protected static ?string $modelLabel = 'List File Surat';
-
+    protected static ?string $modelLabel = 'List Surat';
+    
     protected static ?string $navigationGroup = 'Surat';
-
+    
     protected static ?string $navigationLabel = 'List File Surat';
+    
+    protected static ?string $slug = 'list-file-surat';
 
     protected static ?string $navigationIcon = 'heroicon-s-folder-arrow-down';
 

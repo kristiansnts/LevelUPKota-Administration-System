@@ -122,7 +122,7 @@ class MailsOutResource extends Resource
                     ->label('Lihat Surat')
                     ->icon('heroicon-o-eye')
                     ->color('info')
-                    ->visible(fn (Mail $record): bool => $record->file_name)
+                    ->visible(fn (Mail $record): bool => !empty($record->file_name))
                     ->url(function (Mail $record): string {
                         if ($record->file_name) {
                             return StringHelper::getMailLink($record->file_name);
