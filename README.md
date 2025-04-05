@@ -10,7 +10,7 @@ LevelUpKota Administration System is a web application that allows administrator
 - Laravel 11.x
 - Filament 3.x
 - SQLite (Testing)
-- MySQL/PostgreSQL (Production)
+- MySQL/PostgreSQL (Development)
 
 ## Features
 
@@ -20,6 +20,8 @@ LevelUpKota Administration System is a web application that allows administrator
 - Database Management Tools
 - Secure Authentication
 - Customizable Admin Panels
+- Google Drive Integration
+- Google Socialite Authentication
 
 ## Prerequisites
 
@@ -33,7 +35,7 @@ LevelUpKota Administration System is a web application that allows administrator
 1. Clone the repository:
 ```sh
 git clone <repository-url>
-cd levelupkota-admin
+cd LevelUPKota-Administration-System
 ```
 
 2. Install PHP dependencies:
@@ -58,7 +60,7 @@ DB_HOST=127.0.0.1
 DB_PORT=3306
 DB_DATABASE=levelupkota
 DB_USERNAME=root
-DB_PASSWORD=
+DB_PASSWORD=password
 ```
 
 6. Run migrations and seed the database:
@@ -66,16 +68,13 @@ DB_PASSWORD=
 php artisan migrate:fresh --seed
 ```
 
-7. Install Filament Shield:
-```sh
-php artisan shield:install
-```
 
 ## Filament Shield
 
 Filament Shield is a powerful package for managing role-based access control within Filament. It allows fine-grained permission management through an intuitive UI and provides Artisan commands to quickly configure and apply permissions.
 
 More information can be found at: [Filament Shield Plugin](https://filamentphp.com/plugins/bezhansalleh-shield)
+
 
 ## Creating a Filament Resource
 
@@ -87,13 +86,24 @@ php artisan make:filament-resource ResourceName --panel=admin
 ```
 This will generate the necessary files under `app/Filament/Admin/Resources/ResourceNameResource.php`.
 
+
 ## Default Admin Credentials
 
 After seeding the database, you can log in with:
-- **Email**: admin.levelupkota@gmail.com
-- **Password**: password
+- **Email**: akundemo@gmail.com
+- **Password**: demo
 
 ## Development
+
+We use GoogleDrive Integration so you must add 
+- **GOOGLE_DRIVE_CLIENT_ID**=your-drive-client-id
+- **GOOGLE_DRIVE_CLIENT_SECRET**=your-drive-client-secret
+- **GOOGLE_DRIVE_REFRESH_TOKEN**=your-drive-refresh-token
+- **GOOGLE_DRIVE_SHARED_FOLDER_ID**=your-drive-shared-folder
+- **GOOGLE_DRIVE_FOLDER**=your-drive-folder
+
+you can get them by following :
+[Flysystem Google Drive Ext from masbug](https://github.com/masbug/flysystem-google-drive-ext)
 
 ### Running the Application
 
@@ -132,17 +142,16 @@ git commit -m "feat: add new feature"
 Follow the **Conventional Commits** specification to ensure consistent commit messages:
 
 - `feat:` A new feature
-- `fix:` A bug fix
-- `docs:` Documentation changes
-- `style:` Formatting, missing semicolons, etc. (no logic changes)
-- `refactor:` Code changes that neither fix a bug nor add a feature
-- `perf:` Performance improvements
-- `test:` Adding or updating tests
+- `fix:` Fixing something
 - `chore:` Maintenance or tooling changes
 
 ## Security
 
 If you discover any security vulnerabilities, please send an email to [epafroditus.kristian@gmail.com](mailto:epafroditus.kristian@gmail.com).
+
+## Contact
+
+If you want to join work or need to build project, please send an email to [epafroditus.kristian@gmail.com](mailto:epafroditus.kristian@gmail.com) or you can visit my personal website [KristianDev](kristiansnts.dev).
 
 ## License
 
