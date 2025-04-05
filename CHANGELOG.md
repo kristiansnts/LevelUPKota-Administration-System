@@ -1,3 +1,15 @@
+# [1.25.0](https://github.com/kristiansnts/LevelUPKota-Administration-System/compare/v1.24.2...v1.25.0) (2025-04-05)
+
+
+### Bug Fixes
+
+* **resource:** update visibility condition for mail file links to check for non-empty file names ([2d1f745](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/2d1f745c3016bdb0ec3071401707740450a03959))
+
+
+### Features
+
+* **resource:** implement user-specific query scopes for payment methods and transaction categories ([b54cbf6](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/b54cbf64cf333b101fe3ccf7d9a988569a006ea5))
+
 ## [1.24.2](https://github.com/kristiansnts/LevelUPKota-Administration-System/compare/v1.24.1...v1.24.2) (2025-04-05)
 
 
