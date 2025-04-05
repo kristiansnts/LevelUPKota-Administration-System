@@ -1,3 +1,10 @@
+## [1.24.2](https://github.com/kristiansnts/LevelUPKota-Administration-System/compare/v1.24.1...v1.24.2) (2025-04-05)
+
+
+### Bug Fixes
+
+* **env:** Update .env.example ([b90f313](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/b90f3139168d41aec0b4e9cd78e7e479ae1db2de))
+
 ## [1.24.1](https://github.com/kristiansnts/LevelUPKota-Administration-System/compare/v1.24.0...v1.24.1) (2025-04-05)
 
 
