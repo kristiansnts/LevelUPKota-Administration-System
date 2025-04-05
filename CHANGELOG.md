@@ -1,3 +1,10 @@
+## [1.24.1](https://github.com/kristiansnts/LevelUPKota-Administration-System/compare/v1.24.0...v1.24.1) (2025-04-05)
+
+
+### Bug Fixes
+
+* **docs:** Update README.md ([1f09e18](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/1f09e1835a1d38fb9bf97f15ba9935a514c96b5a))
+
 # [1.24.0](https://github.com/kristiansnts/LevelUPKota-Administration-System/compare/v1.23.2...v1.24.0) (2025-04-05)
 
 
