@@ -1,3 +1,11 @@
+# [1.24.0](https://github.com/kristiansnts/LevelUPKota-Administration-System/compare/v1.23.2...v1.24.0) (2025-04-05)
+
+
+### Features
+
+* **policy:** add ReportPolicy and TransactionPolicy for managing user permissions on reports and transactions ([d4b93c4](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/d4b93c46780727c4c98b911d320b9101e1b601c7))
+* **transaction:** enhance transaction management with new services and actions for file handling and user pivot creation ([f9adab3](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/f9adab3f1b0c96d1c2fa5c353abec131bb111e8d))
+
 ## [1.23.2](https://github.com/kristiansnts/LevelUPKota-Administration-System/compare/v1.23.1...v1.23.2) (2025-04-01)
 
 
