@@ -20,13 +20,14 @@ class SecurityForm
                     ->required()
                     ->validationMessages([
                         'required' => 'Kata sandi saat ini tidak boleh kosong',
-                    ])
-                    ->visible(fn (): bool => ! RolesHelper::isGuest()),
+                    ]),
                 Forms\Components\TextInput::make('password')
                     ->label('Kata Sandi')
+                    ->visible(fn (): bool => RolesHelper::isGuest())
                     ->password(),
                 Forms\Components\TextInput::make('password_confirmation')
                     ->label('Konfirmasi Kata Sandi')
+                    ->visible(fn (): bool => RolesHelper::isGuest())
                     ->password(),
             ]);
     }

@@ -2,11 +2,11 @@
 
 namespace App\Filament\Resources\Finance\TransactionResource\Pages;
 
-use App\Enums\FinanceTypeEnum;
 use App\Filament\Resources\Finance\TransactionResource;
 use App\Models\Transaction;
 use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
+use App\Filament\Resources\Finance\TransactionResource\Shared\Services\TransactionService;
 
 class EditTransaction extends EditRecord
 {
@@ -33,28 +33,7 @@ class EditTransaction extends EditRecord
         $transaction = $this->record;
         $transactionId = $transaction->getKey();
 
-        $affectedTransactions = Transaction::where('id', '>=', $transactionId)
-            ->orderBy('id')
-            ->get();
-
-        $previousTransaction = Transaction::where('id', '<', $transactionId)
-            ->latest('id')
-            ->first();
-
-        $runningBalance = $previousTransaction ? $previousTransaction->balance : 0;
-
-        foreach ($affectedTransactions as $affectedTransaction) {
-            if ($affectedTransaction->transactionCategory && $affectedTransaction->transactionCategory->transaction_type === FinanceTypeEnum::INCOME->value) {
-                $runningBalance += $affectedTransaction->amount;
-            } else {
-                $runningBalance -= $affectedTransaction->amount;
-            }
-
-            if ($affectedTransaction->balance !== $runningBalance) {
-                $affectedTransaction->balance = $runningBalance;
-                $affectedTransaction->saveQuietly();
-            }
-        }
+        (new TransactionService())->updateTransaction($transaction, $transactionId);
     }
 
     public function getRedirectUrl(): string

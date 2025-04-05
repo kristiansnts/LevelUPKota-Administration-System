@@ -10,10 +10,9 @@ use Filament\Forms\Form;
 use App\Helpers\StringHelper;
 use Illuminate\Support\HtmlString;
 use Filament\Forms\Components\Placeholder;
-use Filament\Forms\Components\Actions\Action;
 use App\Filament\Resources\Finance\TransactionResource\Pages\EditTransaction;
-use Illuminate\Support\Facades\Storage;
-use App\Models\Transaction;
+use App\Filament\Shared\Actions\DeleteGoogleFileAction;
+use App\Filament\Shared\Services\ModelQueryService;
 
 class TransactionForm extends Form
 {
@@ -57,7 +56,7 @@ class TransactionForm extends Form
                         ->schema([
                             Forms\Components\Select::make('transaction_category_id')
                                 ->label('Kategori Transaksi')
-                                ->relationship('transactionCategory', 'name')
+                                ->options(fn (): array => ModelQueryService::getTransactionCategoryOptions())
                                 ->createOptionForm(fn (): array => TransactionCategoryCreateForm::getFormSchema())
                                 ->createOptionModalHeading('Buat Kategori Transaksi')
                                 ->createOptionUsing(function (array $data): int {
@@ -81,7 +80,7 @@ class TransactionForm extends Form
                                     return $useCase->createPaymentMethod($data);
                                 })
                                 ->createOptionModalHeading('Buat Metode Pembayaran')
-                                ->relationship('paymentMethod', 'name')
+                                ->options(fn (): array => ModelQueryService::getPaymentMethodOptions())
                                 ->searchable()
                                 ->preload()
                                 ->required(),
@@ -110,27 +109,8 @@ class TransactionForm extends Form
                             return StringHelper::setTransactionDirNameByAddress();
                         })
                         ->hintActions([
-                            Action::make('delete_file')
-                                ->label('Hapus File')
-                                ->icon('heroicon-o-trash')
-                                ->color('danger')
-                                ->requiresConfirmation('Apakah Anda yakin ingin menghapus file ini?')
-                                ->visible(function (?Transaction $record): bool {
-                                    return $record && !empty($record->transaction_proof_link);
-                                })
-                                ->action(function (Action $action, Transaction $record) {
-                                    $fileName = Transaction::where('id', $record->id)->first()->transaction_proof_link;
-                                    if ($fileName) {
-                                        Storage::disk('google')->delete($fileName);
-
-                                        Transaction::where('id', $record->id)->update([
-                                            'transaction_proof_link' => null,
-                                        ]);
-                                    }
-
-                                    $action->getComponent()->state(null);
-                                    $action->getComponent()->getLivewire()->js('window.location.reload()');
-                                }),
+                            DeleteGoogleFileAction::make('delete_file')
+                                ->fileColumn('transaction_proof_link')
                         ])
                         ->getUploadedFileUsing(fn () => null)
                         ->imageEditor()

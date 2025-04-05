@@ -8,6 +8,8 @@ use App\Models\PaymentMethodUser;
 use App\Models\TransactionCategory;
 use App\Models\TransactionCategoryUser;
 use App\Models\User;
+use App\Models\Transaction;
+use App\Models\TransactionUser;
 
 class CreatePivotService
 {
@@ -69,5 +71,17 @@ class CreatePivotService
         ]);
 
         return $paymentMethod->id;
+    }
+
+    /**
+     * Create a transaction user pivot
+     */
+    public function createTransactionUserPivot(int $transactionId): void
+    {
+        TransactionUser::create([
+            'transaction_id' => $transactionId,
+            'city_id' => $this->user->city_id,
+            'district_id' => $this->user->district_id ?? null,
+        ]);
     }
 }

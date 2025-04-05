@@ -6,6 +6,7 @@ use App\Filament\Resources\Finance\TransactionResource\Shared\FormState\AmountFo
 use App\Models\Transaction;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Collection;
 
 
 class TransactionTable extends Tables\Table
@@ -49,7 +50,14 @@ class TransactionTable extends Tables\Table
             ->defaultSort('transaction_date', 'desc')
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
+                    Tables\Actions\DeleteBulkAction::make()
+                        ->using(function (Collection $records) {
+                            $records->each(function (Transaction $record) {
+                                // Delete related TransactionUser records first
+                                $record->transactionUsers()->delete();
+                                $record->delete();
+                            });
+                        }),
                 ]),
             ]);
     }

@@ -20,9 +20,7 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use App\Helpers\StringHelper;
 use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
-use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Storage;
-use Filament\Forms\Components\Actions\Action;
+use App\Filament\Shared\Actions\DeleteGoogleFileAction;
 
 class MailsOutResource extends Resource
 {
@@ -61,28 +59,9 @@ class MailsOutResource extends Resource
                                 return StringHelper::setMailOutDirNameByAddress();
                             })
                             ->hintActions([
-                                Action::make('delete_file')
-                                    ->label('Hapus File')
-                                    ->icon('heroicon-o-trash')
-                                    ->color('danger')
-                                    ->requiresConfirmation('Apakah Anda yakin ingin menghapus file ini?')
-                                    ->visible(function (?Mail $record): bool {
-                                        return $record && !empty($record->file_name);
-                                    })
-                                    ->action(function (Action $action, Mail $record) {
-                                        $fileName = Mail::where('id', $record->id)->first()->file_name;
-                                        if ($fileName) {
-                                            Storage::disk('google')->delete($fileName);
-
-                                            Mail::where('id', $record->id)->update([
-                                                'file_name' => null,
-                                                'file_id' => null,
-                                            ]);
-                                        }
-
-                                        $action->getComponent()->state(null);
-                                        $action->getComponent()->getLivewire()->js('window.location.reload()');
-                                    }),
+                                DeleteGoogleFileAction::make('delete_file')
+                                    ->fileColumn('file_name')
+                                    ->additionalColumn('file_id')
                             ])
                             ->getUploadedFileNameForStorageUsing(
                                 function (TemporaryUploadedFile $file, Get $get): string {
@@ -124,7 +103,8 @@ class MailsOutResource extends Resource
                 Tables\Columns\TextColumn::make('receiver_name')
                     ->label('Penerima'),
                 Tables\Columns\TextColumn::make('description')
-                    ->label('Keterangan'),
+                    ->label('Keterangan')
+                    ->wrap(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->label('Tanggal Dibuat')
                     ->dateTime('d-m-Y H:i:s'),
@@ -142,7 +122,13 @@ class MailsOutResource extends Resource
                     ->label('Lihat Surat')
                     ->icon('heroicon-o-eye')
                     ->color('info')
-                    ->url(fn (Mail $record): string => StringHelper::getMailLink($record->file_name))
+                    ->visible(fn (Mail $record): bool => $record->file_name)
+                    ->url(function (Mail $record): string {
+                        if ($record->file_name) {
+                            return StringHelper::getMailLink($record->file_name);
+                        }
+                        return '';
+                    })
                     ->extraAttributes([
                         'target' => '_blank',
                     ]),

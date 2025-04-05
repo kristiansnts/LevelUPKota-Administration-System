@@ -7,7 +7,7 @@ use App\Models\Mail;
 use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
 use Filament\Actions\Action;
-use Illuminate\Support\Facades\Storage;
+use App\Filament\Resources\Mail\MailsResource\Shared\Services\UpdateFileIdGoogleService;
 
 class EditMailsIn extends EditRecord
 {
@@ -41,12 +41,8 @@ class EditMailsIn extends EditRecord
     public function mount(int | string $record): void
     {
         parent::mount($record);
-        $fileName = Mail::where('id', $this->record->id)->first()->file_name;
-        if ($fileName) {
-            $adapter = Storage::disk('google')->getAdapter();
-            $fileId = $adapter->getMetadata($fileName);
-            $this->record->file_id = $fileId['extraMetadata']['id'];
-            $this->record->saveQuietly();
+        if ($this->record->file_name) {
+            (new UpdateFileIdGoogleService())->updateFileId($this->record);
         }
     }
 
