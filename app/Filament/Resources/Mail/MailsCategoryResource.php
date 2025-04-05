@@ -20,15 +20,15 @@ class MailsCategoryResource extends Resource
 
     protected static ?string $modelLabel = 'Kategori Surat';
 
-    protected static ?string $slug = 'kategori-surat';
-
     protected static ?string $navigationGroup = 'Surat';
+
+    protected static ?string $navigationParentItem = 'List File Surat';
 
     protected static ?string $navigationLabel = 'Kategori Surat';
 
-    protected static ?string $navigationIcon = 'heroicon-o-tag';
+    protected static ?string $slug = 'kategori-surat';
 
-    protected static bool $shouldRegisterNavigation = false;
+    protected static ?string $navigationIcon = 'heroicon-o-tag';
 
     public static function form(Form $form): Form
     {

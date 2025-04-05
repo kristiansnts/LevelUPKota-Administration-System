@@ -10,6 +10,8 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use App\Filament\Shared\Services\ResourceScopeService;
+use App\Models\TransactionCategoryUser;
 
 class TransactionCategoryResource extends Resource
 {
@@ -19,11 +21,11 @@ class TransactionCategoryResource extends Resource
 
     protected static ?string $navigationGroup = 'Keuangan';
 
+    protected static ?string $navigationParentItem = 'Daftar Transaksi';
+
     protected static ?string $navigationLabel = 'Kategori Transaksi';
 
     protected static ?string $slug = 'kategori-transaksi';
-
-    protected static bool $shouldRegisterNavigation = false;
 
     protected static ?string $navigationIcon = 'heroicon-o-hashtag';
 
@@ -61,6 +63,22 @@ class TransactionCategoryResource extends Resource
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
             ]);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Builder<TransactionCategory>
+     */
+    public static function getEloquentQuery(): \Illuminate\Database\Eloquent\Builder
+    {
+        /** @var \Illuminate\Database\Eloquent\Builder<TransactionCategory> $transactionCategoryIds */
+        $transactionCategoryIds = ResourceScopeService::userScope(
+            TransactionCategoryUser::query(),
+            'transaction_category_id'
+        );
+
+        /** @var \Illuminate\Database\Eloquent\Builder<TransactionCategory> */
+        return parent::getEloquentQuery()
+            ->whereIn('id', $transactionCategoryIds);
     }
 
     public static function getRelations(): array

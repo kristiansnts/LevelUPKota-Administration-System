@@ -10,6 +10,8 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use App\Filament\Shared\Services\ResourceScopeService;
+use App\Models\PaymentMethodUser;
 
 class PaymentMethodResource extends Resource
 {
@@ -19,11 +21,11 @@ class PaymentMethodResource extends Resource
 
     protected static ?string $navigationGroup = 'Keuangan';
 
+    protected static ?string $navigationParentItem = 'Daftar Transaksi';
+
     protected static ?string $navigationLabel = 'Metode Pembayaran';
 
     protected static ?string $slug = 'metode-pembayaran';
-
-    protected static bool $shouldRegisterNavigation = false;
 
     protected static ?string $navigationIcon = 'heroicon-o-credit-card';
 
@@ -61,6 +63,22 @@ class PaymentMethodResource extends Resource
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
             ]);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Builder<PaymentMethod>
+     */
+    public static function getEloquentQuery(): \Illuminate\Database\Eloquent\Builder
+    {
+        /** @var \Illuminate\Database\Eloquent\Builder<PaymentMethod> $paymentMethodIds */
+        $paymentMethodIds = ResourceScopeService::userScope(
+            PaymentMethodUser::query(),
+            'payment_method_id'
+        );
+
+        /** @var \Illuminate\Database\Eloquent\Builder<PaymentMethod> */
+        return parent::getEloquentQuery()
+            ->whereIn('id', $paymentMethodIds);
     }
 
     public static function getRelations(): array
