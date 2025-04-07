@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Resources\Finance\TransactionResource\Shared\Services;
+namespace App\Filament\Resources\Mail\MailsResource\Shared\Services;
 
 use App\Filament\Shared\Services\ModelQueryService;
 use App\Models\Mail;
