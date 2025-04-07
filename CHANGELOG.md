@@ -1,3 +1,15 @@
+# [1.26.0](https://github.com/kristiansnts/LevelUPKota-Administration-System/compare/v1.25.0...v1.26.0) (2025-04-07)
+
+
+### Bug Fixes
+
+* **service:** update namespace for CreatePivotMailService to reflect correct resource structure ([8728575](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/872857593e1107d26781f1e3a1d0293fb10fa9f4))
+
+
+### Features
+
+* **upload:** enhance file upload components with accepted file types and improve URL handling for PDFs ([aab7602](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/aab7602b2369c117033b034487d4f205473b1092))
+
 # [1.25.0](https://github.com/kristiansnts/LevelUPKota-Administration-System/compare/v1.24.2...v1.25.0) (2025-04-05)
 
 
