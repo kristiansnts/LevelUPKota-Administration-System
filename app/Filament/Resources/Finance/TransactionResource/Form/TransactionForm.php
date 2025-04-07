@@ -105,6 +105,7 @@ class TransactionForm extends Form
                     Forms\Components\FileUpload::make('transaction_proof_link')
                         ->label('Upload Bukti Transaksi')
                         ->disk('google')
+                        ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/gif', 'application/pdf', 'image/jpg'])
                         ->directory(function () {
                             return StringHelper::setTransactionDirNameByAddress();
                         })
