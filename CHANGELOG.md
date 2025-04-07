@@ -1,3 +1,10 @@
+## [1.26.1](https://github.com/kristiansnts/LevelUPKota-Administration-System/compare/v1.26.0...v1.26.1) (2025-04-07)
+
+
+### Bug Fixes
+
+* **resource:** delete report_user ([a46c5ff](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/a46c5ff0f2a7ff1b0d11e7c6a86392f612ddad3f))
+
 # [1.26.0](https://github.com/kristiansnts/LevelUPKota-Administration-System/compare/v1.25.0...v1.26.0) (2025-04-07)
 
 
