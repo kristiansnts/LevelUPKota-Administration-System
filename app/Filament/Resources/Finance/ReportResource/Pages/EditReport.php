@@ -15,7 +15,11 @@ class EditReport extends EditRecord
     protected function getHeaderActions(): array
     {
         return [
-            Actions\DeleteAction::make(),
+            Actions\DeleteAction::make()
+                ->before(function (Report $record) {
+                    // Delete related records in the report_user table first
+                    $record->users()->detach();
+                }),
             Actions\Action::make('submitReport')
                 ->label('Laporan Selesai')
                 ->action(function (Report $record) {
