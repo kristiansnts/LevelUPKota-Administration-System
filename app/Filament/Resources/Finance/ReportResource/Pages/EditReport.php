@@ -17,7 +17,6 @@ class EditReport extends EditRecord
         return [
             Actions\DeleteAction::make()
                 ->before(function (Report $record) {
-                    // Delete related records in the report_user table first
                     $record->users()->detach();
                 }),
             Actions\Action::make('submitReport')
