@@ -48,12 +48,24 @@ class StringHelper
         $storage = Storage::disk('google');
         $adapter = $storage->getAdapter();
         $originalUrl = $adapter->getUrl($path);
-        $url = str_replace(
-            'https://drive.google.com/uc?id=',
-            'https://docs.google.com/document/d/',
-            $originalUrl
-        );
-        $url = str_replace('&export=media', '', $url) . '/edit';
+        
+        $isPdf = strtolower(pathinfo($path, PATHINFO_EXTENSION)) === 'pdf';
+
+        if ($isPdf) {
+            $url = str_replace(
+                'https://drive.google.com/uc?id=',
+                'https://drive.google.com/file/d/',
+                $originalUrl
+            );
+            $url = str_replace('&export=media', '', $url) . '/preview';
+        } else {
+            $url = str_replace(
+                'https://drive.google.com/uc?id=',
+                'https://docs.google.com/document/d/',
+                $originalUrl
+            );
+            $url = str_replace('&export=media', '', $url) . '/edit';
+        }
 
         return $url;
     }

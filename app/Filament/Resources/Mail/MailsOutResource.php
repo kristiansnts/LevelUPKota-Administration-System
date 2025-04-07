@@ -55,6 +55,7 @@ class MailsOutResource extends Resource
                         Forms\Components\FileUpload::make('file_name')
                             ->label('Upload Surat')
                             ->disk('google')
+                            ->acceptedFileTypes(['application/pdf', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'])
                             ->directory(function () {
                                 return StringHelper::setMailOutDirNameByAddress();
                             })
