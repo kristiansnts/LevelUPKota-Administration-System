@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Report extends Model
 {
@@ -15,6 +16,17 @@ class Report extends Model
         'is_done',
         'transaction_id',
     ];
+
+    /**
+     * Get the users associated with this report.
+     * 
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany<\App\Models\User>
+     */
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'report_user')
+                    ->withPivot(['city_id', 'district_id']);
+    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany<\App\Models\Transaction, $this>

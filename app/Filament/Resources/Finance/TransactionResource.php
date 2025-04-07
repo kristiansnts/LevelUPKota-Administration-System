@@ -17,6 +17,7 @@ use App\Filament\Shared\Services\ResourceScopeService;
 use Filament\Support\Enums\MaxWidth;
 use Illuminate\Support\HtmlString;
 use App\Helpers\StringHelper;
+use App\Filament\Shared\Services\ModelQueryService;
 
 class TransactionResource extends Resource
 {
@@ -75,21 +76,16 @@ class TransactionResource extends Resource
             ], position: Tables\Enums\ActionsPosition::BeforeColumns)
             ->actionsColumnLabel('Aksi')
             ->filters([
-                Tables\Filters\SelectFilter::make('report_id')
-                    ->label('Laporan')
-                    ->preload()
-                    ->searchable()
-                    ->relationship('report', 'title'),
                 Tables\Filters\SelectFilter::make('transaction_category_id')
                     ->label('Kategori Transaksi')
                     ->preload()
                     ->searchable()
-                    ->relationship('transactionCategory', 'name'),
+                    ->options(ModelQueryService::getTransactionCategoryOptions()),
                 Tables\Filters\SelectFilter::make('payment_method_id')
                     ->label('Metode Pembayaran')
                     ->preload()
                     ->searchable()
-                    ->relationship('paymentMethod', 'name'),
+                    ->options(ModelQueryService::getPaymentMethodOptions()),
             ])
             ->filtersTriggerAction(
                 fn (Action $action): Action => $action
@@ -118,7 +114,8 @@ class TransactionResource extends Resource
 
         /** @var \Illuminate\Database\Eloquent\Builder<Transaction> */
         return parent::getEloquentQuery()
-            ->whereIn('id', $transactionIds);
+            ->whereIn('id', $transactionIds)
+            ->whereNull('report_id');
     }
 
     public static function getPages(): array

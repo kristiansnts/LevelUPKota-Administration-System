@@ -84,13 +84,20 @@ class ReportResource extends Resource
             ->actions([
                 Tables\Actions\EditAction::make()
                     ->label('Ubah Laporan')
-                    ->visible(fn (Report $record): bool => ReportStatus::from($record->is_done ? 'true' : 'false') === ReportStatus::DRAFT),
+                    ->visible(fn (Report $record): bool => !$record->is_done),
                 Tables\Actions\Action::make('preview')
                     ->label('Lihat Laporan')
                     ->icon('heroicon-o-eye')
                     ->color('info')
                     ->url(fn (Report $record): string => ReportResource::getUrl('preview', ['record' => $record->id])),
             ])
+            ->recordUrl(function (Report $record): ?string {
+                if ($record->is_done) {
+                    return ReportResource::getUrl('preview', ['record' => $record->id]);
+                }
+                
+                return ReportResource::getUrl('edit', ['record' => $record->id]);
+            })
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),

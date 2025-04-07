@@ -9,11 +9,17 @@ class TransactionService
 {
     public function createTransaction(Transaction $transaction, int $transactionId): void
     {
-        $lastTransaction = Transaction::whereHas('transactionUsers', function ($query) use ($transaction) {
+        $query = Transaction::whereHas('transactionUsers', function ($query) use ($transaction) {
             $query->where('city_id', $transaction->transactionUsers->first()->city_id)
                   ->where('district_id', $transaction->transactionUsers->first()->district_id);
-        })
-            ->where('id', '<', $transactionId)
+        });
+        
+        // If transaction has report_id, only consider transactions with the same report_id
+        if ($transaction->report_id) {
+            $query->where('report_id', $transaction->report_id);
+        }
+        
+        $lastTransaction = $query->where('id', '<', $transactionId)
             ->latest('id')
             ->first();
 
@@ -25,19 +31,22 @@ class TransactionService
 
     public function updateTransaction(Transaction $transaction, int $transactionId): void
     {
-        $affectedTransactions = Transaction::whereHas('transactionUsers', function ($query) use ($transaction) {
+        $query = Transaction::whereHas('transactionUsers', function ($query) use ($transaction) {
             $query->where('city_id', $transaction->transactionUsers->first()->city_id)
                   ->where('district_id', $transaction->transactionUsers->first()->district_id);
-        })
-            ->where('id', '>=', $transactionId)
+        });
+        
+        // If transaction has report_id, only consider transactions with the same report_id
+        if ($transaction->report_id) {
+            $query->where('report_id', $transaction->report_id);
+        }
+        
+        $affectedTransactions = clone $query;
+        $affectedTransactions = $affectedTransactions->where('id', '>=', $transactionId)
             ->orderBy('id')
             ->get();
 
-        $previousTransaction = Transaction::whereHas('transactionUsers', function ($query) use ($transaction) {
-            $query->where('city_id', $transaction->transactionUsers->first()->city_id)
-                  ->where('district_id', $transaction->transactionUsers->first()->district_id);
-        })
-            ->where('id', '<', $transactionId)
+        $previousTransaction = $query->where('id', '<', $transactionId)
             ->latest('id')
             ->first();
 

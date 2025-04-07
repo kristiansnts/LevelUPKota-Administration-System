@@ -17,13 +17,12 @@ class EditReport extends EditRecord
         return [
             Actions\DeleteAction::make()
                 ->before(function (Report $record) {
-                    // Delete related records in the report_user table first
                     $record->users()->detach();
                 }),
             Actions\Action::make('submitReport')
                 ->label('Laporan Selesai')
                 ->action(function (Report $record) {
-                    $record->is_done = ReportStatus::SUBMITTED;
+                    $record->is_done = ReportStatus::SUBMITTED->value;
                     $record->save();
                     
                     return redirect()->to(ReportResource::getUrl('index'));
@@ -36,7 +35,7 @@ class EditReport extends EditRecord
     {
         parent::mount($record);
 
-        if ($this->record->is_done === ReportStatus::SUBMITTED) {
+        if ($this->record->is_done === ReportStatus::SUBMITTED->value) {
             $this->redirect(ReportResource::getUrl('preview', ['record' => $record]));
         }
     }
