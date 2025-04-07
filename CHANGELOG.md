@@ -1,3 +1,12 @@
+## [1.26.2](https://github.com/kristiansnts/LevelUPKota-Administration-System/compare/v1.26.1...v1.26.2) (2025-04-07)
+
+
+### Bug Fixes
+
+* **resource:** update pivot ([8c64505](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/8c645059b2bf3915b0a007cd1ae7fdac63fd1ce1))
+* **resource:** update report and transaction resource logic for improved handling of report statuses and filtering ([b930270](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/b930270c73813a2736ab5c6a7df2792d1daa392c))
+* **service:** refine transaction queries to include report_id filtering ([30c343a](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/30c343a612525489ffc6a8b35ba47f6049034e7c))
+
 ## [1.26.1](https://github.com/kristiansnts/LevelUPKota-Administration-System/compare/v1.26.0...v1.26.1) (2025-04-07)
 
 
