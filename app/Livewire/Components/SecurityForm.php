@@ -17,7 +17,7 @@ class SecurityForm
                 Forms\Components\TextInput::make('current_password')
                     ->label('Kata Sandi Saat Ini')
                     ->password()
-                    ->required()
+                    ->visible(fn (): bool => RolesHelper::isGuest())
                     ->validationMessages([
                         'required' => 'Kata sandi saat ini tidak boleh kosong',
                     ]),
