@@ -113,9 +113,16 @@ class TransactionResource extends Resource
         );
 
         /** @var \Illuminate\Database\Eloquent\Builder<Transaction> */
-        return parent::getEloquentQuery()
-            ->whereIn('id', $transactionIds)
-            ->whereNull('report_id');
+        $query = parent::getEloquentQuery()
+            ->whereIn('id', $transactionIds);
+            
+        // Only filter out transactions with report_id on the index page
+        // Allow viewing/editing transactions with report_id when accessed directly
+        if (!request()->route('record')) {
+            $query->whereNull('report_id');
+        }
+        
+        return $query;
     }
 
     public static function getPages(): array
