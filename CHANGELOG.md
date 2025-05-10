@@ -1,3 +1,10 @@
+## [1.26.3](https://github.com/kristiansnts/LevelUPKota-Administration-System/compare/v1.26.2...v1.26.3) (2025-05-06)
+
+
+### Bug Fixes
+
+* **resource:** update transaction query logic to conditionally filter out transactions with report_id on index page ([c6650dc](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/c6650dc4e8b992686c93a2ec11b0e3fbba30f450))
+
 ## [1.26.2](https://github.com/kristiansnts/LevelUPKota-Administration-System/compare/v1.26.1...v1.26.2) (2025-04-07)
 
 
