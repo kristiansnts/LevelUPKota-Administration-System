@@ -109,7 +109,7 @@ class MailsOutResource extends Resource
                 Tables\Columns\TextColumn::make('created_at')
                     ->label('Tanggal Dibuat')
                     ->dateTime('d-m-Y H:i:s'),
-            ])
+            ])->defaultSort('created_at', 'desc')
             ->filters([
                 Tables\Filters\SelectFilter::make('status')
                     ->label('Status')
