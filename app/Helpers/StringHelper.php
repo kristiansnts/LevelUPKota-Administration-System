@@ -43,8 +43,12 @@ class StringHelper
         return $url;
     }
 
-    public static function getMailLink(string $path): string
+    public static function getMailLink(?string $path): string
     {
+        if (is_null($path)) {
+            return '';
+        }
+
         $storage = Storage::disk('google');
         $adapter = $storage->getAdapter();
         $originalUrl = $adapter->getUrl($path);
