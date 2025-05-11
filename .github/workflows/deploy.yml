@@ -15,3 +15,4 @@ jobs:
         remote-user: pusdinss
         private-ssh-key: ${{ secrets.SSH_KEY }}
         destination-path: ~/adminlup.pusdinss.my.id/adminlup
+        ssh-port: 6123
