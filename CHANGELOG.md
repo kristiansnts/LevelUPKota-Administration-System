@@ -1,3 +1,17 @@
+## [1.26.5](https://github.com/kristiansnts/LevelUPKota-Administration-System/compare/v1.26.4...v1.26.5) (2025-05-10)
+
+
+### Bug Fixes
+
+* **MailsOutResource:** set default sort order for created_at column in table ([27c85b9](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/27c85b9111933eb82edd8a53c67060603eda0aac))
+
+## [1.26.4](https://github.com/kristiansnts/LevelUPKota-Administration-System/compare/v1.26.3...v1.26.4) (2025-05-10)
+
+
+### Bug Fixes
+
+* add null condition on getMailLink ([bb3a2f4](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/bb3a2f4d85c27fa60fcd71611452338515b76dd4))
+
 ## [1.26.3](https://github.com/kristiansnts/LevelUPKota-Administration-System/compare/v1.26.2...v1.26.3) (2025-05-06)
 
 
