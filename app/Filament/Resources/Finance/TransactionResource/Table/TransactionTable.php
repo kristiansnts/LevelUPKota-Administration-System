@@ -47,7 +47,7 @@ class TransactionTable extends Tables\Table
                 \Pelmered\FilamentMoneyField\Tables\Columns\MoneyColumn::make('balance')
                     ->label('Saldo'),
             ])
-            ->defaultSort('transaction_date', 'desc')
+            ->defaultSort('created_at', 'desc')
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make()
