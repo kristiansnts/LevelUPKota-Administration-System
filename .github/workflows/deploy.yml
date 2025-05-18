@@ -1,14 +1,19 @@
-name: Deploy via git-ftp
-on: push
+on:
+  push:
+    branches:
+      - main
+name: Deploy website on push
 jobs:
-  deploy:
+  web-deploy:
     name: Deploy
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v1
-    - name: git-ftp push
-      uses: stackcci/git-ftp-deploy@1.0.0
+    - name: Get latest code
+      uses: actions/checkout@v3
+
+    - name: Push files
+      uses: SamKirkland/FTP-Deploy-Action@v4.3.4
       with:
-        url: "ftp://${{ secrets.FTP_SERVER }}"
-        user: ${{ secrets.FTP_USERNAME }}
+        server: ftp.pusdinss.my.id
+        username: adminlup@lumin.my.id
         password: ${{ secrets.FTP_PASSWORD }}
