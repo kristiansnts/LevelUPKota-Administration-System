@@ -1,3 +1,10 @@
+## [1.26.6](https://github.com/kristiansnts/LevelUPKota-Administration-System/compare/v1.26.5...v1.26.6) (2025-05-18)
+
+
+### Bug Fixes
+
+* **TransactionTable:** update default sort order to created_at for transaction table ([a3030df](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/a3030df8e597be19b75be4516d4f4ea4d0ac2676))
+
 ## [1.26.4](https://github.com/kristiansnts/LevelUPKota-Administration-System/compare/v1.26.3...v1.26.4) (2025-05-11)
 
 
