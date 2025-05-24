@@ -1,23 +1,14 @@
-name: 🐥 ssh-action-deploy
-
-on:
-  push:
-    branches: main
-  pull_request:
-    branches: main
-    
+name: ssh command
+on: push
 jobs:
-  build:
-    name: 🕳️ Ubuntu...
+  test:
     runs-on: ubuntu-latest
     steps:
-      - name: 💞 Github actions...
-        uses: actions/checkout@v3
-      - name: 🌈 Deploy with ssh...
-        uses: sebastianjnuwu/ssh-action-deploy@v4
+      - id: ssh
+        uses: invi5H/ssh-action@v1
         with:
-          IP: ${{ secrets.SSH_HOST }}
-          USER: ${{ secrets.SSH_USER }}
-          KEY: ${{ secrets.SSH_PRIVATE_KEYS }}
-          FOLDER: "/home/pusdinss/adminlup.pusdinss.my.id/adminlup"
-          RUN: "ls -a; pwd"
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+          SSH_PORT: ${{ secrets.SSH_PORT }}
+          SSH_USER: ${{ secrets.SSH_USER }}
+          SSH_KEY: ${{ secrets.SSH_PRIVATE_KEYS }}
+      - run: ssh ${{ steps.ssh.outputs.SERVER }} pwd
