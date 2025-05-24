@@ -2,9 +2,9 @@ name: 🐥 ssh-action-deploy
 
 on:
   push:
-    branches: [ "action" ]
+    branches: main
   pull_request:
-    branches: [ "action" ]
+    branches: main
     
 jobs:
   build:
