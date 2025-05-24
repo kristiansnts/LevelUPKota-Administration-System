@@ -15,8 +15,9 @@ jobs:
 
     - name: Install SSH KEY
       run: |
-        install -m 600 ${{ secrets.SSH_PRIVATE_KEY }} ~/.ssh/id_rsa
+        mkdir -p ~/.ssh
         echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/id_rsa
         ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
 
     - name: Connect and Pull
