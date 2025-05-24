@@ -1,3 +1,11 @@
+## [1.26.7](https://github.com/kristiansnts/LevelUPKota-Administration-System/compare/v1.26.6...v1.26.7) (2025-05-24)
+
+
+### Bug Fixes
+
+* **deploy:** change FTP ([b6ebbec](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/b6ebbec848d6ea94431936f2fc1479ea0b3f197e))
+* **deploy:** change to samirkland ([9f5108a](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/9f5108a7634d2b94179d659d0422127e664f2158))
+
 ## [1.26.6](https://github.com/kristiansnts/LevelUPKota-Administration-System/compare/v1.26.5...v1.26.6) (2025-05-18)
 
 
