@@ -1,3 +1,10 @@
+## [1.26.8](https://github.com/kristiansnts/LevelUPKota-Administration-System/compare/v1.26.7...v1.26.8) (2025-05-24)
+
+
+### Bug Fixes
+
+* **deploy:** fix deploy ([259d4f7](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/259d4f7b6e1f2843b67ad287be60f3a54a079197))
+
 ## [1.26.7](https://github.com/kristiansnts/LevelUPKota-Administration-System/compare/v1.26.6...v1.26.7) (2025-05-24)
 
 
