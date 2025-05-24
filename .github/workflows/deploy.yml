@@ -21,4 +21,4 @@ jobs:
         ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
 
     - name: Connect and Pull
-      run: ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "cd /home/pusdinss/adminlup.pusdinss.my.id/adminlup && git pull origin main"
+      run: ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "cd /home/pusdinss/adminlup.pusdinss.my.id/adminlup && git pull"
