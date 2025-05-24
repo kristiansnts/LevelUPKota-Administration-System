@@ -1,14 +1,24 @@
-name: Deploy via git-ftp
-on: push
+on:
+  push:
+    branches:
+      - main
+
+name: Deploy website on push
 jobs:
-  deploy:
-    name: Deploy
+  run_pull:
+    name: Run Pull
     runs-on: ubuntu-latest
+
     steps:
-    - uses: actions/checkout@v1
-    - name: git-ftp push
-      uses: stackcci/git-ftp-deploy@1.0.0
-      with:
-        url: "ftp://${{ secrets.FTP_SERVER }}"
-        user: ${{ secrets.FTP_USERNAME }}
-        password: ${{ secrets.FTP_PASSWORD }}
+    - name: Get latest code
+      uses: actions/checkout@v3
+
+    - name: Install SSH key
+      run: |
+        mkdir -p ~/.ssh
+        echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/id_rsa
+        ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
+
+    - name: Connect and Pull
+      run: ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "cd /home/pusdinss/adminlup.pusdinss.my.id/adminlup && git pull origin main"
