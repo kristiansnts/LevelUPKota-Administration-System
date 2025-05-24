@@ -1,24 +1,23 @@
+name: 🐥 ssh-action-deploy
+
 on:
   push:
-    branches:
-      - main
-
-name: Deploy website on push
+    branches: [ "action" ]
+  pull_request:
+    branches: [ "action" ]
+    
 jobs:
- run_pull:
-    name: Run Pull
+  build:
+    name: 🕳️ Ubuntu...
     runs-on: ubuntu-latest
-
     steps:
-    - name: Get latest code
-      uses: actions/checkout@v3
-
-    - name: Install SSH KEY
-      run: |
-        mkdir -p ~/.ssh
-        echo "${{ secrets.SSH_PRIVATE_KEYS }}" > ~/.ssh/id_rsa
-        chmod 600 ~/.ssh/id_rsa
-        ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
-
-    - name: Connect and Pull
-      run: ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "cd /home/pusdinss/adminlup.pusdinss.my.id/adminlup && git pull"
+      - name: 💞 Github actions...
+        uses: actions/checkout@v3
+      - name: 🌈 Deploy with ssh...
+        uses: sebastianjnuwu/ssh-action-deploy@v4
+        with:
+          IP: ${{ secrets.SSH_HOST }}
+          USER: ${{ secrets.SSH_USER }}
+          KEY: ${{ secrets.SSH_PRIVATE_KEYS }}
+          FOLDER: "/home/pusdinss/adminlup.pusdinss.my.id/adminlup"
+          RUN: "ls -a; pwd"
