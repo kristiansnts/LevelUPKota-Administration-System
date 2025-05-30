@@ -1,3 +1,10 @@
+# [1.27.0](https://github.com/kristiansnts/LevelUPKota-Administration-System/compare/v1.26.10...v1.27.0) (2025-05-30)
+
+
+### Features
+
+* **TransactionCategory:** prevent deletion of categories with existing transactions ([e7befd7](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/e7befd73b800adadd7059438d4f157271e1bf54c))
+
 ## [1.26.10](https://github.com/kristiansnts/LevelUPKota-Administration-System/compare/v1.26.9...v1.26.10) (2025-05-30)
 
 
