@@ -11,6 +11,7 @@ use App\Livewire\Components\PersonalInfoForm;
 use App\Livewire\Components\RoleForm;
 use App\Livewire\Components\SecurityForm;
 use App\Livewire\Hooks\UserUpdate;
+use App\Models\User;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Forms\Form;
@@ -42,7 +43,7 @@ class CustomProfileComponent extends Component implements HasForms
         return $form
             ->schema([
                 PersonalInfoForm::make(),
-                RoleForm::make()->visible(fn (): bool => RolesHelper::isGuest()),
+                RoleForm::make()->hidden(fn (): bool => auth()->user()->setRole),
                 AddressForm::make(),
                 SecurityForm::make()->visible(fn (): bool => RolesHelper::isGuest()),
             ])

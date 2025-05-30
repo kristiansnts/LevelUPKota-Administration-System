@@ -7,6 +7,8 @@ use Spatie\Permission\Models\Role;
 
 class UserUpdate
 {
+
+
     /**
      * @param  array<string, mixed>  $data
      */
@@ -61,5 +63,7 @@ class UserUpdate
         $user = ModelQueryService::getUserModel();
 
         $user->syncRoles([$role->id]);
+        $user->setRole = true;
+        $user->save();
     }
 }

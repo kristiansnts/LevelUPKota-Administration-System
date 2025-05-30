@@ -46,6 +46,6 @@ class UserSeeder extends Seeder
             'city_id' => 1000,
         ]);
 
-        $demoUser->assignRole('demo');
+        $demoUser->assignRole('guest');
     }
 }

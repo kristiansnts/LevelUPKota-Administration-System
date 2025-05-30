@@ -35,4 +35,14 @@ class RolesHelper
 
         return $user->hasRole('guest');
     }
+
+    public static function isSetRole(): bool
+    {
+        /**
+         * @var \App\Models\User
+         */
+        $user = ModelQueryService::getUserModel();
+
+        return $user->setRole();
+    }
 }
