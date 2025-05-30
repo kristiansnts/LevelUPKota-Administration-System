@@ -56,11 +56,35 @@ class TransactionCategoryResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+                Tables\Actions\DeleteAction::make()
+                    ->before(function (TransactionCategory $record) {
+                        if ($record->transactions()->exists()) {
+                            \Filament\Notifications\Notification::make()
+                                ->title('Tidak dapat menghapus kategori')
+                                ->body('Kategori transaksi ini masih digunakan oleh beberapa transaksi. Hapus atau ubah kategori transaksi tersebut terlebih dahulu.')
+                                ->danger()
+                                ->send();
+                            
+                            return false;
+                        }
+                    }),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
+                    Tables\Actions\DeleteBulkAction::make()
+                        ->before(function ($records) {
+                            foreach ($records as $record) {
+                                if ($record->transactions()->exists()) {
+                                    \Filament\Notifications\Notification::make()
+                                        ->title('Tidak dapat menghapus kategori')
+                                        ->body('Satu atau lebih kategori transaksi masih digunakan oleh transaksi. Hapus atau ubah kategori transaksi tersebut terlebih dahulu.')
+                                        ->danger()
+                                        ->send();
+                                    
+                                    return false;
+                                }
+                            }
+                        }),
                 ]),
             ]);
     }
