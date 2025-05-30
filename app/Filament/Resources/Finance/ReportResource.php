@@ -57,11 +57,11 @@ class ReportResource extends Resource
                     ->label('Status')
                     ->getStateUsing(function (Report $record): string {
                         return ReportStatus::from(
-                            $record->is_done ? 'true' : 'false'
+                            $record->is_done ? 1 : 0
                         )->getLabel();
                     })
                     ->badge()
-                    ->color(fn (Report $record): string => match (ReportStatus::from($record->is_done ? 'true' : 'false')) {
+                    ->color(fn (Report $record): string => match (ReportStatus::from($record->is_done ? 1 : 0)) {
                         ReportStatus::DRAFT => 'warning',
                         ReportStatus::SUBMITTED => 'success',
                         default => 'gray',

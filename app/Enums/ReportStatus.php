@@ -4,10 +4,10 @@ namespace App\Enums;
 
 use Filament\Support\Contracts\HasLabel;
 
-enum ReportStatus: string implements HasLabel
+enum ReportStatus: int implements HasLabel
 {
-    case DRAFT = 'false';
-    case SUBMITTED = 'true';
+    case DRAFT = 0;
+    case SUBMITTED = 1;
 
     public function getLabel(): string
     {
