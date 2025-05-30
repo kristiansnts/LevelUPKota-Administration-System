@@ -1,3 +1,10 @@
+## [1.27.1](https://github.com/kristiansnts/LevelUPKota-Administration-System/compare/v1.27.0...v1.27.1) (2025-05-30)
+
+
+### Bug Fixes
+
+* **mail:** enhance status handling and filtering in mail tables ([de0b9b0](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/de0b9b0f9bc1a1eb2cd01213625f921c66457f5d))
+
 # [1.27.0](https://github.com/kristiansnts/LevelUPKota-Administration-System/compare/v1.26.10...v1.27.0) (2025-05-30)
 
 
