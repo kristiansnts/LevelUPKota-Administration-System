@@ -41,10 +41,10 @@ class MailsResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('file_name')
+                Tables\Columns\TextColumn::make('status')
                     ->label('Status')
                     ->badge()
-                    ->formatStateUsing(function (Mail $record): string {
+                    ->getStateUsing(function (Mail $record): string {
                         $state = empty($record->file_name) ? MailStatusEnum::DRAFT->value : MailStatusEnum::UPLOADED->value;
                         return MailStatusEnum::from($state)->getLabel();
                     })
@@ -69,10 +69,28 @@ class MailsResource extends Resource
                     ->dateTime('d M Y')
                     ->label('Tanggal Dibuat'),
             ])
+            ->defaultSort('created_at', 'desc')
             ->filters([
-                Tables\Filters\SelectFilter::make('file_name')
+                Tables\Filters\SelectFilter::make('status')
                     ->label('Status')
-                    ->options(MailStatusEnum::class),
+                    ->options(MailStatusEnum::class)
+                    ->query(function (Builder $query, array $data): Builder {
+                        if (!isset($data['value']) || $data['value'] === '') {
+                            return $query;
+                        }
+                        
+                        if ($data['value'] === MailStatusEnum::DRAFT->value) {
+                            return $query->where(function ($q) {
+                                $q->whereNull('file_name')->orWhere('file_name', '');
+                            });
+                        }
+                        
+                        if ($data['value'] === MailStatusEnum::UPLOADED->value) {
+                            return $query->whereNotNull('file_name')->where('file_name', '!=', '');
+                        }
+                        
+                        return $query;
+                    }),
             ])
             ->filtersTriggerAction(
                 fn (Action $action): Action => $action
