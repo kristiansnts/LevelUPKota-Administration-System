@@ -13,4 +13,12 @@ class TransactionCategory extends Model
         'description',
         'transaction_type',
     ];
+
+    /**
+     * Get the transactions that belong to this category.
+     */
+    public function transactions()
+    {
+        return $this->hasMany(Transaction::class, 'transaction_category_id');
+    }
 }
