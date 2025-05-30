@@ -1,3 +1,10 @@
+## [1.26.10](https://github.com/kristiansnts/LevelUPKota-Administration-System/compare/v1.26.9...v1.26.10) (2025-05-30)
+
+
+### Bug Fixes
+
+* **ReportStatus:** change enum values from strings to integers ([d690069](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/d690069223121d24e7e29e47cdbe14d75160356a))
+
 ## [1.26.9](https://github.com/kristiansnts/LevelUPKota-Administration-System/compare/v1.26.8...v1.26.9) (2025-05-30)
 
 
