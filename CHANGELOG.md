@@ -1,3 +1,10 @@
+## [1.26.9](https://github.com/kristiansnts/LevelUPKota-Administration-System/compare/v1.26.8...v1.26.9) (2025-05-30)
+
+
+### Bug Fixes
+
+* **role:** Add setRole functionality to User model and update related components ([c21956c](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/c21956c3cb1e0c9372eba8a4e387c998afb70499))
+
 ## [1.26.8](https://github.com/kristiansnts/LevelUPKota-Administration-System/compare/v1.26.7...v1.26.8) (2025-05-24)
 
 
