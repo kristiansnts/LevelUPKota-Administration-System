@@ -1,3 +1,11 @@
+## [1.28.2](https://github.com/kristiansnts/LevelUPKota-Administration-System/compare/v1.28.1...v1.28.2) (2025-06-05)
+
+
+### Bug Fixes
+
+* **QRDocumentController:** adjust logo resizing for QR code generation ([1e26263](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/1e262639f6fef31410cb4e426c082c5c3b01ce27))
+* **QRGenSigResource:** enhance QR generator deletion and query handling ([124acef](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/124acef440570991e6199d3b09aa30ac45da4e8d))
+
 ## [1.28.1](https://github.com/kristiansnts/LevelUPKota-Administration-System/compare/v1.28.0...v1.28.1) (2025-06-05)
 
 
