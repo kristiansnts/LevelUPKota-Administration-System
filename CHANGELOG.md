@@ -1,3 +1,11 @@
+# [1.28.0](https://github.com/kristiansnts/LevelUPKota-Administration-System/compare/v1.27.1...v1.28.0) (2025-06-05)
+
+
+### Features
+
+* **QRDocument:** enhance QR code functionality and public URL handling ([9d49c6a](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/9d49c6ac4b87b3be2fda21f275607dc4f02d3d0d))
+* **QRGenerator:** add QR generation and signing functionality ([596d2e8](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/596d2e8ae2f7fcf9095fd9055a9176e75ffbe4ae))
+
 ## [1.27.1](https://github.com/kristiansnts/LevelUPKota-Administration-System/compare/v1.27.0...v1.27.1) (2025-05-30)
 
 
