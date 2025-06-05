@@ -68,23 +68,16 @@ class QRDocumentController extends Controller
 
     private function getPublicUrl($qrGeneratorId)
     {
-        // Check if we're in production or have a custom domain
-        if (config('app.env') === 'production' || !empty(config('app.url'))) {
-            return route('qr.document.show', ['qrGeneratorId' => $qrGeneratorId]);
+        // Use the configured app URL
+        $baseUrl = config('app.url');
+        
+        // If app URL is set and not localhost, use it
+        if (!empty($baseUrl) && !str_contains($baseUrl, 'localhost') && !str_contains($baseUrl, '127.0.0.1')) {
+            return $baseUrl . '/qr-document/' . $qrGeneratorId;
         }
         
-        // For development, you need to replace this with your actual domain or ngrok URL
-        // Option 1: Use your actual domain
-        // return 'https://lumin.my.id/qr-document/' . $qrGeneratorId;
-        
-        // Option 2: Use ngrok for testing (replace with your ngrok URL)
-        // return 'https://0177-110-138-198-201.ngrok-free.app/qr-document/' . $qrGeneratorId;
-        
-        // Option 3: Use your local IP address (replace with your actual IP)
-        // return 'http://192.168.1.3:8000/qr-document/' . $qrGeneratorId;
-        
-        // Default fallback
-        // return route('qr.document.show', ['qrGeneratorId' => $qrGeneratorId]);
+        // Fallback to route helper
+        return route('qr.document.show', ['qrGeneratorId' => $qrGeneratorId]);
     }
 
     public function downloadQrCode($qrGeneratorId)
@@ -113,7 +106,7 @@ class QRDocumentController extends Controller
             margin: 10,
             roundBlockSizeMode: RoundBlockSizeMode::Margin,
             logoPath: $logoPath,
-            logoResizeToWidth: 200,
+            logoResizeToWidth: 160,
             logoResizeToHeight: 100,
             logoPunchoutBackground: true
         );
@@ -152,7 +145,7 @@ class QRDocumentController extends Controller
             margin: 10,
             roundBlockSizeMode: RoundBlockSizeMode::Margin,
             logoPath: $logoPath,
-            logoResizeToWidth: 200,
+            logoResizeToWidth: 160,
             logoResizeToHeight: 100,
             logoPunchoutBackground: true
         );
@@ -171,12 +164,5 @@ class QRDocumentController extends Controller
         return view('public.qr-preview', [
             'qrGeneratorId' => $qrGeneratorId
         ]);
-    }
-
-    // Add this method for debugging
-    public function debugUrl($qrGeneratorId)
-    {
-        $url = $this->getPublicUrl($qrGeneratorId);
-        return response()->json(['url' => $url]);
     }
 } 

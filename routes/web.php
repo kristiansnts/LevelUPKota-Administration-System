@@ -27,7 +27,3 @@ Route::get('/qr-code/{qrGeneratorId}/generate', [QRDocumentController::class, 'g
 
 Route::get('/qr-code/{qrGeneratorId}/preview', [QRDocumentController::class, 'previewQrCode'])
     ->name('qr.code.preview');
-
-// Debug route
-Route::get('/debug-url/{qrGeneratorId}', [QRDocumentController::class, 'debugUrl'])
-    ->name('qr.debug.url');
