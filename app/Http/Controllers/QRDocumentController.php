@@ -75,13 +75,13 @@ class QRDocumentController extends Controller
         
         // For development, you need to replace this with your actual domain or ngrok URL
         // Option 1: Use your actual domain
-        // return 'https://yourdomain.com/qr-document/' . $qrGeneratorId;
+        // return 'https://lumin.my.id/qr-document/' . $qrGeneratorId;
         
         // Option 2: Use ngrok for testing (replace with your ngrok URL)
         // return 'https://0177-110-138-198-201.ngrok-free.app/qr-document/' . $qrGeneratorId;
         
         // Option 3: Use your local IP address (replace with your actual IP)
-        return 'http://192.168.1.3:8000/qr-document/' . $qrGeneratorId;
+        // return 'http://192.168.1.3:8000/qr-document/' . $qrGeneratorId;
         
         // Default fallback
         // return route('qr.document.show', ['qrGeneratorId' => $qrGeneratorId]);
