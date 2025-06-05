@@ -1,3 +1,10 @@
+## [1.28.1](https://github.com/kristiansnts/LevelUPKota-Administration-System/compare/v1.28.0...v1.28.1) (2025-06-05)
+
+
+### Bug Fixes
+
+* **QRGenSigResource:** streamline public URL generation and enhance QR document view ([cd1e2f7](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/cd1e2f70bdbac64cc3d28d722fffda469a634b76))
+
 # [1.28.0](https://github.com/kristiansnts/LevelUPKota-Administration-System/compare/v1.27.1...v1.28.0) (2025-06-05)
 
 
