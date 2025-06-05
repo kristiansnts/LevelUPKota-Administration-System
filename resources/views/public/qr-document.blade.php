@@ -299,10 +299,6 @@
                     <div class="produced-label">Produced by,</div>
                     <div class="produced-info">{{ $producer_full }}</div>
                 </div>
-                <div style="margin-top: 15px; text-align: right;">
-                    <div class="info-value large">{{ $produced_date }}</div>
-                    <div class="info-value large">{{ $produced_time }}</div>
-                </div>
             </div>
 
             <!-- Table Header -->
