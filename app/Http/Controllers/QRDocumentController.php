@@ -106,7 +106,7 @@ class QRDocumentController extends Controller
             margin: 10,
             roundBlockSizeMode: RoundBlockSizeMode::Margin,
             logoPath: $logoPath,
-            logoResizeToWidth: 160,
+            logoResizeToWidth: 140,
             logoResizeToHeight: 100,
             logoPunchoutBackground: true
         );
@@ -145,7 +145,7 @@ class QRDocumentController extends Controller
             margin: 10,
             roundBlockSizeMode: RoundBlockSizeMode::Margin,
             logoPath: $logoPath,
-            logoResizeToWidth: 160,
+            logoResizeToWidth: 140,
             logoResizeToHeight: 100,
             logoPunchoutBackground: true
         );
