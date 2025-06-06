@@ -1,3 +1,10 @@
+# [1.29.0](https://github.com/kristiansnts/LevelUPKota-Administration-System/compare/v1.28.2...v1.29.0) (2025-06-06)
+
+
+### Features
+
+* **init:** remove deprecated Docker configuration and database files ([a628892](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/a6288921fbb274094c532e97b64503beaed9eb2e))
+
 ## [1.28.2](https://github.com/kristiansnts/LevelUPKota-Administration-System/compare/v1.28.1...v1.28.2) (2025-06-05)
 
 
