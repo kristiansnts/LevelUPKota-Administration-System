@@ -7,17 +7,15 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class District extends Model
 {
-    protected $connection = 'indonesia_territory';
+    protected $primaryKey = 'kecamatan_id';
 
-    protected $table = 'district';
+    protected $fillable = [
+        'kabupaten_id',
+        'kecamatan_name'
+    ];
 
-    protected $primaryKey = 'dis_id';
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<\App\Models\City, $this>
-     */
     public function city(): BelongsTo
     {
-        return $this->belongsTo(City::class);
+        return $this->belongsTo(City::class, 'kabupaten_id', 'kabupaten_id');
     }
 }
