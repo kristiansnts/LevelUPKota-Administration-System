@@ -26,7 +26,6 @@ use Filament\Support\Enums\ActionSize;
 use Filament\Tables\Actions\Action;
 use Filament\Support\Enums\MaxWidth;
 use Illuminate\Support\HtmlString;
-use Illuminate\Database\Eloquent\Builder;
 
 class QRGenSigResource extends Resource
 {
@@ -91,16 +90,7 @@ class QRGenSigResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
-            ->modifyQueryUsing(function (Builder $query) {
-                // Use a subquery to get the first record for each qr_generator_id
-                return $query->whereIn('qr_generator_qr_signer_id', function ($subQuery) {
-                    $subQuery->selectRaw('MIN(qr_generator_qr_signer_id)')
-                        ->from('qr_generator_qr_signer')
-                        ->groupBy('qr_generator_id');
-                })
-                ->orderBy('created_at', 'desc');
-            })
-            ->columns([
+        ->columns([
                 TextColumn::make('qr_generator_id')
                     ->label('QR ID')
                     ->limit(8)
@@ -122,27 +112,12 @@ class QRGenSigResource extends Resource
                         return QrGeneratorSigner::where('qr_generator_id', $record->qr_generator_id)
                             ->where('is_sign', true)->count();
                     }),
-                TextColumn::make('created_at')
-                    ->label('Dibuat')
-                    ->dateTime('d/m/Y H:i')
-                    ->sortable(),
             ])
             ->filters([
                 //
             ])
             ->actions([
-                Tables\Actions\DeleteAction::make()
-                    ->action(function ($record) {
-                        // Delete all signers for this QR Generator
-                        QrGeneratorSigner::where('qr_generator_id', $record->qr_generator_id)->delete();
-                        
-                        // Also delete the QR Generator record itself
-                        QRGenerator::where('qr_generator_id', $record->qr_generator_id)->delete();
-                    })
-                    ->requiresConfirmation()
-                    ->modalHeading('Hapus QR Generator')
-                    ->modalDescription('Apakah Anda yakin ingin menghapus QR Generator ini? Semua penanda tangan yang terkait akan ikut terhapus.')
-                    ->modalSubmitActionLabel('Ya, Hapus'),
+                Tables\Actions\DeleteAction::make(),
                 Tables\Actions\Action::make('view')
                     ->label('Lihat')
                     ->url(fn (QrGeneratorSigner $record): string => self::getPublicUrl($record->qr_generator_id))
@@ -167,6 +142,7 @@ class QRGenSigResource extends Resource
                     ->modalContent(function (QrGeneratorSigner $record) {
                         $qrUrl = route('qr.code.generate', ['qrGeneratorId' => $record->qr_generator_id]);
                         $documentUrl = self::getPublicUrl($record->qr_generator_id);
+                        
                         
                         return new HtmlString('
                             <div class="text-center space-y-4">
@@ -216,21 +192,7 @@ class QRGenSigResource extends Resource
             ->actionsColumnLabel('Aksi')
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make()
-                        ->action(function ($records) {
-                            // Get all unique qr_generator_ids from selected records
-                            $qrGeneratorIds = $records->pluck('qr_generator_id')->unique();
-                            
-                            // Delete all signers for these QR Generators
-                            QrGeneratorSigner::whereIn('qr_generator_id', $qrGeneratorIds)->delete();
-                            
-                            // Also delete the QR Generator records themselves
-                            QRGenerator::whereIn('qr_generator_id', $qrGeneratorIds)->delete();
-                        })
-                        ->requiresConfirmation()
-                        ->modalHeading('Hapus QR Generator Terpilih')
-                        ->modalDescription('Apakah Anda yakin ingin menghapus QR Generator yang dipilih? Semua penanda tangan yang terkait akan ikut terhapus.')
-                        ->modalSubmitActionLabel('Ya, Hapus Semua'),
+                    Tables\Actions\DeleteBulkAction::make(),
                 ]),
             ]);
     }
