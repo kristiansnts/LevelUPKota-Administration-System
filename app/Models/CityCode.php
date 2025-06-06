@@ -21,7 +21,7 @@ class CityCode extends Model
      */
     public function province(): BelongsTo
     {
-        return $this->belongsTo(Province::class, 'province_id');
+        return $this->belongsTo(Province::class, 'province_id', 'provinsi_id');
     }
 
     /**
@@ -29,7 +29,7 @@ class CityCode extends Model
      */
     public function city(): BelongsTo
     {
-        return $this->belongsTo(City::class, 'city_id');
+        return $this->belongsTo(City::class, 'city_id', 'kabupaten_id');
     }
 
     /**
@@ -37,6 +37,6 @@ class CityCode extends Model
      */
     public function district(): BelongsTo
     {
-        return $this->belongsTo(District::class, 'district_id');
+        return $this->belongsTo(District::class, 'district_id', 'kecamatan_id');
     }
 }

@@ -16,11 +16,8 @@ class UserSeeder extends Seeder
     {
         $user = User::factory()->create([
             'name' => 'Admin',
-            'email' => 'admin.levelup@gmail.com',
+            'email' => 'admin.ss@gmail.com',
             'password' => Hash::make('password'),
-            'phone_number' => '083125180658',
-            'province_id' => 15,
-            'city_id' => 241,
         ]);
 
         $role = Role::create([
@@ -41,9 +38,6 @@ class UserSeeder extends Seeder
             'name' => 'Akun Demo',
             'email' => 'akundemo@gmail.com',
             'password' => Hash::make('demo'),
-            'phone_number' => '1234567890',
-            'province_id' => 100,
-            'city_id' => 1000,
         ]);
 
         $demoUser->assignRole('guest');

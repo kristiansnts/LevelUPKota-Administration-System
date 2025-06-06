@@ -8,25 +8,20 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class City extends Model
 {
-    protected $connection = 'indonesia_territory';
+    protected $primaryKey = 'kabupaten_id';
 
-    protected $table = 'city';
+    protected $fillable = [
+        'provinsi_id',
+        'kabupaten_name'
+    ];
 
-    protected $primaryKey = 'city_id';
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<\App\Models\Province, $this>
-     */
     public function province(): BelongsTo
     {
-        return $this->belongsTo(Province::class);
+        return $this->belongsTo(Province::class, 'provinsi_id', 'provinsi_id');
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany<\App\Models\District, $this>
-     */
     public function districts(): HasMany
     {
-        return $this->hasMany(District::class);
+        return $this->hasMany(District::class, 'kabupaten_id', 'kabupaten_id');
     }
 }

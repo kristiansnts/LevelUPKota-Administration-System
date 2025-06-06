@@ -14,11 +14,11 @@ class CityCodeResource extends Resource
 {
     protected static ?string $model = CityCode::class;
 
-    protected static ?string $modelLabel = 'Kode Kota';
+    protected static ?string $modelLabel = 'Kode Surat';
 
     protected static ?string $navigationGroup = 'Surat';
 
-    protected static ?string $navigationLabel = 'Kode Kota';
+    protected static ?string $navigationLabel = 'Kode Surat';
 
     protected static ?string $navigationIcon = 'heroicon-o-map-pin';
 
@@ -26,23 +26,27 @@ class CityCodeResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\Section::make('City Code')
+                Forms\Components\Section::make('Kode Surat')
                     ->schema([
                         Forms\Components\Select::make('province_id')
-                            ->relationship('province', 'prov_name')
+                            ->relationship('province', 'provinsi_name')
+                            ->label('Provinsi')
                             ->searchable()
                             ->preload()
                             ->required(),
                         Forms\Components\Select::make('city_id')
-                            ->relationship('city', 'city_name')
+                            ->relationship('city', 'kabupaten_name')
+                            ->label('Kota')
                             ->searchable()
                             ->preload()
                             ->required(),
                         Forms\Components\Select::make('district_id')
-                            ->relationship('district', 'dis_name')
+                            ->relationship('district', 'kecamatan_name')
+                            ->label('Kecamatan')
                             ->searchable()
                             ->preload(),
                         Forms\Components\TextInput::make('code')
+                            ->label('Kode Surat')
                             ->required(),
                     ]),
             ]);
@@ -52,9 +56,9 @@ class CityCodeResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('province.prov_name'),
-                Tables\Columns\TextColumn::make('city.city_name'),
-                Tables\Columns\TextColumn::make('district.dis_name'),
+                Tables\Columns\TextColumn::make('province.provinsi_name'),
+                Tables\Columns\TextColumn::make('city.kabupaten_name'),
+                Tables\Columns\TextColumn::make('district.kecamatan_name'),
                 Tables\Columns\TextColumn::make('code'),
             ])
             ->filters([
