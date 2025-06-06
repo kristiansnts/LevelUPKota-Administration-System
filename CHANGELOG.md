@@ -1,3 +1,10 @@
+## [1.29.1](https://github.com/kristiansnts/LevelUPKota-Administration-System/compare/v1.29.0...v1.29.1) (2025-06-06)
+
+
+### Reverts
+
+* Revert "fix(QRGenSigResource): enhance QR generator deletion and query handling" ([47cd40a](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/47cd40a9e0b79460e58b8356bc9c1d603714d95a))
+
 # [1.29.0](https://github.com/kristiansnts/LevelUPKota-Administration-System/compare/v1.28.2...v1.29.0) (2025-06-06)
 
 
