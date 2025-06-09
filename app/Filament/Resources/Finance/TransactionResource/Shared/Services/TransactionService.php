@@ -15,8 +15,11 @@ class TransactionService
         });
         
         // If transaction has report_id, only consider transactions with the same report_id
+        // If transaction has NO report_id, only consider transactions with NO report_id
         if ($transaction->report_id) {
             $query->where('report_id', $transaction->report_id);
+        } else {
+            $query->whereNull('report_id');
         }
         
         $lastTransaction = $query->where('id', '<', $transactionId)
@@ -37,8 +40,11 @@ class TransactionService
         });
         
         // If transaction has report_id, only consider transactions with the same report_id
+        // If transaction has NO report_id, only consider transactions with NO report_id
         if ($transaction->report_id) {
             $query->where('report_id', $transaction->report_id);
+        } else {
+            $query->whereNull('report_id');
         }
         
         $affectedTransactions = clone $query;
