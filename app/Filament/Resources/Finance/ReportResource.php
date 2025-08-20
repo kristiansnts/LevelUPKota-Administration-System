@@ -100,7 +100,12 @@ class ReportResource extends Resource
             })
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
+                    Tables\Actions\DeleteBulkAction::make()
+                        ->before(function ($records) {
+                            foreach ($records as $record) {
+                                $record->transactions()->delete();
+                            }
+                        }),
                 ]),
             ]);
     }

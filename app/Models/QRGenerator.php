@@ -29,6 +29,11 @@ class QRGenerator extends Model
         return $this->belongsTo(Mail::class, 'document_id', 'id');
     }
 
+    public function qrGeneratorSigners()
+    {
+        return $this->hasMany(QrGeneratorSigner::class, 'qr_generator_id', 'qr_id');
+    }
+
     protected static function boot()
     {
         parent::boot();
@@ -37,6 +42,10 @@ class QRGenerator extends Model
             if (empty($model->qr_id)) {
                 $model->qr_id = (string) Str::ulid();
             }
+        });
+
+        static::deleting(function (QRGenerator $qrGenerator) {
+            $qrGenerator->qrGeneratorSigners()->delete();
         });
     }
 }
