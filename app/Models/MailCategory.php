@@ -12,4 +12,16 @@ class MailCategory extends Model
         'name',
         'description',
     ];
+
+    public function mails()
+    {
+        return $this->hasMany(Mail::class);
+    }
+
+    protected static function booted(): void
+    {
+        static::deleting(function (MailCategory $category) {
+            $category->mails()->delete();
+        });
+    }
 }

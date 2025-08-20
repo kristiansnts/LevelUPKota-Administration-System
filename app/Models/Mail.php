@@ -49,4 +49,17 @@ class Mail extends Model
     {
         return $this->hasMany(MailUser::class);
     }
+
+    public function qrGenerators(): HasMany
+    {
+        return $this->hasMany(QRGenerator::class, 'document_id');
+    }
+
+    protected static function booted(): void
+    {
+        static::deleting(function (Mail $mail) {
+            $mail->mailUsers()->delete();
+            $mail->qrGenerators()->delete();
+        });
+    }
 }

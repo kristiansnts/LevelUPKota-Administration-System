@@ -21,4 +21,11 @@ class TransactionCategory extends Model
     {
         return $this->hasMany(Transaction::class, 'transaction_category_id');
     }
+
+    protected static function booted(): void
+    {
+        static::deleting(function (TransactionCategory $category) {
+            $category->transactions()->delete();
+        });
+    }
 }
