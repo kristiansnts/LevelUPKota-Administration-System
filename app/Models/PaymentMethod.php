@@ -12,4 +12,16 @@ class PaymentMethod extends Model
         'name',
         'description',
     ];
+
+    public function transactions()
+    {
+        return $this->hasMany(Transaction::class);
+    }
+
+    protected static function booted(): void
+    {
+        static::deleting(function (PaymentMethod $paymentMethod) {
+            $paymentMethod->transactions()->delete();
+        });
+    }
 }

@@ -35,4 +35,11 @@ class Report extends Model
     {
         return $this->hasMany(Transaction::class);
     }
+
+    protected static function booted(): void
+    {
+        static::deleting(function (Report $report) {
+            $report->transactions()->delete();
+        });
+    }
 }
