@@ -1,3 +1,14 @@
+## [1.28.2](https://github.com/kristiansnts/LevelUPKota-Administration-System/compare/v1.28.1...v1.28.2) (2025-08-20)
+
+
+### Bug Fixes
+
+* **cascade:** fix delete constraint ([e7d8d50](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/e7d8d50f06b1e4c03cc121e1677f186bfc19b2c9))
+* **cascade:** fix delete constraint ([93e5a1f](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/93e5a1f4063e37d4a920ffeb325626adbc013191))
+* **QRDocumentController:** adjust logo resizing for QR code generation ([1e26263](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/1e262639f6fef31410cb4e426c082c5c3b01ce27))
+* **QRGenSigResource:** enhance QR generator deletion and query handling ([124acef](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/124acef440570991e6199d3b09aa30ac45da4e8d))
+* **TransactionService:** refine transaction query logic for report_id handling ([dfd14f7](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/dfd14f7b436595b9b1206972c0dea730867087f9))
+
 ## [1.28.2](https://github.com/kristiansnts/LevelUPKota-Administration-System/compare/v1.28.1...v1.28.2) (2025-06-09)
 
 
