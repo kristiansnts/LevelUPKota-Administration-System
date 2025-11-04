@@ -29,6 +29,14 @@ class Report extends Model
     }
 
     /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany<\App\Models\ReportUser, $this>
+     */
+    public function reportUsers(): HasMany
+    {
+        return $this->hasMany(ReportUser::class);
+    }
+
+    /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany<\App\Models\Transaction, $this>
      */
     public function transactions(): HasMany

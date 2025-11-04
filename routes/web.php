@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\SocialiteController;
 use App\Http\Controllers\QRDocumentController;
+use App\Http\Controllers\FinancialReportController;
 use Illuminate\Support\Facades\Route;
 
 // Remove any existing auth routes that might conflict with Filament's
@@ -27,3 +28,7 @@ Route::get('/qr-code/{qrGeneratorId}/generate', [QRDocumentController::class, 'g
 
 Route::get('/qr-code/{qrGeneratorId}/preview', [QRDocumentController::class, 'previewQrCode'])
     ->name('qr.code.preview');
+
+// Public Financial Report route
+Route::get('/laporan-keuangan', [FinancialReportController::class, 'index'])
+    ->name('laporan-keuangan');
