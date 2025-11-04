@@ -8,7 +8,26 @@ jobs:
     - name: 🚚 Get latest code
       uses: actions/checkout@v4
 
-    - name: 📂 Sync files
+    - name: 📂 Deploy via SSH
+      id: ssh-deploy
+      continue-on-error: true
+      uses: appleboy/ssh-action@v1.0.3
+      with:
+        host: 195.88.211.90
+        username: tahumeat
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        port: 22
+        script: |
+          cd /home/tahumeat/lumin.my.id
+          git pull origin main
+          composer install --no-dev --optimize-autoloader
+          php artisan migrate --force
+          php artisan config:cache
+          php artisan route:cache
+          php artisan view:cache
+
+    - name: 📂 Deploy via FTP (Fallback)
+      if: steps.ssh-deploy.outcome == 'failure'
       uses: SamKirkland/FTP-Deploy-Action@v4.0.0
       with:
         server: ${{ secrets.FTP_SERVER }}
