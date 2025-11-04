@@ -47,7 +47,10 @@ class Report extends Model
     protected static function booted(): void
     {
         static::deleting(function (Report $report) {
-            $report->transactions()->delete();
+            // Set report_id to null for all transactions instead of deleting them
+            // This is now handled by the database foreign key constraint (onDelete SET NULL)
+            // But we keep this for explicit clarity
+            $report->transactions()->update(['report_id' => null]);
         });
     }
 }
