@@ -14,6 +14,28 @@
 
 ### Features
 
+* **deploy:** enhance SSH deployment step and remove git pull command ([ed517be](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/ed517bef32ff28438ab062b192b654977a5b8679))
+* **deploy:** enhance SSH deployment step and remove git pull command ([47e2b44](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/47e2b44e322989c0e32f414eb78fa521e6b106a2))
+* **deploy:** implement SSH deployment with fallback to FTP ([3b67ed7](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/3b67ed7805a331b7efd1f747550513c24211a68a))
+* **transaction:** refactor to modal to easy create transaction ([ba84bfd](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/ba84bfd064b3a624ce353c47c2c87718676326f0))
+* **transaction:** refactor to modal to easy create transaction ([e903269](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/e9032697de1b27f16624ab27e91c0f82902774ec))
+
+# [1.29.0](https://github.com/kristiansnts/LevelUPKota-Administration-System/compare/v1.28.1...v1.29.0) (2025-11-04)
+
+
+### Bug Fixes
+
+* **bulk:** fix bulk delete ([ab7f77b](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/ab7f77b56d9626e3676a187e64c557e59906db7a))
+* **bulk:** fix bulk delete ([42e24da](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/42e24da63d102fc40edb64da8fd1244edfe212d9))
+* **cascade:** fix delete constraint ([e7d8d50](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/e7d8d50f06b1e4c03cc121e1677f186bfc19b2c9))
+* **cascade:** fix delete constraint ([93e5a1f](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/93e5a1f4063e37d4a920ffeb325626adbc013191))
+* **QRDocumentController:** adjust logo resizing for QR code generation ([1e26263](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/1e262639f6fef31410cb4e426c082c5c3b01ce27))
+* **QRGenSigResource:** enhance QR generator deletion and query handling ([124acef](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/124acef440570991e6199d3b09aa30ac45da4e8d))
+* **TransactionService:** refine transaction query logic for report_id handling ([dfd14f7](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/dfd14f7b436595b9b1206972c0dea730867087f9))
+
+
+### Features
+
 * **deploy:** implement SSH deployment with fallback to FTP ([3b67ed7](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/3b67ed7805a331b7efd1f747550513c24211a68a))
 * **transaction:** refactor to modal to easy create transaction ([ba84bfd](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/ba84bfd064b3a624ce353c47c2c87718676326f0))
 * **transaction:** refactor to modal to easy create transaction ([e903269](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/e9032697de1b27f16624ab27e91c0f82902774ec))
