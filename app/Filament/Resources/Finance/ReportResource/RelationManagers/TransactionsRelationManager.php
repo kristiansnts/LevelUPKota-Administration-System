@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\Finance\ReportResource\RelationManagers;
 
 use App\Filament\Resources\Finance\TransactionResource\Form\TransactionForm;
+use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
 use App\Filament\Resources\Finance\TransactionResource\Table\TransactionTable;
@@ -43,8 +44,7 @@ class TransactionsRelationManager extends RelationManager
                     ->mutateFormDataUsing(function (array $data): array {
                         $data['report_id'] = $this->getOwnerRecord()->id;
                         return $data;
-                    })
-                    ->url(fn (): string => TransactionResource::getUrl('create', ['report_id' => $this->getOwnerRecord()->id])),
+                    }),
             ])
             ->actions([
                 Tables\Actions\EditAction::make()
@@ -55,8 +55,7 @@ class TransactionsRelationManager extends RelationManager
                         ->mutateFormDataUsing(function (array $data): array {
                             $data['report_id'] = $this->getOwnerRecord()->id;
                             return $data;
-                        })
-                        ->url(fn (Model $record): string => TransactionResource::getUrl('edit', ['record' => $record->id])),
+                        }),
                     Tables\Actions\ViewAction::make('bukti_transaksi')
                         ->label('Bukti Transaksi')
                         ->icon('heroicon-o-eye')

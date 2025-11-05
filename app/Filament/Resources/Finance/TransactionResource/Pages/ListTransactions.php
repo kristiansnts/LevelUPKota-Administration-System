@@ -18,8 +18,7 @@ class ListTransactions extends ListRecords
         $createLabel = config('constants.resources.transaction.create');
 
         return [
-            Actions\CreateAction::make()
-                ->label($createLabel),
+
         ];
     }
 }
