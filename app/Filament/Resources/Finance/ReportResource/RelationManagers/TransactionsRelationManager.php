@@ -15,6 +15,9 @@ use App\Filament\Resources\Finance\ReportResource\Pages\PreviewReport;
 use App\Helpers\StringHelper;
 use Illuminate\Support\HtmlString;
 use Filament\Support\Enums\MaxWidth;
+use App\Filament\Resources\Finance\TransactionResource\Shared\Services\TransactionService;
+use App\Filament\Resources\Finance\TransactionResource\Shared\Services\CreatePivotService;
+use App\Models\Transaction;
 
 class TransactionsRelationManager extends RelationManager
 {
@@ -44,6 +47,11 @@ class TransactionsRelationManager extends RelationManager
                     ->mutateFormDataUsing(function (array $data): array {
                         $data['report_id'] = $this->getOwnerRecord()->id;
                         return $data;
+                    })
+                    ->after(function (Transaction $record): void {
+                        $transactionId = $record->getKey();
+                        CreatePivotService::make()->createTransactionUserPivot($transactionId);
+                        (new TransactionService())->createTransaction($record, $transactionId);
                     }),
             ])
             ->actions([
@@ -55,6 +63,10 @@ class TransactionsRelationManager extends RelationManager
                         ->mutateFormDataUsing(function (array $data): array {
                             $data['report_id'] = $this->getOwnerRecord()->id;
                             return $data;
+                        })
+                        ->after(function (Transaction $record): void {
+                            $transactionId = $record->getKey();
+                            (new TransactionService())->updateTransaction($record, $transactionId);
                         }),
                     Tables\Actions\ViewAction::make('bukti_transaksi')
                         ->label('Bukti Transaksi')
