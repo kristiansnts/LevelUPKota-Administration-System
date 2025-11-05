@@ -52,6 +52,10 @@ class TransactionResource extends Resource
     public static function table(Table $table): Table
     {
         return TransactionTable::table($table)
+            ->headerActions([
+                Tables\Actions\CreateAction::make()
+                    ->label('Catat Transaksi'),
+            ])
             ->actions([
                 Tables\Actions\EditAction::make()
                     ->icon('heroicon-o-pencil')
