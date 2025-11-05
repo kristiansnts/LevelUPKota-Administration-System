@@ -18,6 +18,8 @@ use Filament\Support\Enums\MaxWidth;
 use Illuminate\Support\HtmlString;
 use App\Helpers\StringHelper;
 use App\Filament\Shared\Services\ModelQueryService;
+use App\Filament\Resources\Finance\TransactionResource\Shared\Services\TransactionService;
+use App\Filament\Resources\Finance\TransactionResource\Shared\Services\CreatePivotService;
 
 class TransactionResource extends Resource
 {
@@ -54,12 +56,21 @@ class TransactionResource extends Resource
         return TransactionTable::table($table)
             ->headerActions([
                 Tables\Actions\CreateAction::make()
-                    ->label('Catat Transaksi'),
+                    ->label('Catat Transaksi')
+                    ->after(function (Transaction $record): void {
+                        $transactionId = $record->getKey();
+                        CreatePivotService::make()->createTransactionUserPivot($transactionId);
+                        (new TransactionService())->createTransaction($record, $transactionId);
+                    }),
             ])
             ->actions([
                 Tables\Actions\EditAction::make()
                     ->icon('heroicon-o-pencil')
-                    ->color('warning'),
+                    ->color('warning')
+                    ->after(function (Transaction $record): void {
+                        $transactionId = $record->getKey();
+                        (new TransactionService())->updateTransaction($record, $transactionId);
+                    }),
                 Tables\Actions\ViewAction::make('transaction_proof_link')
                     ->label('Bukti Transaksi')
                     ->icon('heroicon-o-eye')
