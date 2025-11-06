@@ -1,3 +1,35 @@
+# [1.29.0](https://github.com/kristiansnts/LevelUPKota-Administration-System/compare/v1.28.1...v1.29.0) (2025-11-06)
+
+
+### Bug Fixes
+
+* **bulk:** fix bulk delete ([ab7f77b](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/ab7f77b56d9626e3676a187e64c557e59906db7a))
+* **bulk:** fix bulk delete ([42e24da](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/42e24da63d102fc40edb64da8fd1244edfe212d9))
+* **cascade:** fix delete constraint ([e7d8d50](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/e7d8d50f06b1e4c03cc121e1677f186bfc19b2c9))
+* **cascade:** fix delete constraint ([93e5a1f](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/93e5a1f4063e37d4a920ffeb325626adbc013191))
+* **QRDocumentController:** adjust logo resizing for QR code generation ([1e26263](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/1e262639f6fef31410cb4e426c082c5c3b01ce27))
+* **QRGenSigResource:** enhance QR generator deletion and query handling ([124acef](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/124acef440570991e6199d3b09aa30ac45da4e8d))
+* **report:** add calculation ([2aadac1](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/2aadac1edf773c9fc0d987e61a6e86256171eee4))
+* **report:** add calculation ([cbeb1b6](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/cbeb1b6c8b8bb13e3c5dc690010083544ed60c47))
+* **report:** error on create form ([a39216f](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/a39216f90e57052111177172601911680031a1e4))
+* **report:** error on create form ([8e040c9](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/8e040c990eb1d85ee4ef21992feee120463bfe3f))
+* **TransactionService:** refine transaction query logic for report_id handling ([dfd14f7](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/dfd14f7b436595b9b1206972c0dea730867087f9))
+
+
+### Features
+
+* **database:** update foreign key constraints for transactions and report_user tables ([e79cc3f](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/e79cc3fca105af3a6091c203a79b2e3a3906e537))
+* **database:** update foreign key constraints for transactions and report_user tables ([8d6ccd3](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/8d6ccd3b3cf7a3a0fedcb5a6b5c53ec7c902b2ac))
+* **deploy:** enhance SSH deployment step and remove git pull command ([ed517be](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/ed517bef32ff28438ab062b192b654977a5b8679))
+* **deploy:** enhance SSH deployment step and remove git pull command ([47e2b44](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/47e2b44e322989c0e32f414eb78fa521e6b106a2))
+* **deploy:** implement SSH deployment with fallback to FTP ([3b67ed7](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/3b67ed7805a331b7efd1f747550513c24211a68a))
+* **lk:** new laporan keuangan ([7fcdba6](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/7fcdba6e8c8a39d40ff806a7dd5ae86ccf35beb4))
+* **lk:** new laporan keuangan ([3fe30dc](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/3fe30dcf974a6316c54585a22d65e5da72f8a2d7))
+* **recalculation:** add recalculation and delete transaction ([4fd78d3](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/4fd78d30050fab3d6500b49ebc7e5c3c66b5f1cb))
+* **recalculation:** add recalculation and delete transaction ([36c9f45](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/36c9f4567aae3231e09ba5da0bb306362c2dda07))
+* **transaction:** refactor to modal to easy create transaction ([ba84bfd](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/ba84bfd064b3a624ce353c47c2c87718676326f0))
+* **transaction:** refactor to modal to easy create transaction ([e903269](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/e9032697de1b27f16624ab27e91c0f82902774ec))
+
 # [1.29.0](https://github.com/kristiansnts/LevelUPKota-Administration-System/compare/v1.28.1...v1.29.0) (2025-11-05)
 
 
