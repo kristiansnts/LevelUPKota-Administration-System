@@ -56,7 +56,8 @@ class TransactionForm extends Form
                         ->schema([
                             Forms\Components\Select::make('transaction_category_id')
                                 ->label('Kategori Transaksi')
-                                ->options(fn (): array => ModelQueryService::getTransactionCategoryOptions())
+                                ->options(fn (): array => ModelQueryService::getTransactionCategoryOptionsWithHtml())
+                                ->allowHtml()
                                 ->createOptionForm(fn (): array => TransactionCategoryCreateForm::getFormSchema())
                                 ->createOptionModalHeading('Buat Kategori Transaksi')
                                 ->createOptionUsing(function (array $data): int {

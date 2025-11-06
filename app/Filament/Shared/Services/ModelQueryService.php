@@ -87,7 +87,33 @@ class ModelQueryService
 
         return TransactionCategory::query()
             ->whereIn('id', $transactionCategoryIds)
-            ->pluck('name', 'id')
+            ->get()
+            ->mapWithKeys(function ($category) {
+                return [$category->id => $category->full_display];
+            })
+            ->toArray();
+    }
+
+    public static function getTransactionCategoryOptionsWithHtml(): array
+    {
+        /**
+         * @var array<int, string>
+         */
+        $transactionCategoryIds = ResourceScopeService::userScope(
+            TransactionCategoryUser::query(),
+            'transaction_category_id'
+        );
+
+        return TransactionCategory::query()
+            ->whereIn('id', $transactionCategoryIds)
+            ->get()
+            ->mapWithKeys(function ($category) {
+                $html = '<strong>' . e($category->name_with_type) . '</strong>';
+                if ($category->description) {
+                    $html .= '<br><small>' . e($category->description) . '</small>';
+                }
+                return [$category->id => $html];
+            })
             ->toArray();
     }
 
