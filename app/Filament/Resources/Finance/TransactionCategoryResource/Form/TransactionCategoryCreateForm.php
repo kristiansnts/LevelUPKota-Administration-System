@@ -27,7 +27,7 @@ class TransactionCategoryCreateForm
                 ->rows(3),
             Forms\Components\Select::make('transaction_type')
                 ->label('Tipe')
-                ->options(FinanceTypeEnum::class)
+                ->options(FinanceTypeEnum::toSelectOptionsWithDescription())
                 ->required(),
         ];
     }

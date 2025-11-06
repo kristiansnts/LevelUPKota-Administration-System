@@ -18,7 +18,7 @@ class TransactionTable extends Tables\Table
                 Tables\Columns\TextColumn::make('transaction_date')
                     ->label('Tanggal Transaksi')
                     ->dateTime('l, d F Y'),
-                Tables\Columns\TextColumn::make('transactionCategory.name')
+                Tables\Columns\TextColumn::make('transactionCategory.name_with_type')
                     ->label('Kategori Transaksi'),
                 Tables\Columns\TextColumn::make('description')
                     ->label('Keterangan')
