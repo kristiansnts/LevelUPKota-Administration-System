@@ -43,7 +43,7 @@ class TransactionsRelationManager extends RelationManager
             ->headerActions([
                 Tables\Actions\CreateAction::make()
                     ->label('Catat Transaksi')
-                    ->hidden(fn (): bool => $this->getPageClass() === PreviewReport::class)
+                    ->hidden(fn(): bool => $this->getPageClass() === PreviewReport::class)
                     ->mutateFormDataUsing(function (array $data): array {
                         $data['report_id'] = $this->getOwnerRecord()->id;
                         return $data;
@@ -53,32 +53,59 @@ class TransactionsRelationManager extends RelationManager
                         CreatePivotService::make()->createTransactionUserPivot($transactionId);
                         (new TransactionService())->createTransaction($record, $transactionId);
                     }),
+                Tables\Actions\Action::make('recalculate_balances')
+                    ->label('Hitung Ulang Saldo')
+                    ->icon('heroicon-o-calculator')
+                    ->color('info')
+                    ->hidden(fn(): bool => $this->getPageClass() === PreviewReport::class)
+                    ->requiresConfirmation()
+                    ->modalHeading('Hitung Ulang Saldo')
+                    ->modalDescription('Apakah Anda yakin ingin menghitung ulang semua saldo transaksi dalam laporan ini?')
+                    ->modalSubmitActionLabel('Ya, Hitung Ulang')
+                    ->action(function (): void {
+                        $reportId = $this->getOwnerRecord()->id;
+                        (new TransactionService())->recalculateAllBalances($reportId);
+                        \Filament\Notifications\Notification::make()
+                            ->title('Saldo berhasil dihitung ulang')
+                            ->success()
+                            ->send();
+                    }),
             ])
             ->actions([
                 Tables\Actions\EditAction::make()
-                        ->label('Ubah Transaksi')
-                        ->icon('heroicon-o-pencil')
-                        ->color('warning')
-                        ->hidden(fn (): bool => $this->getPageClass() === PreviewReport::class)
-                        ->mutateFormDataUsing(function (array $data): array {
-                            $data['report_id'] = $this->getOwnerRecord()->id;
-                            return $data;
-                        })
-                        ->after(function (Transaction $record): void {
-                            $transactionId = $record->getKey();
-                            (new TransactionService())->updateTransaction($record, $transactionId);
-                        }),
-                    Tables\Actions\ViewAction::make('bukti_transaksi')
-                        ->label('Bukti Transaksi')
-                        ->icon('heroicon-o-eye')
-                        ->color('info')
-                        ->hidden(fn (): bool => $this->getPageClass() === PreviewReport::class)
-                        ->form([])
-                        ->modalWidth(MaxWidth::Small)
-                        ->modalHeading('Bukti Transaksi')
-                        ->modalContent(fn ($record) => new HtmlString('
+                    ->label('Ubah Transaksi')
+                    ->icon('heroicon-o-pencil')
+                    ->color('warning')
+                    ->hidden(fn(): bool => $this->getPageClass() === PreviewReport::class)
+                    ->mutateFormDataUsing(function (array $data): array {
+                        $data['report_id'] = $this->getOwnerRecord()->id;
+                        return $data;
+                    })
+                    ->after(function (Transaction $record): void {
+                        $transactionId = $record->getKey();
+                        (new TransactionService())->updateTransaction($record, $transactionId);
+                    }),
+                Tables\Actions\DeleteAction::make()
+                    ->label('Hapus Transaksi')
+                    ->icon('heroicon-o-trash')
+                    ->hidden(fn(): bool => $this->getPageClass() === PreviewReport::class)
+                    ->before(function (Transaction $record): void {
+                        (new TransactionService())->deleteTransaction($record);
+                    })
+                    ->after(function (Transaction $record): void {
+                        $record->transactionUsers()->delete();
+                    }),
+                Tables\Actions\ViewAction::make('bukti_transaksi')
+                    ->label('Bukti Transaksi')
+                    ->icon('heroicon-o-eye')
+                    ->color('info')
+                    ->hidden(fn(): bool => $this->getPageClass() === PreviewReport::class)
+                    ->form([])
+                    ->modalWidth(MaxWidth::Small)
+                    ->modalHeading('Bukti Transaksi')
+                    ->modalContent(fn($record) => new HtmlString('
                             <iframe 
-                                src="'.StringHelper::getTransactionProofLink($record->transaction_proof_link).'" 
+                                src="' . StringHelper::getTransactionProofLink($record->transaction_proof_link) . '" 
                                 style="width: 100%; height: 250px; border: none;"
                                 title="Bukti Transaksi"
                             ></iframe>

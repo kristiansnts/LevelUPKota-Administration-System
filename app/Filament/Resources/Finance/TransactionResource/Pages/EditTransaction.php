@@ -15,7 +15,21 @@ class EditTransaction extends EditRecord
     protected function getHeaderActions(): array
     {
         return [
-            Actions\DeleteAction::make(),
+            Actions\DeleteAction::make()
+                ->before(function (): void {
+                    /**
+                     * @var Transaction $transaction
+                     */
+                    $transaction = $this->record;
+                    (new TransactionService())->deleteTransaction($transaction);
+                })
+                ->after(function (): void {
+                    /**
+                     * @var Transaction $transaction
+                     */
+                    $transaction = $this->record;
+                    $transaction->transactionUsers()->delete();
+                }),
         ];
     }
 

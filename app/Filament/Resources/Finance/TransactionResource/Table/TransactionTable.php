@@ -53,7 +53,9 @@ class TransactionTable extends Tables\Table
                     Tables\Actions\DeleteBulkAction::make()
                         ->using(function (Collection $records) {
                             $records->each(function (Transaction $record) {
-                                // Delete related TransactionUser records first
+                                // Recalculate balances for subsequent transactions
+                                (new \App\Filament\Resources\Finance\TransactionResource\Shared\Services\TransactionService())->deleteTransaction($record);
+                                // Delete related TransactionUser records
                                 $record->transactionUsers()->delete();
                                 $record->delete();
                             });
