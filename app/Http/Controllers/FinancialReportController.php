@@ -35,6 +35,11 @@ class FinancialReportController extends Controller
             $query->where('transaction_date', '<=', $request->end_date);
         }
 
+        // Search by description
+        if ($request->filled('search')) {
+            $query->where('description', 'like', '%' . $request->search . '%');
+        }
+
         // Calculate summary statistics for all filtered transactions
         $summaryQuery = Transaction::query();
         
@@ -51,6 +56,11 @@ class FinancialReportController extends Controller
         
         if ($request->filled('end_date')) {
             $summaryQuery->where('transaction_date', '<=', $request->end_date);
+        }
+        
+        // Apply search filter to summary query
+        if ($request->filled('search')) {
+            $summaryQuery->where('description', 'like', '%' . $request->search . '%');
         }
         
         $totalIncome = (clone $summaryQuery)->where('amount', '>', 0)->sum('amount');
@@ -73,7 +83,7 @@ class FinancialReportController extends Controller
             'report'
         ]);
 
-        // Filter by report
+        // Filter by report - if no report_id is provided, show only transactions with null report_id
         if ($request->filled('report_id')) {
             $query->where('report_id', $request->report_id);
         } else {
@@ -87,6 +97,11 @@ class FinancialReportController extends Controller
 
         if ($request->filled('end_date')) {
             $query->where('transaction_date', '<=', $request->end_date);
+        }
+
+        // Search by description
+        if ($request->filled('search')) {
+            $query->where('description', 'like', '%' . $request->search . '%');
         }
 
         $allTransactions = $query->orderBy('transaction_date', 'asc')->get();
