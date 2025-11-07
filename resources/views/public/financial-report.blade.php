@@ -286,6 +286,11 @@
                             @endforeach
                         </select>
                     </div>
+                    
+                    <div class="form-group">
+                        <label for="search">Cari Deskripsi / Search Description</label>
+                        <input type="text" id="search" name="search" placeholder="Cari transaksi..." value="{{ request('search') }}">
+                    </div>
                 </div>
                 
                 <div class="filter-buttons">
@@ -302,10 +307,12 @@
             const startDate = document.getElementById('start_date').value;
             const endDate = document.getElementById('end_date').value;
             const reportId = document.getElementById('report_id').value;
+            const search = document.getElementById('search').value;
             
             if (startDate) params.append('start_date', startDate);
             if (endDate) params.append('end_date', endDate);
             if (reportId) params.append('report_id', reportId);
+            if (search) params.append('search', search);
             
             window.location.href = '{{ route("laporan-keuangan.pdf") }}?' + params.toString();
         }
