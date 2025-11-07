@@ -76,7 +76,7 @@ class RequestApprovalAction extends Action
                                         }
 
                                         $description = $record->description ?? 'surat';
-                                        $approvalUrl = url('/approval/' . $record->id);
+                                        $approvalUrl = url('/approval/' . $record->mail_unique);
 
                                         $message = "Shalom Bapak/Ibu Korwil/PIC/CPIC, kami dari ALK LevelUP{$location} memohon izin meminta tanda tangan untuk persetujuan {$description}. Apabila berkenan bisa klik link dibawah ini terimakasih.\n\n{$approvalUrl}";
 
