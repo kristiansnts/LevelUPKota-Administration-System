@@ -8,6 +8,7 @@
     "require": {
         "php": "^8.2",
         "bacon/bacon-qr-code": "^3.0",
+        "barryvdh/laravel-dompdf": "^3.1",
         "bezhansalleh/filament-shield": "^3.3",
         "chrisdicarlo/laravel-config-checker": "^1.2",
         "dutchcodingcompany/filament-socialite": "^2.4",

@@ -32,3 +32,5 @@ Route::get('/qr-code/{qrGeneratorId}/preview', [QRDocumentController::class, 'pr
 // Public Financial Report route
 Route::get('/laporan-keuangan', [FinancialReportController::class, 'index'])
     ->name('laporan-keuangan');
+Route::get('/laporan-keuangan/pdf', [FinancialReportController::class, 'exportPdf'])
+    ->name('laporan-keuangan.pdf');

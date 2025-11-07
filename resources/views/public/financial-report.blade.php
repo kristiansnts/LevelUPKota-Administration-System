@@ -109,6 +109,15 @@
             background-color: #555;
         }
         
+        .btn-success {
+            background-color: #28a745;
+            color: white;
+        }
+        
+        .btn-success:hover {
+            background-color: #218838;
+        }
+        
         .content {
             padding: 20px;
         }
@@ -282,9 +291,25 @@
                 <div class="filter-buttons">
                     <button type="submit" class="btn btn-primary">Filter</button>
                     <a href="{{ route('laporan-keuangan') }}" class="btn btn-secondary">Reset</a>
+                    <button type="button" class="btn btn-success" onclick="exportPDF()">Cetak PDF</button>
                 </div>
             </form>
         </div>
+        
+        <script>
+        function exportPDF() {
+            const params = new URLSearchParams();
+            const startDate = document.getElementById('start_date').value;
+            const endDate = document.getElementById('end_date').value;
+            const reportId = document.getElementById('report_id').value;
+            
+            if (startDate) params.append('start_date', startDate);
+            if (endDate) params.append('end_date', endDate);
+            if (reportId) params.append('report_id', reportId);
+            
+            window.location.href = '{{ route("laporan-keuangan.pdf") }}?' + params.toString();
+        }
+        </script>
 
         <!-- Content -->
         <div class="content">
