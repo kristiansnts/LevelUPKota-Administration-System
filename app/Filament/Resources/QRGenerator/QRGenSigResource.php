@@ -74,7 +74,9 @@ class QRGenSigResource extends Resource
                             ->schema([
                                 Select::make('qr_signer_id')
                                     ->label('Penanda Tangan')
-                                    ->relationship('qrSigner', 'signer_name')
+                                    ->relationship('qrSigner', 'signer_name', function ($query) {
+                                        return ResourceScopeService::userScope($query);
+                                    })
                                     ->searchable()
                                     ->preload()
                                     ->required(),
@@ -98,13 +100,46 @@ class QRGenSigResource extends Resource
     {
         return $table
             ->modifyQueryUsing(function (Builder $query) {
+                $user = auth()->user();
+                
                 // Use a subquery to get the first record for each qr_generator_id
-                return $query->whereIn('qr_generator_qr_signer_id', function ($subQuery) {
+                $query->whereIn('qr_generator_qr_signer_id', function ($subQuery) {
                     $subQuery->selectRaw('MIN(qr_generator_qr_signer_id)')
                         ->from('qr_generator_qr_signer')
                         ->groupBy('qr_generator_id');
-                })
-                ->orderBy('created_at', 'desc');
+                });
+                
+                // Join with qr_generator, mails, and qr_signer
+                $query->join('qr_generator', 'qr_generator_qr_signer.qr_generator_id', '=', 'qr_generator.qr_id')
+                    ->join('mails', 'qr_generator.document_id', '=', 'mails.id')
+                    ->join('qr_signer', 'qr_generator_qr_signer.qr_signer_id', '=', 'qr_signer.qr_signer_id');
+                
+                // Try to filter by mails.city_id first (for production)
+                $mailsHasCityId = false;
+                try {
+                    if ($user->city_id && \Schema::hasColumn('mails', 'city_id')) {
+                        $query->where('mails.city_id', $user->city_id);
+                        $mailsHasCityId = true;
+                    }
+                    
+                    if ($user->district_id && \Schema::hasColumn('mails', 'district_id')) {
+                        $query->where('mails.district_id', $user->district_id);
+                    }
+                } catch (\Exception $e) {
+                    // Mails columns don't exist
+                }
+                
+                // Fallback: Filter by qr_signer.city_id (for local)
+                if (!$mailsHasCityId && $user->city_id) {
+                    $query->where('qr_signer.city_id', $user->city_id);
+                }
+                
+                if (!$mailsHasCityId && $user->district_id) {
+                    $query->where('qr_signer.district_id', $user->district_id);
+                }
+                
+                return $query->select('qr_generator_qr_signer.*')
+                    ->orderBy('qr_generator_qr_signer.created_at', 'desc');
             })
             ->columns([
                 TextColumn::make('qr_generator_id')

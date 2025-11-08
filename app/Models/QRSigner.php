@@ -23,6 +23,8 @@ class QRSigner extends Model
         'signer_name',
         'signer_position',
         'phone_number',
+        'city_id',
+        'district_id',
     ];
 
     protected static function boot()
