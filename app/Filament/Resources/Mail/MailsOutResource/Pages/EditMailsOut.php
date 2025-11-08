@@ -25,4 +25,15 @@ class EditMailsOut extends EditRecord
             (new UpdateFileIdGoogleService())->updateFileId($this->record);
         }
     }
+
+    protected function afterSave(): void
+    {
+        if (! $this->record instanceof \App\Models\Mail) {
+            return;
+        }
+
+        if ($this->record->file_name) {
+            (new UpdateFileIdGoogleService())->updateFileId($this->record);
+        }
+    }
 }

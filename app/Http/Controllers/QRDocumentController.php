@@ -53,12 +53,47 @@ class QRDocumentController extends Controller
             'organization_subtitle' => 'Administration System',
             'brand_name' => 'LEVELUP',
             'logo_icon' => 'LU',
-            'signatures' => $allSigners->map(function ($signer) {
+            'signatures' => $allSigners->map(function ($signer) use ($document) {
+                $phoneNumber = $signer->qrSigner->phone_number ?? null;
+                $whatsappUrl = null;
+                
+                // Only show WhatsApp button if status is draft
+                if ($phoneNumber && $signer->status === 'draft') {
+                    // Format phone number
+                    $phone = preg_replace('/[^0-9]/', '', $phoneNumber);
+                    if (substr($phone, 0, 1) === '0') {
+                        $phone = '62' . substr($phone, 1);
+                    }
+                    
+                    // Create WhatsApp message with qr_generator_qr_signer_id in URL
+                    $description = $document->description ?? 'surat';
+                    $approvalUrl = url('/approval/' . $signer->qr_generator_qr_signer_id);
+                    $message = "Shalom Bapak/Ibu, kami dari ALK LevelUP memohon izin meminta tanda tangan untuk persetujuan {$description}. Apabila berkenan bisa klik link dibawah ini terimakasih.\n\n{$approvalUrl}";
+                    
+                    $whatsappUrl = 'https://wa.me/' . $phone . '?text=' . urlencode($message);
+                }
+                
+                // Determine status display
+                $statusDisplay = 'Belum ditandatangani';
+                $statusEn = 'not signed';
+                
+                if ($signer->status === 'approved') {
+                    $statusDisplay = 'Telah ditandatangani';
+                    $statusEn = 'signed';
+                } elseif ($signer->status === 'rejected') {
+                    $statusDisplay = 'Ditolak';
+                    $statusEn = 'rejected';
+                }
+                
                 return [
                     'name' => $signer->qrSigner->signer_name ?? '-',
                     'position' => $signer->qrSigner->signer_position ?? '-',
-                    'status' => $signer->is_sign ? 'Telah ditandatangani' : 'Belum ditandatangani',
-                    'status_en' => $signer->is_sign ? 'signed' : 'not signed',
+                    'status' => $statusDisplay,
+                    'status_en' => $statusEn,
+                    'is_signed' => $signer->status === 'approved',
+                    'has_rejected' => $signer->status === 'rejected',
+                    'phone_number' => $phoneNumber,
+                    'whatsapp_url' => $whatsappUrl,
                 ];
             })->toArray(),
         ];

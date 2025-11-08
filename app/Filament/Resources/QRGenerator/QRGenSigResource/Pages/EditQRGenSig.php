@@ -33,7 +33,7 @@ class EditQRGenSig extends EditRecord
         $data['signers'] = $allSigners->map(function ($signer) {
             return [
                 'qr_signer_id' => $signer->qr_signer_id,
-                'is_sign' => $signer->is_sign,
+                'status' => $signer->status,
             ];
         })->toArray();
 
@@ -60,7 +60,8 @@ class EditQRGenSig extends EditRecord
                     'qr_generator_qr_signer_id' => (string) Str::ulid(),
                     'qr_generator_id' => $record->qr_generator_id,
                     'qr_signer_id' => $signer['qr_signer_id'],
-                    'is_sign' => $signer['is_sign'] ?? false,
+                    'status' => $signer['status'] ?? 'draft',
+                    'total_sign' => count($data['signers']),
                 ]);
 
                 if ($firstRecord === null) {

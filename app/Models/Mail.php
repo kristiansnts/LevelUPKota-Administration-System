@@ -25,6 +25,7 @@ class Mail extends Model
         'type',
         'file_name',
         'file_id',
+        'file_url',
     ];
 
     protected $casts = [

@@ -245,6 +245,31 @@
             font-style: italic;
             color: #666;
         }
+        
+        .action-button {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            margin-top: 20px;
+            background-color: #25D366;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        
+        .action-button:hover {
+            background-color: #1da851;
+        }
+        
+        .action-button i {
+            margin-right: 8px;
+        }
     </style>
 </head>
 <body>
@@ -326,6 +351,13 @@
                 <div class="signature-status">
                     <div class="status-main">{{ $signature['status'] }}</div>
                     <div class="status-sub">{{ $signature['status_en'] }}</div>
+                    @auth
+                        @if(!$signature['is_signed'] && !$signature['has_rejected'] && !empty($signature['whatsapp_url']))
+                            <a href="{{ $signature['whatsapp_url'] }}" target="_blank" class="action-button" style="margin-top: 10px; padding: 8px 15px; font-size: 14px;">
+                                📱 Ajukan Tanda Tangan
+                            </a>
+                        @endif
+                    @endauth
                 </div>
             </div>
             @endforeach
