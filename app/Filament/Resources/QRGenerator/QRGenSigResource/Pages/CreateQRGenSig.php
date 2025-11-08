@@ -33,7 +33,8 @@ class CreateQRGenSig extends CreateRecord
                     'qr_generator_qr_signer_id' => (string) Str::ulid(),
                     'qr_generator_id' => $qrGenerator->qr_id,
                     'qr_signer_id' => $signer['qr_signer_id'],
-                    'is_sign' => $signer['is_sign'] ?? false,
+                    'status' => $signer['status'] ?? 'draft',
+                    'total_sign' => count($data['signers']),
                 ]);
 
                 // Store the first record for return

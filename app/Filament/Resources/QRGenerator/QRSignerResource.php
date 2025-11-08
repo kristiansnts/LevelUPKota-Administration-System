@@ -35,6 +35,10 @@ class QRSignerResource extends Resource
                         TextInput::make('signer_name')
                             ->label('Nama Penanda Tangan')
                             ->required(),
+                        TextInput::make('phone_number')
+                            ->label('Nomor Telepon')
+                            ->tel()
+                            ->required(),
                         TextInput::make('signer_position')
                             ->label('Jabatan Penanda Tangan')
                             ->required(),
@@ -48,6 +52,8 @@ class QRSignerResource extends Resource
             ->columns([
                 TextColumn::make('signer_name')
                     ->label('Nama Penanda Tangan'),
+                TextColumn::make('phone_number')
+                    ->label('Nomor Telepon'),
                 TextColumn::make('signer_position')
                     ->label('Jabatan Penanda Tangan'),
             ])

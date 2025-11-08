@@ -78,9 +78,15 @@ class QRGenSigResource extends Resource
                                     ->searchable()
                                     ->preload()
                                     ->required(),
-                                Checkbox::make('is_sign')
-                                    ->label('Sudah di tandatangani?')
-                                    ->default(false)
+                                Select::make('status')
+                                    ->label('Status')
+                                    ->options([
+                                        'draft' => 'Draft',
+                                        'approved' => 'Disetujui',
+                                        'rejected' => 'Ditolak',
+                                    ])
+                                    ->default('draft')
+                                    ->required()
                             ])
                             ->minItems(1)
                             ->addActionLabel('Tambah Penanda Tangan'),
@@ -120,7 +126,7 @@ class QRGenSigResource extends Resource
                     ->label('Sudah Ditandatangani')
                     ->getStateUsing(function ($record) {
                         return QrGeneratorSigner::where('qr_generator_id', $record->qr_generator_id)
-                            ->where('is_sign', true)->count();
+                            ->where('status', 'approved')->count();
                     }),
                 TextColumn::make('created_at')
                     ->label('Dibuat')
@@ -137,7 +143,7 @@ class QRGenSigResource extends Resource
                         QrGeneratorSigner::where('qr_generator_id', $record->qr_generator_id)->delete();
                         
                         // Also delete the QR Generator record itself
-                        QRGenerator::where('qr_generator_id', $record->qr_generator_id)->delete();
+                        QRGenerator::where('qr_id', $record->qr_generator_id)->delete();
                     })
                     ->requiresConfirmation()
                     ->modalHeading('Hapus QR Generator')
@@ -225,7 +231,7 @@ class QRGenSigResource extends Resource
                             QrGeneratorSigner::whereIn('qr_generator_id', $qrGeneratorIds)->delete();
                             
                             // Also delete the QR Generator records themselves
-                            QRGenerator::whereIn('qr_generator_id', $qrGeneratorIds)->delete();
+                            QRGenerator::whereIn('qr_id', $qrGeneratorIds)->delete();
                         })
                         ->requiresConfirmation()
                         ->modalHeading('Hapus QR Generator Terpilih')

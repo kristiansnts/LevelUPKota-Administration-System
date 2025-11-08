@@ -21,7 +21,9 @@ class QrGeneratorSigner extends Model
         'qr_generator_qr_signer_id',
         'qr_generator_id',
         'qr_signer_id',
-        'is_sign',
+        'status',
+        'total_sign',
+        'rejection_notes',
     ];
 
     public function qrGenerator()

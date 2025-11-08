@@ -14,13 +14,34 @@ class UpdateFileIdGoogleService
             return;
         }
         
-        // Get metadata from Google Drive
-        $metadata = Storage::disk('google')->getMetadata($mail->file_name);
-        
-        // Update the file_id field with the Google Drive file ID
-        if (isset($metadata['path'])) {
-            $mail->file_id = $metadata['path'];
-            $mail->save();
+        try {
+            // Check if file exists on Google Drive
+            if (!Storage::disk('google')->exists($mail->file_name)) {
+                return;
+            }
+            
+            // Get the Google Drive adapter and file ID
+            $adapter = Storage::disk('google')->getAdapter();
+            
+            // Get file ID from the adapter
+            if (method_exists($adapter, 'getMetadata')) {
+                $metadata = $adapter->getMetadata($mail->file_name);
+                $fileId = $metadata['path'] ?? null;
+            } else {
+                // For newer versions, try to get the path directly
+                // The file_name already contains the Google Drive file ID
+                $fileId = $mail->file_name;
+            }
+            
+            // Update the file_id and file_url fields
+            if ($fileId) {
+                $mail->file_id = $fileId;
+                $mail->file_url = "https://drive.google.com/file/d/{$fileId}/preview";
+                $mail->save();
+            }
+        } catch (\Exception $e) {
+            // Log the error but don't fail the entire operation
+            \Log::warning("Failed to update Google Drive file ID for mail {$mail->id}: " . $e->getMessage());
         }
     }
 }

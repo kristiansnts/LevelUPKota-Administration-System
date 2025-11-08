@@ -5,6 +5,7 @@ namespace App\Filament\Resources\Mail;
 use App\Enums\MailStatusEnum;
 use App\Enums\MailTypeEnum;
 use App\Filament\Resources\Mail\MailsOutResource\Actions\MailCodeCreateAction;
+use App\Filament\Resources\Mail\MailsOutResource\Actions\RequestApprovalAction;
 use App\Filament\Resources\Mail\MailsOutResource\Pages;
 use App\Filament\Resources\Mail\MailsResource\Form\MailInfoForm;
 use App\Filament\Shared\Services\ResourceScopeService;
@@ -133,6 +134,7 @@ class MailsOutResource extends Resource
                     }),
             ])
             ->actions([
+                RequestApprovalAction::make(),
                 Tables\Actions\EditAction::make()
                     ->label('Edit dan Upload')
                     ->icon('heroicon-c-pencil'),

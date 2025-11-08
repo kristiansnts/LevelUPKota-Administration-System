@@ -13,7 +13,7 @@ class ListQRGenSigs extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make()->label('Buat Tanda Tangan QR'),
+            // Actions\CreateAction::make()->label('Buat Tanda Tangan QR'),
         ];
     }
 }
