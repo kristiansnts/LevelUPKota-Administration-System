@@ -1,3 +1,11 @@
+# [1.32.0](https://github.com/kristiansnts/LevelUPKota-Administration-System/compare/v1.31.0...v1.32.0) (2025-11-08)
+
+
+### Features
+
+* **migration:** add city_id and district_id columns to qr_signer table2 ([93788e4](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/93788e40dd496f0c60ed3aa5dfa89e52212dffea))
+* **migration:** add city_id and district_id columns to qr_signer table2 ([ddfba7d](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/ddfba7d911a19fd3be77f77b20077459ce1371e3))
+
 # [1.31.0](https://github.com/kristiansnts/LevelUPKota-Administration-System/compare/v1.30.0...v1.31.0) (2025-11-08)
 
 
