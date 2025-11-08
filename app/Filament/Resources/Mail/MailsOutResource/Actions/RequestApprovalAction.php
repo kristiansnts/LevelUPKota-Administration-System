@@ -31,7 +31,22 @@ class RequestApprovalAction extends Action
                     ->schema([
                         Forms\Components\Select::make('qr_signer_id')
                             ->label('Penanda Tangan')
-                            ->options(QRSigner::all()->pluck('signer_name', 'qr_signer_id'))
+                            ->options(function () {
+                                $user = auth()->user();
+                                $query = QRSigner::query();
+                                
+                                // Filter by city_id
+                                if ($user->city_id) {
+                                    $query->where('city_id', $user->city_id);
+                                }
+                                
+                                // Filter by district_id
+                                if ($user->district_id) {
+                                    $query->where('district_id', $user->district_id);
+                                }
+                                
+                                return $query->pluck('signer_name', 'qr_signer_id');
+                            })
                             ->searchable()
                             ->required()
                             ->distinct(),

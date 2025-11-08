@@ -12,6 +12,8 @@ use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Section;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\Hidden;
+use App\Filament\Shared\Services\ResourceScopeService;
+use Illuminate\Database\Eloquent\Builder;
 
 class QRSignerResource extends Resource
 {
@@ -49,6 +51,9 @@ class QRSignerResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+            ->modifyQueryUsing(function (Builder $query) {
+                return ResourceScopeService::userScope($query);
+            })
             ->columns([
                 TextColumn::make('signer_name')
                     ->label('Nama Penanda Tangan'),
