@@ -1,3 +1,11 @@
+# [1.31.0](https://github.com/kristiansnts/LevelUPKota-Administration-System/compare/v1.30.0...v1.31.0) (2025-11-08)
+
+
+### Features
+
+* **scoped:** add scoped for general use ([0ebb6dd](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/0ebb6ddf4637ad83acc8d1a278397d2191dd229c))
+* **scoped:** add scoped for general use ([5099ab8](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/5099ab8d998dae22a18e66b6ef9982ee0cec969f))
+
 # [1.29.0](https://github.com/kristiansnts/LevelUPKota-Administration-System/compare/v1.28.1...v1.29.0) (2025-11-08)
 
 
