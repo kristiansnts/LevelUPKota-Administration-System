@@ -1,3 +1,10 @@
+## [1.33.1](https://github.com/kristiansnts/LevelUPKota-Administration-System/compare/v1.33.0...v1.33.1) (2026-03-05)
+
+
+### Bug Fixes
+
+* trigger fresh CI build ([746e255](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/746e25536fdfe37df23611beb9215aa1e12e1f28))
+
 # [1.33.0](https://github.com/kristiansnts/LevelUPKota-Administration-System/compare/v1.32.0...v1.33.0) (2026-03-05)
 
 
