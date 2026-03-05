@@ -2,7 +2,7 @@
 
 ## About
 
-LevelUpKota Administration System is a web application that allows administrators to manage the LevelUpKota management system. Built with Laravel and Filament, it provides a robust and user-friendly interface for system administration.
+LevelUpKota Administration System is a web application that allows administrators to manage the LevelUpKota management system. Built with Laravel and Filament, it provides a robust and user-friendly interface for system administration and deployed on vercel.
 
 ## Tech Stack
 
