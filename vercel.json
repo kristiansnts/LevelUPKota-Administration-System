@@ -1,0 +1,46 @@
+{
+  "version": 2,
+  "framework": null,
+  "outputDirectory": "public",
+  "buildCommand": "npm run build && bash scripts/vercel-prepare.sh",
+  "functions": {
+    "api/main.go": {
+      "runtime": "@vercel/go@3.4.3",
+      "includeFiles": "**",
+      "memory": 1024,
+      "maxDuration": 60
+    }
+  },
+  "routes": [
+    {
+      "src": "^(/index\\.php.*|/)$",
+      "dest": "/api/main.go"
+    },
+    { "handle": "filesystem" },
+    {
+      "src": "/(.*)",
+      "dest": "/api/main.go"
+    }
+  ],
+  "env": {
+    "APP_ENV": "production",
+    "APP_DEBUG": "false",
+    "APP_URL": "https://your-app.vercel.app",
+    "SESSION_SECURE_COOKIE": "true",
+    "APP_CONFIG_CACHE": "/tmp/config.php",
+    "APP_EVENTS_CACHE": "/tmp/events.php",
+    "APP_PACKAGES_CACHE": "/tmp/packages.php",
+    "APP_ROUTES_CACHE": "/tmp/routes.php",
+    "APP_SERVICES_CACHE": "/tmp/services.php",
+    "VIEW_COMPILED_PATH": "/tmp/views",
+    "SESSION_DRIVER": "redis",
+    "SESSION_SECURE_COOKIE": "true",
+    "REDIS_CLIENT": "predis",
+    "REDIS_DB": "0",
+    "REDIS_CACHE_DB": "0",
+    "CACHE_DRIVER": "redis",
+    "CACHE_STORE": "redis",
+    "LOG_CHANNEL": "stderr",
+    "PHP_FPM_URL": "https://dl.static-php.dev/static-php-cli/bulk/php-8.4.18-fpm-linux-x86_64.tar.gz"
+  }
+}
