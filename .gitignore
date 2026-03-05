@@ -23,6 +23,5 @@ yarn-error.log
 /.zed
 .sqlite
 service_account_key.jsonapi/php-fpm-bin
-api/vendor.tar.gz
 api/laravel/
 .vercel
