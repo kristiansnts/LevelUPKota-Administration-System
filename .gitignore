@@ -22,4 +22,7 @@ yarn-error.log
 /.vscode
 /.zed
 .sqlite
-service_account_key.json
+service_account_key.jsonapi/php-fpm-bin
+api/vendor.tar.gz
+api/laravel/
+.vercel

@@ -1,48 +1,44 @@
-on: push
-name: 🚀 Deploy website on push
+name: Deploy to Vercel
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
 jobs:
-  web-deploy:
-    name: 🎉 Deploy
+  deploy:
+    name: Deploy
     runs-on: ubuntu-latest
+
     steps:
-    - name: 🚚 Get latest code
-      uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
 
-    - name: 📂 Deploy via SSH
-      id: ssh-deploy
-      continue-on-error: true
-      uses: appleboy/scp-action@v0.1.7
-      with:
-        host: 195.88.211.90
-        username: tahumeat
-        key: ${{ secrets.SSH_PRIVATE_KEY }}
-        port: 22
-        source: "."
-        target: "/home/tahumeat/lumin.my.id"
-        rm: false
-        strip_components: 0
-        overwrite: true
+      - name: Setup PHP 8.4
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.4"
+          tools: composer
+          extensions: mbstring, pdo, pdo_mysql, openssl, tokenizer, xml, fileinfo, curl, zip
 
-    - name: 🔧 Run Post-Deploy Commands
-      if: steps.ssh-deploy.outcome == 'success'
-      uses: appleboy/ssh-action@v1.0.3
-      with:
-        host: 195.88.211.90
-        username: tahumeat
-        key: ${{ secrets.SSH_PRIVATE_KEY }}
-        port: 22
-        script: |
-          cd /home/tahumeat/lumin.my.id
-          composer install --no-dev --optimize-autoloader
-          php artisan migrate --force
-          php artisan config:cache
-          php artisan route:cache
-          php artisan view:cache
+      - name: Cache Composer dependencies
+        uses: actions/cache@v4
+        with:
+          path: vendor
+          key: composer-${{ hashFiles('composer.lock') }}
+          restore-keys: composer-
 
-    - name: 📂 Deploy via FTP (Fallback)
-      if: steps.ssh-deploy.outcome == 'failure'
-      uses: SamKirkland/FTP-Deploy-Action@v4.0.0
-      with:
-        server: ${{ secrets.FTP_SERVER }}
-        username: ${{ secrets.FTP_USERNAME }}
-        password: ${{ secrets.FTP_PASSWORD }}
+      - name: Install Composer dependencies
+        run: composer install --no-dev --optimize-autoloader --no-interaction
+
+      - name: Pack vendor.tar.gz
+        run: bash scripts/pack.sh
+
+      - name: Install Vercel CLI
+        run: npm install -g vercel@latest
+
+      - name: Deploy to Vercel (Production)
+        run: vercel deploy --prod --token=${{ secrets.VERCEL_TOKEN }} --yes
+        env:
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
