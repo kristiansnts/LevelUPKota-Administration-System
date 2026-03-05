@@ -1,3 +1,11 @@
+# [1.33.0](https://github.com/kristiansnts/LevelUPKota-Administration-System/compare/v1.32.0...v1.33.0) (2026-03-05)
+
+
+### Features
+
+* Migrate deployment to Vercel, introducing a Go handler for Laravel applications with PHP-FPM and associated build scripts. ([aa6a4d4](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/aa6a4d40446c97c7ac00b9f459e6c7e4cbdf3a04))
+* Migrate deployment to Vercel, introducing a Go handler for Laravel applications with PHP-FPM and associated build scripts. ([01ab825](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/01ab82537f51f6f3fdd5d3fb41a33518c4258484))
+
 # [1.32.0](https://github.com/kristiansnts/LevelUPKota-Administration-System/compare/v1.31.0...v1.32.0) (2025-11-08)
 
 
