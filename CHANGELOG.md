@@ -1,3 +1,18 @@
+# [1.34.0](https://github.com/kristiansnts/LevelUPKota-Administration-System/compare/v1.33.1...v1.34.0) (2026-03-06)
+
+
+### Bug Fixes
+
+* add vendor tar gz ([dfe0aca](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/dfe0acaadba6ffb1cc3bba4f873cd46ce0bde799))
+* add vendor tar gz ([24fded9](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/24fded93c1898c63ac627cda51feeff4be0c3fad))
+* trigger fresh CI build ([b400c9a](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/b400c9a09ec30c2fe7b935a3deaa4cb2c81a95dc))
+* trigger fresh CI build ([e3f0b20](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/e3f0b20c3a9fb7271a00ed45245509783e310f5e))
+
+
+### Features
+
+* Optimize Vercel deployments by bundling PHP-FPM and vendor, and update default environment settings. ([88692fa](https://github.com/kristiansnts/LevelUPKota-Administration-System/commit/88692fab3d92d64632750c748ffa0521fdd8de19))
+
 ## [1.33.1](https://github.com/kristiansnts/LevelUPKota-Administration-System/compare/v1.33.0...v1.33.1) (2026-03-05)
 
 
