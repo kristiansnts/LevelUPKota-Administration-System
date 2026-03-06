@@ -94,12 +94,20 @@ func bootstrap() error {
 
 	phpFpmDst := "/tmp/php-fpm-bin"
 
-	// 1. Download and extract PHP-FPM binary (if not already in /tmp)
+	// 1. Prefer bundled PHP-FPM binary (copied to api/php-fpm-bin at build time by vercel-prepare.sh,
+	//    available at /var/task/php-fpm-bin at runtime). Fall back to downloading only if missing.
 	if _, err := os.Stat(phpFpmDst); os.IsNotExist(err) {
-		phpFpmURL := envOrDefault("PHP_FPM_URL",
-			"https://dl.static-php.dev/static-php-cli/bulk/php-8.4.18-fpm-linux-x86_64.tar.gz")
-		if err := downloadAndExtractFile(phpFpmURL, phpFpmDst, "php-fpm"); err != nil {
-			return fmt.Errorf("download php-fpm: %w", err)
+		bundledBin := "/var/task/php-fpm-bin"
+		if _, err := os.Stat(bundledBin); err == nil {
+			if err := copyFile(bundledBin, phpFpmDst); err != nil {
+				return fmt.Errorf("copy bundled php-fpm: %w", err)
+			}
+		} else {
+			phpFpmURL := envOrDefault("PHP_FPM_URL",
+				"https://dl.static-php.dev/static-php-cli/bulk/php-8.4.17-fpm-linux-x86_64.tar.gz")
+			if err := downloadAndExtractFile(phpFpmURL, phpFpmDst, "php-fpm"); err != nil {
+				return fmt.Errorf("download php-fpm: %w", err)
+			}
 		}
 		if err := os.Chmod(phpFpmDst, 0755); err != nil {
 			return err
@@ -117,7 +125,7 @@ func bootstrap() error {
 		} else {
 			vendorURL := os.Getenv("VENDOR_URL")
 			if vendorURL == "" {
-				return fmt.Errorf("VENDOR_URL required (no bundled vendor.tar.gz found)")
+				return fmt.Errorf("vendor.tar.gz not found at /var/task/vendor.tar.gz — run 'bash scripts/pack.sh' before deploying")
 			}
 			if err := downloadAndExtractTarGz(vendorURL, "/tmp"); err != nil {
 				return fmt.Errorf("download vendor: %w", err)
@@ -244,6 +252,21 @@ func waitForSocket(path string, timeout time.Duration) error {
 
 // downloadAndExtractFile downloads a .tar.gz from url, finds the file named
 // binaryName inside it, and writes it to dst.
+func copyFile(src, dst string) error {
+	in, err := os.Open(src)
+	if err != nil {
+		return err
+	}
+	defer in.Close()
+	out, err := os.Create(dst)
+	if err != nil {
+		return err
+	}
+	defer out.Close()
+	_, err = io.Copy(out, in)
+	return err
+}
+
 func downloadAndExtractFile(url, dst, binaryName string) error {
 	resp, err := http.Get(url)
 	if err != nil {

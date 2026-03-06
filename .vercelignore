@@ -1,6 +1,6 @@
 # Dependencies
 node_modules
-vendor
+/vendor
 
 # Laravel storage (except framework stubs)
 storage/logs
@@ -21,3 +21,6 @@ tests
 # Build artifacts (public/build is included, vendor.tar.gz in api/ is included)
 public/hot
 public/storage
+
+# Force-include vendor.tar.gz even if it's in .gitignore
+!api/vendor.tar.gz

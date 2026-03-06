@@ -16,15 +16,17 @@
       "src": "^(/index\\.php.*|/)$",
       "dest": "/api/main.go"
     },
-    { "handle": "filesystem" },
+    {
+      "handle": "filesystem"
+    },
     {
       "src": "/(.*)",
       "dest": "/api/main.go"
     }
   ],
   "env": {
-    "APP_ENV": "production",
-    "APP_DEBUG": "false",
+    "APP_ENV": "development",
+    "APP_DEBUG": "true",
     "APP_URL": "https://your-app.vercel.app",
     "SESSION_SECURE_COOKIE": "true",
     "APP_CONFIG_CACHE": "/tmp/config.php",
@@ -34,7 +36,6 @@
     "APP_SERVICES_CACHE": "/tmp/services.php",
     "VIEW_COMPILED_PATH": "/tmp/views",
     "SESSION_DRIVER": "redis",
-    "SESSION_SECURE_COOKIE": "true",
     "REDIS_CLIENT": "predis",
     "REDIS_DB": "0",
     "REDIS_CACHE_DB": "0",
